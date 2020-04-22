@@ -27,10 +27,10 @@ const StyledButton = styled.button`
   }
 `;
 
-const ToolbarButton: React.FC<ToolbarButtonInterface> = (props) => {
+const ToolbarButtonBase: React.FC<ToolbarButtonInterface> = (props) => {
   return (
       <StyledButton {...props}>{props.children}</StyledButton>
   );
 };
 
-export default ToolbarButton;
+export default ToolbarButtonBase;

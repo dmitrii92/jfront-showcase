@@ -1,34 +1,23 @@
 import React from "react";
-import ToolbarButton from "./buttons/ToolbarButton";
-import styled from "styled-components";
+
+import ToolbarButtonBase from "./buttons/ToolbarButtonBase";
 import {ToolbarButtonCreate, ToolbarButtonEdit, ToolbarButtonFind, ToolbarButtonSave} from "./buttons";
+import ToolbarBase, {ToolbarInterface} from "./ToolbarBase";
 
-const StyledToolbar = styled.nav`
-  font: 11px arial, tahoma, helvetica, sans-serif;
-  vertical-align: middle;
-  margin: 0;
-  padding: 2px;
-  border-style: solid;
-  border-color: #99bbe8;
-  border-width: 0 1px 1px 1px;
-  overflow: hidden;
-  background-color: #d0def0;
-  background-image: url(bg.gif);
-  background-position: 0 5%;
-`;
 
-const Toolbar = () => {
+const Toolbar: React.FC<ToolbarInterface> = (props) => {
   return (
-      <StyledToolbar>
-        <ToolbarButton onClick={() => window.alert("Hello!")}>Button1</ToolbarButton>
-        <ToolbarButton onClick={() => console.log("Message!")}>Button2</ToolbarButton>
-        <ToolbarButton>Button3</ToolbarButton>
-        <ToolbarButton disabled={true}>Disabled Button</ToolbarButton>
+      <ToolbarBase {...props}>
+        <ToolbarButtonBase onClick={() => window.alert("Hello!")}>Button1</ToolbarButtonBase>
+        <ToolbarButtonBase onClick={() => console.log("Message!")}>Button2</ToolbarButtonBase>
+        <ToolbarButtonBase>Button3</ToolbarButtonBase>
+        <ToolbarButtonBase disabled={true}>Disabled Button</ToolbarButtonBase>
         <ToolbarButtonCreate/>
         <ToolbarButtonSave/>
         <ToolbarButtonEdit/>
         <ToolbarButtonFind/>
-      </StyledToolbar>
+        {props.children}
+      </ToolbarBase>
   );
 };
 

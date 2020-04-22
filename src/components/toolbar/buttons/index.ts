@@ -1,4 +1,4 @@
 
-export * from "./ToolbarDefaultButtons";
+export * from "./ToolbarButtons";
 
-export {default} from "./ToolbarButton";
+export {default} from "./ToolbarButtonBase";

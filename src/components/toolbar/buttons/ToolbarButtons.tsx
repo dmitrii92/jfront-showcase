@@ -5,38 +5,38 @@ import btn_save from "./icons/save.png";
 import btn_edit from "./icons/edit.png";
 import btn_find from "./icons/search.png";
 
-import ToolbarButton, {ToolbarButtonInterface} from "./ToolbarButton";
+import ToolbarButtonBase, {ToolbarButtonInterface} from "./ToolbarButtonBase";
 
 
 const ToolbarButtonFind:React.FC<ToolbarButtonInterface> = (props) => {
   return (
-      <ToolbarButton {...props}>
+      <ToolbarButtonBase {...props}>
         <img src={btn_find}/>
-      </ToolbarButton>
+      </ToolbarButtonBase>
   );
 };
 
 const ToolbarButtonCreate:React.FC<ToolbarButtonInterface> = (props) => {
   return (
-      <ToolbarButton {...props}>
+      <ToolbarButtonBase {...props}>
         <img src={btn_add}/>
-      </ToolbarButton>
+      </ToolbarButtonBase>
   );
 };
 
 const ToolbarButtonSave:React.FC<ToolbarButtonInterface> = (props) => {
   return (
-      <ToolbarButton {...props}>
+      <ToolbarButtonBase {...props}>
         <img src={btn_save}/>
-      </ToolbarButton>
+      </ToolbarButtonBase>
   );
 };
 
 const ToolbarButtonEdit:React.FC<ToolbarButtonInterface> = (props) => {
   return (
-      <ToolbarButton {...props}>
+      <ToolbarButtonBase {...props}>
         <img src={btn_edit}/>
-      </ToolbarButton>
+      </ToolbarButtonBase>
   );
 };
 
