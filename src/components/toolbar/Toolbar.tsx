@@ -1,7 +1,14 @@
 import React from "react";
 
 import ToolbarButtonBase from "./buttons/ToolbarButtonBase";
-import {ToolbarButtonCreate, ToolbarButtonEdit, ToolbarButtonFind, ToolbarButtonSave} from "./buttons";
+import {
+  ToolbarButtonCreate,
+  ToolbarButtonDelete,
+  ToolbarButtonEdit,
+  ToolbarButtonFind,
+  ToolbarButtonSave,
+  ToolbarButtonView
+} from "./buttons";
 import ToolbarBase, {ToolbarInterface} from "./ToolbarBase";
 
 
@@ -11,6 +18,8 @@ const Toolbar: React.FC<ToolbarInterface> = (props) => {
         <ToolbarButtonCreate/>
         <ToolbarButtonSave/>
         <ToolbarButtonEdit/>
+        <ToolbarButtonDelete/>
+        <ToolbarButtonView/>
         <ToolbarButtonFind/>
         <ToolbarButtonBase onClick={() => window.alert("Hello!")}>Button1</ToolbarButtonBase>
         <ToolbarButtonBase onClick={() => console.log("Message!")}>Button2</ToolbarButtonBase>
