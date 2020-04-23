@@ -11,7 +11,7 @@ const StyledToolbar = styled.nav`
   padding: 2px;
   border-style: solid;
   border-color: #99bbe8;
-  border-width: 0 1px 1px 1px;
+  border-width: 1px 1px 1px 1px;
   overflow: hidden;
   background-color: #d0def0;
   background-image: url(bg.gif);
