@@ -7,7 +7,7 @@ export interface ToolbarInterface extends React.HTMLAttributes<HTMLElement> {
 const StyledToolbar = styled.nav`
   font: 11px arial, tahoma, helvetica, sans-serif;
   vertical-align: middle;
-  margin: 0;
+  margin: 0 0 2px;
   padding: 2px;
   border-style: solid;
   border-color: #99bbe8;
