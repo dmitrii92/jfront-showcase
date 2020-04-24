@@ -5,12 +5,13 @@ interface LabelInterface extends React.LabelHTMLAttributes<HTMLLabelElement>{
 }
 
 const StyledLabel = styled.label`
-  display: block;
+  display: inline-block;
   text-align: right;
   width: 200px;
   min-width: 200px;
   padding-right: 5px;
-  float: left;
+  //float: left;
+  //vertical-align: middle;
 `;
 
 const Label: React.FC<LabelInterface> = (props) => {
