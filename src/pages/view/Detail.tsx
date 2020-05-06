@@ -1,16 +1,21 @@
 import React, {useEffect, useState} from "react";
-import Toolbar from "../../components/toolbar";
 import Form from "../../components/form";
 import Header from "../../components/header";
 import FormField from "../../components/form-field";
 import Label from "../../components/label";
-import Button from "../../components/button";
 import {getFeature} from "../../api/FeatureApi";
 import {Feature} from "../../api/FeatureInterface";
-import { useParams } from "react-router-dom";
+import {useHistory, useParams} from "react-router-dom";
+import ToolbarButtonBase, {
+  ToolbarButtonCreate,
+  ToolbarButtonDelete,
+  ToolbarButtonEdit, ToolbarButtonFind,
+  ToolbarButtonSave, ToolbarButtonView
+} from "../../components/toolbar/buttons";
+import ToolbarBase from "../../components/toolbar/ToolbarBase";
 
 const DetailPage = () => {
-
+  const history = useHistory();
   let {id} = useParams();
 
   const [currentFeature, setCurrentFeature] = useState<Feature>();
@@ -26,7 +31,15 @@ const DetailPage = () => {
   return (
       <div>
         <Header>Header</Header>
-        <Toolbar/>
+        <ToolbarBase>
+          <ToolbarButtonCreate onClick={() => history.push(`/create`)}/>
+          <ToolbarButtonSave disabled={true}/>
+          <ToolbarButtonEdit/>
+          <ToolbarButtonDelete/>
+          <ToolbarButtonView disabled={true}/>
+          <ToolbarButtonFind onClick={() => history.push(`/`)}/>
+          <ToolbarButtonBase disabled={true}>Найти</ToolbarButtonBase>
+        </ToolbarBase>
         <Form>
           <FormField>
             <Label>Идентификатор:</Label>
