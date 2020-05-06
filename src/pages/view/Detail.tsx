@@ -1,14 +1,28 @@
-import React from "react";
+import React, {useEffect, useState} from "react";
 import Toolbar from "../../components/toolbar";
 import Form from "../../components/form";
-import Input from "../../components/input";
 import Header from "../../components/header";
 import FormField from "../../components/form-field";
 import Label from "../../components/label";
-import CheckBox from "../../components/checkbox";
-import CheckBoxGroup from "../../components/checkbox-group";
+import Button from "../../components/button";
+import {getFeature} from "../../api/FeatureApi";
+import {Feature} from "../../api/FeatureInterface";
+import { useParams } from "react-router-dom";
 
 const DetailPage = () => {
+
+  let {id} = useParams();
+
+  const [currentFeature, setCurrentFeature] = useState<Feature>();
+
+  useEffect(() => {
+    getFeature(id).then(feature => {
+          console.log(feature);
+          setCurrentFeature(feature);
+        }
+    );
+  }, []);
+
   return (
       <div>
         <Header>Header</Header>
@@ -16,20 +30,39 @@ const DetailPage = () => {
         <Form>
           <FormField>
             <Label>Идентификатор:</Label>
-            <Input/>
+            <Label style={{width: "350px", textAlign: "left"}}>{currentFeature?.featureId}</Label>
           </FormField>
           <FormField>
-            <Label>Имя:</Label>
-            <Input style={{width: "250px"}}/>
+            <Label>Статус:</Label>
+            <Label style={{width: "350px", textAlign: "left"}}>{currentFeature?.featureStatus.name}</Label>
           </FormField>
           <FormField>
-            <CheckBox text="Text1:"/>
+            <Label>Наименование:</Label>
+            <Label style={{width: "350px", textAlign: "left"}}>{currentFeature?.featureName}</Label>
           </FormField>
           <FormField>
-            <CheckBoxGroup text="Группа:">
-              <CheckBox text="Text2:"/>
-              <CheckBox text="Text3:"/>
-            </CheckBoxGroup>
+            <Label>Наименование английское:</Label>
+            <Label style={{width: "350px", textAlign: "left"}}>{currentFeature?.featureNameEn}</Label>
+          </FormField>
+          <FormField>
+            <Label>Дата создания:</Label>
+            <Label style={{width: "350px", textAlign: "left"}}>{currentFeature?.dateIns}</Label>
+          </FormField>
+          <FormField>
+            <Label>Описание:</Label>
+            <Label style={{width: "350px", textAlign: "left"}}>{currentFeature?.description}</Label>
+          </FormField>
+          <FormField>
+            <Label>Автор:</Label>
+            <Label style={{width: "350px", textAlign: "left"}}>{currentFeature?.author.name}</Label>
+          </FormField>
+          <FormField>
+            <Label>Порядок выполнения:</Label>
+            <Label/>
+          </FormField>
+          <FormField>
+            <Label>Ответственный:</Label>
+            <Label style={{width: "350px", textAlign: "left"}}>{currentFeature?.responsible.name}</Label>
           </FormField>
         </Form>
       </div>

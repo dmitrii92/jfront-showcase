@@ -7,7 +7,7 @@ interface FormFieldInterface extends React.HTMLAttributes<HTMLDivElement> {
 const StyledField = styled.div`
   display: block;
   padding-top: 1px;
-  margin-bottom: 3px;
+  margin-bottom: 10px;
 `;
 
 const FormField: React.FC<FormFieldInterface> = (props) => {

@@ -1,8 +1,19 @@
 import axios from 'axios';
+import {Feature} from "./FeatureInterface";
 
-const API_URL = 'http://localhost:8000';
+const API_URL = 'http://vsmlapprfid1:8080/JepRiaShowcase/api';
+const USER = 'user';
+const PASSWORD = 'password';
 
-const getFeature = () => {
-  const url = `${API_URL}/`;
-  return axios.get(url).then(response => response.data);
+export const getFeature = (id?: string): Promise<Feature> => {
+  const url = `${API_URL}/feature/${id}/`;
+
+  return axios
+      .get(
+          url,
+          {auth: {username: `${USER}`, password: `${PASSWORD}`}}
+      )
+      .then(
+          response => response.data
+      );
 }
