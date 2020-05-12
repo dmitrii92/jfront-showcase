@@ -17,3 +17,15 @@ export interface Feature {
     value: number;
   };
 }
+
+export type FeatureSearchTemplate = {
+  featureId?: number;
+  featureNameTemplate?: string;
+  featureNameEnTemplate?: string;
+  /*statusCodeList?: string[];
+  authorId: number;
+  responsibleId: number;
+  dateInsFrom: Date;
+  dateInsTo: Date;
+  maxRowCount: number;*/
+}
