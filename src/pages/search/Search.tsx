@@ -1,4 +1,4 @@
-import React, {useState} from "react";
+import React from "react";
 import Header from "../../components/header";
 import ToolbarButtonBase, {
   ToolbarButtonCreate,
@@ -9,16 +9,64 @@ import ToolbarButtonBase, {
   ToolbarButtonView
 } from "../../components/toolbar/buttons";
 import ToolbarBase from "../../components/toolbar/ToolbarBase";
-import { useHistory } from "react-router-dom";
+import {useHistory} from "react-router-dom";
 import Form from "../../components/form";
 import FormField from "../../components/form-field";
 import Label from "../../components/label";
 import Input from "../../components/input";
+import {useForm} from "react-hook-form";
+import {getResultSetSize, postSearchRequest, searchFeatures} from "../../api/FeatureApi";
+import {SearchRequest} from "../../api/types";
+import {FeatureSearchTemplate} from "../../api/FeatureInterface";
+
 
 const SearchPage = () => {
   const history = useHistory();
-  const [id, setId] = useState();
+  // const [id, setId] = useState();
 
+  const {register, handleSubmit} = useForm<FeatureSearchTemplate>();
+
+  const onSubmit = handleSubmit((data: FeatureSearchTemplate) => {
+    console.log(data);
+    alert(data);
+
+    if (typeof data.featureId === "string") {
+      console.log("String!")
+    } else {
+      console.log("Возможно number!")
+    }
+
+    if (!data.featureId) {
+      data.featureId = undefined;
+    }
+
+    console.log(data);
+    let searchRequest: SearchRequest<FeatureSearchTemplate> = {template: data};
+    postSearchRequest(searchRequest).then((searchId) => {
+      console.log(searchId)
+      getResultSetSize(searchId).then(pageSize => {
+        console.log(pageSize)
+        searchFeatures(searchId, pageSize, 1).then((features) => {
+          console.log(features)
+        });
+      });
+
+    });
+
+  });
+
+  const TestSubmit = handleSubmit(({featureId, featureNameTemplate, featureNameEnTemplate}) => {
+    console.log(featureId);
+    if (typeof featureId === "string") {
+      console.log("String!")
+    } else {
+      console.log("Возможно number!")
+    }
+  })
+
+
+  // @ts-ignore
+  // @ts-ignore
   return (
       <div>
         <Header>Header</Header>
@@ -29,12 +77,24 @@ const SearchPage = () => {
           <ToolbarButtonDelete disabled={true}/>
           <ToolbarButtonView/>
           <ToolbarButtonFind/>
-          <ToolbarButtonBase onClick={() => history.push(`/detail/${id}`)}>Найти</ToolbarButtonBase>
+          <ToolbarButtonBase type="submit" form="main-form">Найти</ToolbarButtonBase>
         </ToolbarBase>
-        <Form>
+        <Form id="main-form" onSubmit={TestSubmit}>
           <FormField>
             <Label>Идентификатор:</Label>
-            <Input value={id} onChange={(e) => setId(e.target.value)}/>
+            <input name="featureId" ref={register({pattern: /\d+/})} type="number"/>
+            {/*<Input name="featureId" ref={register({pattern: /\d+/})} type="number"/>*/}
+          </FormField>
+          <FormField>
+            <Label>Наименование:</Label>
+            <Input name="featureNameTemplate" ref={register}/>
+          </FormField>
+          <FormField>
+            <Label>Наименование анлийское:</Label>
+            <Input name="featureNameEnTemplate" ref={register}/>
+          </FormField>
+          <FormField>
+            <button type="submit">Поиск</button>
           </FormField>
         </Form>
       </div>

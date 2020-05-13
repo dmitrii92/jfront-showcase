@@ -8,7 +8,7 @@ const PASSWORD = 'password';
 
 export const getFeature = (id?: string): Promise<Feature> => {
   const url = `${API_URL}/feature/${id}/`;
-
+  axios.defaults.withCredentials = true;
   return axios
       .get(
           url,
@@ -25,6 +25,8 @@ export const getFeature = (id?: string): Promise<Feature> => {
 
 export const postSearchRequest = (searchRequest: SearchRequest<FeatureSearchTemplate>) => {
   const url = `${API_URL}/feature/search`;
+  axios.defaults.withCredentials = true;
+  console.log(searchRequest)
   return new Promise<string>((resolve, reject) => {
     axios.post(
         url,
@@ -34,7 +36,7 @@ export const postSearchRequest = (searchRequest: SearchRequest<FeatureSearchTemp
           headers: {
             'Accept': 'application/json;charset=utf-8',
             'Content-Type': 'application/json;charset=utf-8',
-            'X-Cache-Control': 'no-cache'
+            'Cache-Control': 'no-cache'
           }
         }
     ).then(response => {
@@ -51,11 +53,12 @@ export const postSearchRequest = (searchRequest: SearchRequest<FeatureSearchTemp
 
 export const searchFeatures = (searchId: string, pageSize: number, page: number): Promise<Array<Feature>> => {
   const url = `${API_URL}/feature/search/${searchId}/resultset?pageSize=${pageSize}&page=${page}`;
-
+  axios.defaults.withCredentials = true;
   return new Promise<Array<Feature>>((resolve, reject) => {
     axios.get(
         url,
         {
+          auth: {username: `${USER}`, password: `${PASSWORD}`},
           headers: {
             'Accept': 'application/json;charset=utf-8',
             'Content-Type': 'application/json;charset=utf-8',
@@ -76,14 +79,16 @@ export const searchFeatures = (searchId: string, pageSize: number, page: number)
 
 export const getResultSetSize = (searchId: string): Promise<number> => {
   const url = `${API_URL}/feature/search/${searchId}/resultset-size`;
+  axios.defaults.withCredentials = true;
   return new Promise<number>((resolve, reject) => {
     axios.get(
         url,
         {
+          auth: {username: `${USER}`, password: `${PASSWORD}`},
           headers: {
             'Accept': 'application/json;charset=utf-8',
             'Content-Type': 'application/json;charset=utf-8',
-            'X-Cache-Control': 'no-cache'
+            'Cache-Control': 'no-cache'
           }
         }
     ).then(response => {
