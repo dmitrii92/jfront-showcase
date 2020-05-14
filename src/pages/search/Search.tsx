@@ -15,46 +15,32 @@ import FormField from "../../components/form-field";
 import Label from "../../components/label";
 import Input from "../../components/input";
 import {useForm} from "react-hook-form";
-import {getResultSetSize, postSearchRequest, searchFeatures} from "../../api/FeatureApi";
+import {getResultSetSize, postSearchRequest} from "../../api/FeatureApi";
 import {SearchRequest} from "../../api/types";
 import {FeatureSearchTemplate} from "../../api/FeatureInterface";
 
 
 const SearchPage = () => {
   const history = useHistory();
-  // const [id, setId] = useState();
 
   const {register, handleSubmit} = useForm<FeatureSearchTemplate>();
 
   const onSubmit = handleSubmit((data: FeatureSearchTemplate) => {
-    console.log(data);
-    alert(data);
-
-    if (typeof data.featureId === "string") {
-      console.log("String!")
-    } else {
-      console.log("Возможно number!")
-    }
 
     if (!data.featureId) {
       data.featureId = undefined;
     }
 
-    console.log(data);
     let searchRequest: SearchRequest<FeatureSearchTemplate> = {template: data};
-    postSearchRequest(searchRequest).then((searchId) => {
-      console.log(searchId)
-      getResultSetSize(searchId).then(pageSize => {
-        console.log(pageSize)
-        if (pageSize > 0) {
-          console.log("history push")
-          history.push(`/list/${searchId}`)
-        }
-        /*searchFeatures(searchId, pageSize, 1).then((features) => {
-          console.log(features)
-        });*/
-      });
 
+    postSearchRequest(searchRequest).then((searchId) => {
+      getResultSetSize(searchId).then(pageSize => {
+        if (pageSize > 0) {
+          history.push(`/list/${searchId}`)
+        } else {
+          alert("Search empty!")
+        }
+      });
     });
 
   });
@@ -64,18 +50,17 @@ const SearchPage = () => {
         <Header>Header</Header>
         <ToolbarBase>
           <ToolbarButtonCreate onClick={() => history.push(`/create`)}/>
-          <ToolbarButtonSave/>
+          <ToolbarButtonSave disabled={true}/>
           <ToolbarButtonEdit disabled={true}/>
           <ToolbarButtonDelete disabled={true}/>
-          <ToolbarButtonView/>
-          <ToolbarButtonFind/>
+          <ToolbarButtonView disabled={true}/>
+          <ToolbarButtonFind disabled={true}/>
           <ToolbarButtonBase type="submit" form="main-form">Найти</ToolbarButtonBase>
         </ToolbarBase>
         <Form id="main-form" onSubmit={onSubmit}>
           <FormField>
             <Label>Идентификатор:</Label>
-            <input name="featureId" ref={register({pattern: /\d+/})} type="number"/>
-            {/*<Input name="featureId" ref={register({pattern: /\d+/})} type="number"/>*/}
+            <Input name="featureId" ref={register({pattern: /\d+/})} type="number"/>
           </FormField>
           <FormField>
             <Label>Наименование:</Label>
