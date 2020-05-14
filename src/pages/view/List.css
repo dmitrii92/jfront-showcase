@@ -1,0 +1,10 @@
+table {
+    table-layout: auto;
+    border-collapse: collapse;
+    border: 3px black solid;
+}
+
+th, td {
+    border: 2px black solid;
+    padding: 7px;
+}

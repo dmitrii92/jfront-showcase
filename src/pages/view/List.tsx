@@ -1,4 +1,4 @@
-import React from "react";
+import React, {useEffect, useState} from "react";
 import {Feature} from "../../api/FeatureInterface";
 import Header from "../../components/header";
 import ToolbarBase from "../../components/toolbar/ToolbarBase";
@@ -8,14 +8,35 @@ import ToolbarButtonBase, {
   ToolbarButtonEdit, ToolbarButtonFind,
   ToolbarButtonSave, ToolbarButtonView
 } from "../../components/toolbar/buttons";
-import {useHistory} from "react-router-dom";
+import {useHistory, useParams} from "react-router-dom";
+import {getResultSetSize, searchFeatures} from "../../api/FeatureApi";
+import {ListItem} from "./ListItem";
 
-interface FeatureListInterface {
-  features: Feature[]
-}
+import "./List.css";
 
-const ListPage: React.FC<FeatureListInterface> = (props) => {
+const ListPage = () => {
   const history = useHistory();
+  let {searchId} = useParams();
+  const [features, setFeatures] = useState<Feature[]>([]);
+
+  useEffect(() => {
+    console.log("useEffect List")
+    console.log(searchId)
+    if (searchId) {
+      console.log("searchId")
+      getResultSetSize(searchId).then(pageSize => {
+            console.log(pageSize)
+            if (searchId) {
+              searchFeatures(searchId, pageSize, 1).then((features) => {
+                console.log(features)
+                setFeatures(features);
+              });
+
+            }
+          }
+      );
+    }
+  }, []);
 
   return (
       <div>
@@ -26,7 +47,7 @@ const ListPage: React.FC<FeatureListInterface> = (props) => {
           <ToolbarButtonEdit disabled={true}/>
           <ToolbarButtonDelete disabled={true}/>
           <ToolbarButtonView/>
-          <ToolbarButtonFind/>
+          <ToolbarButtonFind onClick={() => history.push(`/`)}/>
           <ToolbarButtonBase disabled={true}>Найти</ToolbarButtonBase>
         </ToolbarBase>
         <div>
@@ -45,20 +66,13 @@ const ListPage: React.FC<FeatureListInterface> = (props) => {
             </tr>
             </thead>
             <tbody>
-            {props.features.map(feature => {
+            {features.map(feature => {
               return (
-                  <tr>
-                    <td>{feature.featureId}</td>
-                    <td></td>
-                    <td>{feature.featureStatus.name}</td>
-                    <td>{feature.featureName}</td>
-                    <td>{feature.featureNameEn}</td>
-                    <td>{feature.description}</td>
-                    <td>{feature.dateIns}</td>
-                    <td>{feature.author}</td>
-                    <td>{feature.responsible.name}</td>
-                  </tr>
-              )
+                  <ListItem
+                      key={feature.featureId}
+                      {...feature}
+                  />
+              );
             })}
             </tbody>
           </table>

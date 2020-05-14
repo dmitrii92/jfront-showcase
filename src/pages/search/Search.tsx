@@ -46,27 +46,19 @@ const SearchPage = () => {
       console.log(searchId)
       getResultSetSize(searchId).then(pageSize => {
         console.log(pageSize)
-        searchFeatures(searchId, pageSize, 1).then((features) => {
+        if (pageSize > 0) {
+          console.log("history push")
+          history.push(`/list/${searchId}`)
+        }
+        /*searchFeatures(searchId, pageSize, 1).then((features) => {
           console.log(features)
-        });
+        });*/
       });
 
     });
 
   });
 
-  const TestSubmit = handleSubmit(({featureId, featureNameTemplate, featureNameEnTemplate}) => {
-    console.log(featureId);
-    if (typeof featureId === "string") {
-      console.log("String!")
-    } else {
-      console.log("Возможно number!")
-    }
-  })
-
-
-  // @ts-ignore
-  // @ts-ignore
   return (
       <div>
         <Header>Header</Header>
@@ -79,7 +71,7 @@ const SearchPage = () => {
           <ToolbarButtonFind/>
           <ToolbarButtonBase type="submit" form="main-form">Найти</ToolbarButtonBase>
         </ToolbarBase>
-        <Form id="main-form" onSubmit={TestSubmit}>
+        <Form id="main-form" onSubmit={onSubmit}>
           <FormField>
             <Label>Идентификатор:</Label>
             <input name="featureId" ref={register({pattern: /\d+/})} type="number"/>
