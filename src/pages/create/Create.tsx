@@ -7,24 +7,27 @@ import Label from "../../components/label";
 import CheckBox from "../../components/checkbox";
 import CheckBoxGroup from "../../components/checkbox-group";
 import ToolbarBase from "../../components/toolbar/ToolbarBase";
-import {
+import ToolbarButtonBase, {
   ToolbarButtonCreate,
   ToolbarButtonDelete,
   ToolbarButtonEdit, ToolbarButtonFind,
   ToolbarButtonSave, ToolbarButtonView
 } from "../../components/toolbar/buttons";
+import {useHistory} from "react-router-dom";
 
 const CreatePage = () => {
+  const history = useHistory();
+
   return (
       <div>
-        <Header>Create</Header>
         <ToolbarBase>
           <ToolbarButtonCreate disabled={true}/>
           <ToolbarButtonSave/>
           <ToolbarButtonEdit disabled={true}/>
           <ToolbarButtonDelete disabled={true}/>
           <ToolbarButtonView/>
-          <ToolbarButtonFind/>
+          <ToolbarButtonFind onClick={() => history.push(`/`)}/>
+          <ToolbarButtonBase disabled={true}>Найти</ToolbarButtonBase>
         </ToolbarBase>
         <Form>
           <FormField>

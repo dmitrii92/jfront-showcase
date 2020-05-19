@@ -22,7 +22,7 @@ const DetailPage = () => {
 
   useEffect(() => {
     getFeature(id).then(feature => {
-          console.log(feature);
+          // console.log(feature);
           setCurrentFeature(feature);
         }
     );
@@ -30,7 +30,6 @@ const DetailPage = () => {
 
   return (
       <div>
-        <Header>Header</Header>
         <ToolbarBase>
           <ToolbarButtonCreate onClick={() => history.push(`/create`)}/>
           <ToolbarButtonSave disabled={true}/>

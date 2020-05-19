@@ -31,6 +31,15 @@ const SearchPage = () => {
       data.featureId = undefined;
     }
 
+    /*if (!data.dateInsFrom) {
+      data.dateInsFrom = new Date();
+      console.log(data.dateInsFrom)
+    }
+    if (!data.dateInsTo) {
+      data.dateInsTo = new Date();
+      console.log(data.dateInsTo)
+    }*/
+
     let searchRequest: SearchRequest<FeatureSearchTemplate> = {template: data};
 
     postSearchRequest(searchRequest).then((searchId) => {
@@ -47,7 +56,6 @@ const SearchPage = () => {
 
   return (
       <div>
-        <Header>Header</Header>
         <ToolbarBase>
           <ToolbarButtonCreate onClick={() => history.push(`/create`)}/>
           <ToolbarButtonSave disabled={true}/>
@@ -70,9 +78,14 @@ const SearchPage = () => {
             <Label>Наименование анлийское:</Label>
             <Input name="featureNameEnTemplate" ref={register}/>
           </FormField>
-          <FormField>
-            <button type="submit">Поиск</button>
+{/*          <FormField>
+            <Label>Дата создания, от:</Label>
+            <Input name="dateInsFrom" ref={register} type="date"/>
           </FormField>
+          <FormField>
+            <Label>Дата создания, до:</Label>
+            <Input name="dateInsTo" ref={register} type="date"/>
+          </FormField>*/}
         </Form>
       </div>
   );

@@ -40,7 +40,6 @@ const ListPage = () => {
 
   return (
       <div>
-        <Header>Header</Header>
         <ToolbarBase>
           <ToolbarButtonCreate onClick={() => history.push(`/create`)}/>
           <ToolbarButtonSave disabled={true}/>

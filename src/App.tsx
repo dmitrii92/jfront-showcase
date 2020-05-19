@@ -5,11 +5,13 @@ import {BrowserRouter, Switch, Route} from "react-router-dom";
 import CreatePage from "./pages/create/Create";
 import SearchPage from "./pages/search/Search";
 import ListPage from "./pages/view/List";
+import Header from "./components/header";
 
 function App() {
 
   return (
       <div className="App">
+        <Header>Запрос функционала</Header>
         <BrowserRouter>
           <Switch>
             <Route path="/" exact component={SearchPage}/>
