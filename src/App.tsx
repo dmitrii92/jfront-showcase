@@ -6,6 +6,7 @@ import CreatePage from "./pages/create/Create";
 import SearchPage from "./pages/search/Search";
 import ListPage from "./pages/view/List";
 import Header from "./components/header";
+import EditPage from "./pages/edit/Edit";
 
 function App() {
 
@@ -16,6 +17,7 @@ function App() {
           <Switch>
             <Route path="/" exact component={SearchPage}/>
             <Route path="/create" exact component={CreatePage}/>
+            <Route path="/edit/:id" exact component={EditPage}/>
             <Route path="/detail/:id" component={DetailPage}/>
             <Route path="/list/:searchId" component={ListPage}/>
           </Switch>
