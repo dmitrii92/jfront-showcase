@@ -5,13 +5,13 @@ import ToolbarButtonBase, {
   ToolbarButtonCreate,
   ToolbarButtonDelete,
   ToolbarButtonEdit, ToolbarButtonFind,
-  ToolbarButtonSave, ToolbarButtonView
+  ToolbarButtonSave, ToolbarButtonView, ToolbarSplitter
 } from "../../components/toolbar/buttons";
 import {useHistory, useParams, useLocation} from "react-router-dom";
 import {getResultSetSize, searchFeatures} from "../../api/FeatureApi";
 import {ListItem} from "./ListItem";
 
-import Table, {TableHeader, TableHeaderCell, TableRow} from "../../components/table";
+import Table, {TableColumn, TableHeader, TableHeaderCell, TableRow, TableBody} from "../../components/table";
 import {TablePagingBar} from "../../components/table/TablePagingBar";
 
 const useQuery = () => {
@@ -43,7 +43,7 @@ const ListPage = () => {
             // searchSize = resultSize;
             console.log(searchSize)
             if (searchId) {
-              searchFeatures(searchId, pageSize , page ).then((features) => {
+              searchFeatures(searchId, pageSize, page).then((features) => {
                 console.log(features)
                 setFeatures(features);
               });
@@ -62,6 +62,8 @@ const ListPage = () => {
           <ToolbarButtonEdit disabled={true}/>
           <ToolbarButtonDelete disabled={true}/>
           <ToolbarButtonView/>
+          <ToolbarSplitter/>
+          <ToolbarButtonBase disabled={true}>Список</ToolbarButtonBase>
           <ToolbarButtonFind onClick={() => history.push(`/`)}/>
           <ToolbarButtonBase disabled={true}>Найти</ToolbarButtonBase>
         </ToolbarBase>
@@ -80,16 +82,30 @@ const ListPage = () => {
                 <TableHeaderCell>Ответственный</TableHeaderCell>
               </TableRow>
             </TableHeader>
-            <tbody>
-            {features.map(feature => {
+            <TableBody>
+            {features? features.map(feature => {
               return (
-                  <ListItem
+                  <TableRow
                       key={feature.featureId}
-                      {...feature}
-                  />
+                      onClick={() => console.log("onClick")}
+                      onDoubleClick={() => {
+                        console.log("onDoubleClick")
+                        history.push(`/detail/${feature.featureId}`);
+                      }}
+                  >
+                    <TableColumn label="Идентификатор">{feature.featureId}</TableColumn>
+                    <TableColumn label="Порядок выполнения"></TableColumn>
+                    <TableColumn label="Статус">{feature.featureStatus.name}</TableColumn>
+                    <TableColumn label="Наименование">{feature.featureName}</TableColumn>
+                    <TableColumn label="Наименование английское">{feature.featureNameEn}</TableColumn>
+                    <TableColumn label="Описание">{feature.description}</TableColumn>
+                    <TableColumn label="Дата создания">{feature.dateIns}</TableColumn>
+                    <TableColumn label="Автор">{feature.author.name}</TableColumn>
+                    <TableColumn label="Ответственный">{feature.responsible.name}</TableColumn>
+                  </TableRow>
               );
-            })}
-            </tbody>
+            }) : null}
+            </TableBody>
           </Table>
           <TablePagingBar maxRowCount={searchSize} visibleRowCount={pageSize} onChange={((pageNumber, pageSize) => {
             console.log("pageNumber = " + pageNumber)

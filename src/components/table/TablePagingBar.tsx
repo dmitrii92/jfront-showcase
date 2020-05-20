@@ -7,6 +7,8 @@ import {PagingToolBar} from "./PagingToolBar";
 export const PagingBar = styled.div`
   font: 11px arial, tahoma, helvetica, sans-serif;
   margin: 0;
+  position: fixed;
+  bottom: 0;
   padding: 2px 2px 2px 2px;
   border-style: solid;
   border-color: #99BBE8;

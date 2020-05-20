@@ -12,7 +12,17 @@ export const Table = styled.table`
   @media only screen and (max-width: 760px), (min-device-width: 768px) and (max-device-width: 1024px) {
     border: 0;
   }
+`;
+
+interface TableBodyProps {
+  height?: string;
 }
+
+export const TableBody = styled.tbody<TableBodyProps>`
+  width: 100%;
+  // display: block;
+  // ${props => props.height ? `position: absolute; height: ${props.height}; right: -17px; width: calc(100% + 17px);` : ''};
+  // z-index: 1;
 `;
 
 export const TableHeader = styled.thead`
