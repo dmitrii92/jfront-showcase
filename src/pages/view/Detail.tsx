@@ -1,6 +1,5 @@
 import React, {useEffect, useState} from "react";
 import Form from "../../components/form";
-import Header from "../../components/header";
 import FormField from "../../components/form-field";
 import Label from "../../components/label";
 import {getFeature} from "../../api/FeatureApi";
@@ -10,7 +9,7 @@ import ToolbarButtonBase, {
   ToolbarButtonCreate,
   ToolbarButtonDelete,
   ToolbarButtonEdit, ToolbarButtonFind,
-  ToolbarButtonSave, ToolbarButtonView
+  ToolbarButtonSave, ToolbarButtonView, ToolbarSplitter
 } from "../../components/toolbar/buttons";
 import ToolbarBase from "../../components/toolbar/ToolbarBase";
 
@@ -22,7 +21,6 @@ const DetailPage = () => {
 
   useEffect(() => {
     getFeature(id).then(feature => {
-          // console.log(feature);
           setCurrentFeature(feature);
         }
     );
@@ -33,9 +31,11 @@ const DetailPage = () => {
         <ToolbarBase>
           <ToolbarButtonCreate onClick={() => history.push(`/create`)}/>
           <ToolbarButtonSave disabled={true}/>
-          <ToolbarButtonEdit/>
+          <ToolbarButtonEdit onClick={() => history.push(`/edit/${id}`)}/>
           <ToolbarButtonDelete/>
           <ToolbarButtonView disabled={true}/>
+          <ToolbarSplitter/>
+          <ToolbarButtonBase>Список</ToolbarButtonBase>
           <ToolbarButtonFind onClick={() => history.push(`/`)}/>
           <ToolbarButtonBase disabled={true}>Найти</ToolbarButtonBase>
         </ToolbarBase>

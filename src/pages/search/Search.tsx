@@ -6,7 +6,7 @@ import ToolbarButtonBase, {
   ToolbarButtonEdit,
   ToolbarButtonFind,
   ToolbarButtonSave,
-  ToolbarButtonView
+  ToolbarButtonView, ToolbarSplitter
 } from "../../components/toolbar/buttons";
 import ToolbarBase from "../../components/toolbar/ToolbarBase";
 import {useHistory} from "react-router-dom";
@@ -62,6 +62,8 @@ const SearchPage = () => {
           <ToolbarButtonEdit disabled={true}/>
           <ToolbarButtonDelete disabled={true}/>
           <ToolbarButtonView disabled={true}/>
+          <ToolbarSplitter/>
+          <ToolbarButtonBase disabled={true}>Список</ToolbarButtonBase>
           <ToolbarButtonFind disabled={true}/>
           <ToolbarButtonBase type="submit" form="main-form">Найти</ToolbarButtonBase>
         </ToolbarBase>

@@ -1,7 +1,6 @@
 import React from "react";
 import Form from "../../components/form";
 import Input from "../../components/input";
-import Header from "../../components/header";
 import FormField from "../../components/form-field";
 import Label from "../../components/label";
 import CheckBox from "../../components/checkbox";
@@ -11,7 +10,7 @@ import ToolbarButtonBase, {
   ToolbarButtonCreate,
   ToolbarButtonDelete,
   ToolbarButtonEdit, ToolbarButtonFind,
-  ToolbarButtonSave, ToolbarButtonView
+  ToolbarButtonSave, ToolbarButtonView, ToolbarSplitter
 } from "../../components/toolbar/buttons";
 import {useHistory} from "react-router-dom";
 
@@ -26,6 +25,8 @@ const CreatePage = () => {
           <ToolbarButtonEdit disabled={true}/>
           <ToolbarButtonDelete disabled={true}/>
           <ToolbarButtonView/>
+          <ToolbarSplitter/>
+          <ToolbarButtonBase disabled={true}>Список</ToolbarButtonBase>
           <ToolbarButtonFind onClick={() => history.push(`/`)}/>
           <ToolbarButtonBase disabled={true}>Найти</ToolbarButtonBase>
         </ToolbarBase>

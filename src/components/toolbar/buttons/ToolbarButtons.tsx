@@ -6,8 +6,10 @@ import btn_edit from "./icons/edit.png";
 import btn_find from "./icons/search.png";
 import btn_delete from "./icons/delete.png";
 import btn_view from "./icons/view.png";
+import split from "./icons/split.gif";
 
 import ToolbarButtonBase, {ToolbarButtonInterface} from "./ToolbarButtonBase";
+import styled from "styled-components";
 
 
 const ToolbarButtonFind: React.FC<ToolbarButtonInterface> = (props) => {
@@ -58,11 +60,24 @@ const ToolbarButtonView: React.FC<ToolbarButtonInterface> = (props) => {
   );
 }
 
+const ToolbarSplitter = styled.span`
+  display: inline-block;
+  background-position: center;
+  background-repeat: repeat;
+  height: 22px;
+  width: 2px;
+  float: left;
+  margin-left: 2px;
+  margin-right: 2px;
+  background-image: url(${split});
+`;
+
 export {
   ToolbarButtonFind,
   ToolbarButtonCreate,
   ToolbarButtonSave,
   ToolbarButtonEdit,
   ToolbarButtonDelete,
-  ToolbarButtonView
+  ToolbarButtonView,
+  ToolbarSplitter,
 }
