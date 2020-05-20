@@ -43,9 +43,9 @@ const SearchPage = () => {
     let searchRequest: SearchRequest<FeatureSearchTemplate> = {template: data};
 
     postSearchRequest(searchRequest).then((searchId) => {
-      getResultSetSize(searchId).then(pageSize => {
-        if (pageSize > 0) {
-          history.push(`/list/${searchId}`)
+      getResultSetSize(searchId).then(resultSize => {
+        if (resultSize > 0) {
+          history.push(`/list/${searchId}/?pageSize=25&page=1`)
         } else {
           alert("Search empty!")
         }
