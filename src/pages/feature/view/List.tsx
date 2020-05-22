@@ -1,17 +1,17 @@
 import React, {useEffect, useState} from "react";
-import {Feature} from "../../api/FeatureInterface";
-import ToolbarBase from "../../components/toolbar/ToolbarBase";
+import {Feature} from "../../../api/FeatureInterface";
+import ToolbarBase from "../../../components/toolbar/ToolbarBase";
 import ToolbarButtonBase, {
   ToolbarButtonCreate,
   ToolbarButtonDelete,
   ToolbarButtonEdit, ToolbarButtonFind,
   ToolbarButtonSave, ToolbarButtonView, ToolbarSplitter
-} from "../../components/toolbar/buttons";
+} from "../../../components/toolbar/buttons";
 import {useHistory, useParams, useLocation} from "react-router-dom";
-import {getResultSetSize, searchFeatures} from "../../api/FeatureApi";
+import {getResultSetSize, searchFeatures} from "../../../api/FeatureApi";
 
-import Table, {TableColumn, TableHeader, TableHeaderCell, TableRow, TableBody} from "../../components/table";
-import {TablePagingBar} from "../../components/table/TablePagingBar";
+import Table, {TableColumn, TableHeader, TableHeaderCell, TableRow, TableBody} from "../../../components/table";
+import {TablePagingBar} from "../../../components/table/TablePagingBar";
 
 const useQuery = () => {
   return new URLSearchParams(useLocation().search);

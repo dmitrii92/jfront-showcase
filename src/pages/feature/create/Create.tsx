@@ -1,19 +1,19 @@
 import React from "react";
-import Form from "../../components/form";
-import Input from "../../components/input";
-import FormField from "../../components/form-field";
-import Label from "../../components/label";
-import ToolbarBase from "../../components/toolbar/ToolbarBase";
+import Form from "../../../components/form";
+import Input from "../../../components/input";
+import FormField from "../../../components/form-field";
+import Label from "../../../components/label";
+import ToolbarBase from "../../../components/toolbar/ToolbarBase";
 import ToolbarButtonBase, {
   ToolbarButtonCreate,
   ToolbarButtonDelete,
   ToolbarButtonEdit, ToolbarButtonFind,
   ToolbarButtonSave, ToolbarButtonView, ToolbarSplitter
-} from "../../components/toolbar/buttons";
+} from "../../../components/toolbar/buttons";
 import {useHistory} from "react-router-dom";
 import { useForm } from "react-hook-form/dist/react-hook-form.ie11";
-import {FeatureCreate} from "../../api/FeatureInterface";
-import {createFeature} from "../../api/FeatureApi";
+import {FeatureCreate} from "../../../api/FeatureInterface";
+import {createFeature} from "../../../api/FeatureApi";
 
 const CreatePage = () => {
   const history = useHistory();

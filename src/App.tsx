@@ -1,12 +1,12 @@
-import React, {useState} from 'react';
+import React from 'react';
 
-import DetailPage from "./pages/view/Detail";
+import DetailPage from "./pages/feature/view/Detail";
 import {BrowserRouter, Switch, Route} from "react-router-dom";
-import CreatePage from "./pages/create/Create";
-import SearchPage from "./pages/search/Search";
-import ListPage from "./pages/view/List";
+import CreatePage from "./pages/feature/create/Create";
+import SearchPage from "./pages/feature/search/Search";
+import ListPage from "./pages/feature/view/List";
 import Header from "./components/header";
-import EditPage from "./pages/edit/Edit";
+import EditPage from "./pages/feature/edit/Edit";
 
 function App() {
 

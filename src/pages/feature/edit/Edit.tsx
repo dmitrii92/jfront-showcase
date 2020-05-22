@@ -1,18 +1,18 @@
 import React, {useEffect, useState} from "react";
-import Form from "../../components/form";
-import FormField from "../../components/form-field";
-import Label from "../../components/label";
-import Input from "../../components/input";
-import {getFeature, updateFeature} from "../../api/FeatureApi";
-import {Feature, FeatureUpdate} from "../../api/FeatureInterface";
+import Form from "../../../components/form";
+import FormField from "../../../components/form-field";
+import Label from "../../../components/label";
+import Input from "../../../components/input";
+import {getFeature, updateFeature} from "../../../api/FeatureApi";
+import {Feature, FeatureUpdate} from "../../../api/FeatureInterface";
 import {useHistory, useParams} from "react-router-dom";
 import ToolbarButtonBase, {
   ToolbarButtonCreate,
   ToolbarButtonDelete,
   ToolbarButtonEdit, ToolbarButtonFind,
   ToolbarButtonSave, ToolbarButtonView, ToolbarSplitter
-} from "../../components/toolbar/buttons";
-import ToolbarBase from "../../components/toolbar/ToolbarBase";
+} from "../../../components/toolbar/buttons";
+import ToolbarBase from "../../../components/toolbar/ToolbarBase";
 import {useForm} from "react-hook-form";
 
 const EditPage = () => {

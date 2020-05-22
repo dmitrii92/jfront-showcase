@@ -1,17 +1,17 @@
 import React, {useEffect, useState} from "react";
-import Form from "../../components/form";
-import FormField from "../../components/form-field";
-import Label from "../../components/label";
-import {getFeature} from "../../api/FeatureApi";
-import {Feature} from "../../api/FeatureInterface";
+import Form from "../../../components/form";
+import FormField from "../../../components/form-field";
+import Label from "../../../components/label";
+import {getFeature} from "../../../api/FeatureApi";
+import {Feature} from "../../../api/FeatureInterface";
 import {useHistory, useParams} from "react-router-dom";
 import ToolbarButtonBase, {
   ToolbarButtonCreate,
   ToolbarButtonDelete,
   ToolbarButtonEdit, ToolbarButtonFind,
   ToolbarButtonSave, ToolbarButtonView, ToolbarSplitter
-} from "../../components/toolbar/buttons";
-import ToolbarBase from "../../components/toolbar/ToolbarBase";
+} from "../../../components/toolbar/buttons";
+import ToolbarBase from "../../../components/toolbar/ToolbarBase";
 
 const DetailPage = () => {
   const history = useHistory();
