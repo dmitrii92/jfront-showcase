@@ -1,4 +1,4 @@
-import React, {useEffect, useLayoutEffect, useState} from "react";
+import React, {useEffect, useState} from "react";
 import {Feature} from "../../api/FeatureInterface";
 import ToolbarBase from "../../components/toolbar/ToolbarBase";
 import ToolbarButtonBase, {
@@ -9,7 +9,6 @@ import ToolbarButtonBase, {
 } from "../../components/toolbar/buttons";
 import {useHistory, useParams, useLocation} from "react-router-dom";
 import {getResultSetSize, searchFeatures} from "../../api/FeatureApi";
-import {ListItem} from "./ListItem";
 
 import Table, {TableColumn, TableHeader, TableHeaderCell, TableRow, TableBody} from "../../components/table";
 import {TablePagingBar} from "../../components/table/TablePagingBar";
@@ -26,17 +25,10 @@ const ListPage = () => {
   const [searchSize, setSearchSize] = useState<number>(25);
   const pageSize: number = parseInt(query.get("pageSize") as string);
   const page: number = parseInt(query.get("page") as string);
-  console.log("SEARCH_SIZE = " + searchSize)
-  console.log("QUERY pageSize = " + pageSize)
-  console.log("QUERY pageSize = " + query.get("pageSize"))
-  console.log("QUERY page = " + page)
   const [features, setFeatures] = useState<Feature[]>([]);
 
   useEffect(() => {
-    console.log("useEffect List")
-    console.log(searchId)
     if (searchId) {
-      console.log("searchId")
       getResultSetSize(searchId).then(resultSize => {
             console.log(resultSize)
             setSearchSize(resultSize);
@@ -47,7 +39,6 @@ const ListPage = () => {
                 console.log(features)
                 setFeatures(features);
               });
-
             }
           }
       );
@@ -89,7 +80,6 @@ const ListPage = () => {
                       key={feature.featureId}
                       onClick={() => console.log("onClick")}
                       onDoubleClick={() => {
-                        console.log("onDoubleClick")
                         history.push(`/detail/${feature.featureId}`);
                       }}
                   >
@@ -108,8 +98,6 @@ const ListPage = () => {
             </TableBody>
           </Table>
           <TablePagingBar maxRowCount={searchSize} visibleRowCount={pageSize} onChange={((pageNumber, pageSize) => {
-            console.log("pageNumber = " + pageNumber)
-            console.log("pageSize = " + pageSize)
             history.push({pathname: `/list/${searchId}`, search: `?page=${pageNumber}&pageSize=${pageSize}`})
           })}/>
         </div>
