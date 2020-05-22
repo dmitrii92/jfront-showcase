@@ -35,7 +35,7 @@ const DetailPage = () => {
           <ToolbarButtonDelete/>
           <ToolbarButtonView disabled={true}/>
           <ToolbarSplitter/>
-          <ToolbarButtonBase>Список</ToolbarButtonBase>
+          <ToolbarButtonBase onClick={() => history.goBack()}>Список</ToolbarButtonBase>
           <ToolbarButtonFind onClick={() => history.push(`/`)}/>
           <ToolbarButtonBase disabled={true}>Найти</ToolbarButtonBase>
         </ToolbarBase>

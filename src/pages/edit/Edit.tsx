@@ -3,8 +3,8 @@ import Form from "../../components/form";
 import FormField from "../../components/form-field";
 import Label from "../../components/label";
 import Input from "../../components/input";
-import {getFeature} from "../../api/FeatureApi";
-import {Feature} from "../../api/FeatureInterface";
+import {getFeature, updateFeature} from "../../api/FeatureApi";
+import {Feature, FeatureUpdate} from "../../api/FeatureInterface";
 import {useHistory, useParams} from "react-router-dom";
 import ToolbarButtonBase, {
   ToolbarButtonCreate,
@@ -13,12 +13,25 @@ import ToolbarButtonBase, {
   ToolbarButtonSave, ToolbarButtonView, ToolbarSplitter
 } from "../../components/toolbar/buttons";
 import ToolbarBase from "../../components/toolbar/ToolbarBase";
+import {useForm} from "react-hook-form";
 
 const EditPage = () => {
   const history = useHistory();
   let {id} = useParams();
 
   const [currentFeature, setCurrentFeature] = useState<Feature>();
+
+  const {register, handleSubmit} = useForm<FeatureUpdate>();
+
+  const onSubmit = handleSubmit((data: FeatureUpdate) => {
+    console.log(data)
+    console.log("data.featureName" + data.featureName)
+    if (id) {
+      updateFeature(id.toString(), data).then(() => {
+        history.push(`/detail/${id}`);
+      })
+    }
+  });
 
   useEffect(() => {
     getFeature(id).then(feature => {
@@ -31,7 +44,12 @@ const EditPage = () => {
       <div>
         <ToolbarBase>
           <ToolbarButtonCreate onClick={() => history.push(`/create`)}/>
-          <ToolbarButtonSave disabled={true}/>
+          <ToolbarButtonSave onClick={() => {
+            let button = document.getElementById("edit-submit");
+            if (button) {
+              button.click();
+            }
+          }}/>
           <ToolbarButtonEdit disabled={true}/>
           <ToolbarButtonDelete/>
           <ToolbarButtonView onClick={() => history.goBack()}/>
@@ -40,10 +58,10 @@ const EditPage = () => {
           <ToolbarButtonFind onClick={() => history.push(`/`)}/>
           <ToolbarButtonBase disabled={true}>Найти</ToolbarButtonBase>
         </ToolbarBase>
-        <Form>
+        <Form id="edit-form" onSubmit={onSubmit}>
           <FormField>
             <Label>Идентификатор:</Label>
-            <Input style={{width: "350px", textAlign: "left"}} value={currentFeature?.featureId}/>
+            <Label style={{width: "350px", textAlign: "left"}}>{currentFeature?.featureId}</Label>
           </FormField>
           <FormField>
             <Label>Статус:</Label>
@@ -51,23 +69,35 @@ const EditPage = () => {
           </FormField>
           <FormField>
             <Label>Наименование:</Label>
-            <Input style={{width: "350px", textAlign: "left"}} value={currentFeature?.featureName}/>
+            <Input
+                style={{width: "350px", textAlign: "left"}}
+                defaultValue={currentFeature?.featureName}
+                name="featureName" ref={register}
+            />
           </FormField>
           <FormField>
             <Label>Наименование английское:</Label>
-            <Input style={{width: "350px", textAlign: "left"}} value={currentFeature?.featureNameEn}/>
+            <Input
+                style={{width: "350px", textAlign: "left"}}
+                defaultValue={currentFeature?.featureNameEn}
+                name="featureNameEn" ref={register}
+            />
           </FormField>
           <FormField>
             <Label>Дата создания:</Label>
-            <Input style={{width: "350px", textAlign: "left"}} value={currentFeature?.dateIns.toString()}/>
+            <Label style={{width: "350px", textAlign: "left"}}>{currentFeature?.dateIns.toString()}</Label>
           </FormField>
           <FormField>
             <Label>Описание:</Label>
-            <Input style={{width: "350px", textAlign: "left"}} value={currentFeature?.description}/>
+            <Input
+                style={{width: "350px", textAlign: "left"}}
+                defaultValue={currentFeature?.description}
+                name="description" ref={register}
+            />
           </FormField>
           <FormField>
             <Label>Автор:</Label>
-            <Input style={{width: "350px", textAlign: "left"}} value={currentFeature?.author.name}/>
+            <Label style={{width: "350px", textAlign: "left"}}>{currentFeature?.author.name}</Label>
           </FormField>
           <FormField>
             <Label>Порядок выполнения:</Label>
@@ -75,7 +105,13 @@ const EditPage = () => {
           </FormField>
           <FormField>
             <Label>Ответственный:</Label>
-            <Input style={{width: "350px", textAlign: "left"}} value={currentFeature?.responsible.name}/>
+            <Input
+                style={{width: "350px", textAlign: "left"}}
+                defaultValue={currentFeature?.responsible.name}
+            />
+          </FormField>
+          <FormField>
+            <Input id="edit-submit" type="submit" hidden={true}/>
           </FormField>
         </Form>
       </div>

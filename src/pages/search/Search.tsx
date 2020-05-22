@@ -1,5 +1,4 @@
 import React from "react";
-import Header from "../../components/header";
 import ToolbarButtonBase, {
   ToolbarButtonCreate,
   ToolbarButtonDelete,
@@ -14,7 +13,7 @@ import Form from "../../components/form";
 import FormField from "../../components/form-field";
 import Label from "../../components/label";
 import Input from "../../components/input";
-import {useForm} from "react-hook-form";
+import {useForm} from "react-hook-form/dist/react-hook-form.ie11";
 import {getResultSetSize, postSearchRequest} from "../../api/FeatureApi";
 import {SearchRequest} from "../../api/types";
 import {FeatureSearchTemplate} from "../../api/FeatureInterface";
@@ -65,9 +64,14 @@ const SearchPage = () => {
           <ToolbarSplitter/>
           <ToolbarButtonBase disabled={true}>Список</ToolbarButtonBase>
           <ToolbarButtonFind disabled={true}/>
-          <ToolbarButtonBase type="submit" form="main-form">Найти</ToolbarButtonBase>
+          <ToolbarButtonBase onClick={() => {
+            let button = document.getElementById("search-submit");
+            if (button) {
+              button.click();
+            }
+          }}>Найти</ToolbarButtonBase>
         </ToolbarBase>
-        <Form id="main-form" onSubmit={onSubmit}>
+        <Form onSubmit={onSubmit}>
           <FormField>
             <Label>Идентификатор:</Label>
             <Input name="featureId" ref={register({pattern: /\d+/})} type="number"/>
@@ -88,6 +92,9 @@ const SearchPage = () => {
             <Label>Дата создания, до:</Label>
             <Input name="dateInsTo" ref={register} type="date"/>
           </FormField>*/}
+          <FormField>
+            <Input id="search-submit" type="submit" hidden={true}/>
+          </FormField>
         </Form>
       </div>
   );
