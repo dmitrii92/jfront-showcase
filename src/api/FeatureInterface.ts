@@ -18,14 +18,27 @@ export interface Feature {
   };
 }
 
+export type FeatureCreate = {
+  featureName: string;
+  featureNameEn: string;
+  description: string;
+}
+
+export type FeatureUpdate = {
+  featureName: string;
+  featureNameEn: string;
+  description: string;
+  responsibleId: number;
+}
+
 export type FeatureSearchTemplate = {
   featureId?: number;
   featureNameTemplate?: string;
   featureNameEnTemplate?: string;
+  // dateInsFrom: Date;
+  // dateInsTo: Date;
   /*statusCodeList?: string[];
   authorId: number;
   responsibleId: number;
-  dateInsFrom: Date;
-  dateInsTo: Date;
   maxRowCount: number;*/
 }
