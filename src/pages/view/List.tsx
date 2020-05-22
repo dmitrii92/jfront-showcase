@@ -26,17 +26,15 @@ const ListPage = () => {
   const pageSize: number = parseInt(query.get("pageSize") as string);
   const page: number = parseInt(query.get("page") as string);
   const [features, setFeatures] = useState<Feature[]>([]);
+  const [currentFeature, setCurrentFeature] = useState<Feature>();
+
 
   useEffect(() => {
     if (searchId) {
       getResultSetSize(searchId).then(resultSize => {
-            console.log(resultSize)
             setSearchSize(resultSize);
-            // searchSize = resultSize;
-            console.log(searchSize)
             if (searchId) {
               searchFeatures(searchId, pageSize, page).then((features) => {
-                console.log(features)
                 setFeatures(features);
               });
             }
@@ -50,9 +48,9 @@ const ListPage = () => {
         <ToolbarBase>
           <ToolbarButtonCreate onClick={() => history.push(`/create`)}/>
           <ToolbarButtonSave disabled={true}/>
-          <ToolbarButtonEdit disabled={true}/>
-          <ToolbarButtonDelete disabled={true}/>
-          <ToolbarButtonView/>
+          <ToolbarButtonEdit disabled={!currentFeature} onClick={() => history.push(`/edit/${currentFeature?.featureId}`)}/>
+          <ToolbarButtonDelete disabled={!currentFeature}/>
+          <ToolbarButtonView disabled={!currentFeature} onClick={() => history.push(`/detail/${currentFeature?.featureId}`)}/>
           <ToolbarSplitter/>
           <ToolbarButtonBase disabled={true}>Список</ToolbarButtonBase>
           <ToolbarButtonFind onClick={() => history.push(`/`)}/>
@@ -78,7 +76,10 @@ const ListPage = () => {
               return (
                   <TableRow
                       key={feature.featureId}
-                      onClick={() => console.log("onClick")}
+                      selected={feature === currentFeature}
+                      onClick={() => {
+                        setCurrentFeature(feature)
+                      }}
                       onDoubleClick={() => {
                         history.push(`/detail/${feature.featureId}`);
                       }}

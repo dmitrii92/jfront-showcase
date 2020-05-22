@@ -101,14 +101,11 @@ const EditPage = () => {
           </FormField>
           <FormField>
             <Label>Порядок выполнения:</Label>
-            <Input/>
+            <Label/>
           </FormField>
           <FormField>
             <Label>Ответственный:</Label>
-            <Input
-                style={{width: "350px", textAlign: "left"}}
-                defaultValue={currentFeature?.responsible.name}
-            />
+            <Label style={{width: "350px", textAlign: "left"}}>{currentFeature?.responsible.name}</Label>
           </FormField>
           <FormField>
             <Input id="edit-submit" type="submit" hidden={true}/>
