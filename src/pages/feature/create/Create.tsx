@@ -12,8 +12,8 @@ import ToolbarButtonBase, {
 } from "../../../components/toolbar/buttons";
 import {useHistory} from "react-router-dom";
 import { useForm } from "react-hook-form/dist/react-hook-form.ie11";
-import {FeatureCreate} from "../../../api/FeatureInterface";
-import {createFeature} from "../../../api/FeatureApi";
+import {FeatureCreate} from "../../../api/feature/FeatureInterface";
+import {createFeature} from "../../../api/feature/FeatureApi";
 
 const CreatePage = () => {
   const history = useHistory();

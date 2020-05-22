@@ -2,8 +2,8 @@ import React, {useEffect, useState} from "react";
 import Form from "../../../components/form";
 import FormField from "../../../components/form-field";
 import Label from "../../../components/label";
-import {getFeature} from "../../../api/FeatureApi";
-import {Feature} from "../../../api/FeatureInterface";
+import {getFeature} from "../../../api/feature/FeatureApi";
+import {Feature} from "../../../api/feature/FeatureInterface";
 import {useHistory, useParams} from "react-router-dom";
 import ToolbarButtonBase, {
   ToolbarButtonCreate,

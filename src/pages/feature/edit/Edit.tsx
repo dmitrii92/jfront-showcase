@@ -3,8 +3,8 @@ import Form from "../../../components/form";
 import FormField from "../../../components/form-field";
 import Label from "../../../components/label";
 import Input from "../../../components/input";
-import {getFeature, updateFeature} from "../../../api/FeatureApi";
-import {Feature, FeatureUpdate} from "../../../api/FeatureInterface";
+import {getFeature, updateFeature} from "../../../api/feature/FeatureApi";
+import {Feature, FeatureUpdate} from "../../../api/feature/FeatureInterface";
 import {useHistory, useParams} from "react-router-dom";
 import ToolbarButtonBase, {
   ToolbarButtonCreate,

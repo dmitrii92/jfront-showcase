@@ -1,6 +1,6 @@
 import axios from 'axios';
 import {Feature, FeatureCreate, FeatureSearchTemplate, FeatureUpdate} from "./FeatureInterface";
-import {SearchRequest} from "./types";
+import {SearchRequest} from "../types";
 
 const API_URL = 'http://vsmlapprfid1:8080/JepRiaShowcase/api';
 const USER = 'nagornyys';

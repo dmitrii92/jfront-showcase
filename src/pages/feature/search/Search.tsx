@@ -14,9 +14,9 @@ import FormField from "../../../components/form-field";
 import Label from "../../../components/label";
 import Input from "../../../components/input";
 import {useForm} from "react-hook-form/dist/react-hook-form.ie11";
-import {getResultSetSize, postSearchRequest} from "../../../api/FeatureApi";
+import {getResultSetSize, postSearchRequest} from "../../../api/feature/FeatureApi";
 import {SearchRequest} from "../../../api/types";
-import {FeatureSearchTemplate} from "../../../api/FeatureInterface";
+import {FeatureSearchTemplate} from "../../../api/feature/FeatureInterface";
 
 
 const SearchPage = () => {
