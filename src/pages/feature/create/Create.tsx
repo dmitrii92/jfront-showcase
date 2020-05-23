@@ -14,6 +14,7 @@ import {useHistory} from "react-router-dom";
 import { useForm } from "react-hook-form/dist/react-hook-form.ie11";
 import {FeatureCreate} from "../../../api/feature/FeatureInterface";
 import {createFeature} from "../../../api/feature/FeatureApi";
+import {Tab, TabPanel} from "../../../components/tabpanel/TabPanel";
 
 const CreatePage = () => {
   const history = useHistory();
@@ -30,6 +31,11 @@ const CreatePage = () => {
 
   return (
       <div>
+        <TabPanel>
+          <Tab selected={true}>
+            Запрос функционала
+          </Tab>
+        </TabPanel>
         <ToolbarBase>
           <ToolbarButtonCreate disabled={true}/>
           <ToolbarButtonSave onClick={() => {

@@ -17,6 +17,8 @@ import {useForm} from "react-hook-form/dist/react-hook-form.ie11";
 import {getResultSetSize, postSearchRequest} from "../../../api/feature/FeatureApi";
 import {SearchRequest} from "../../../api/types";
 import {FeatureSearchTemplate} from "../../../api/feature/FeatureInterface";
+import {FEATURE_CREATE_URL} from "../../../RouteConst";
+import {Tab, TabPanel} from "../../../components/tabpanel/TabPanel";
 
 
 const SearchPage = () => {
@@ -55,8 +57,13 @@ const SearchPage = () => {
 
   return (
       <div>
+        <TabPanel>
+          <Tab selected={true}>
+            Запрос функционала
+          </Tab>
+        </TabPanel>
         <ToolbarBase>
-          <ToolbarButtonCreate onClick={() => history.push(`/create`)}/>
+          <ToolbarButtonCreate onClick={() => history.push(`${FEATURE_CREATE_URL}`)}/>
           <ToolbarButtonSave disabled={true}/>
           <ToolbarButtonEdit disabled={true}/>
           <ToolbarButtonDelete disabled={true}/>

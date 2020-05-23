@@ -12,6 +12,7 @@ import {getResultSetSize, searchFeatures} from "../../../api/feature/FeatureApi"
 
 import Table, {TableColumn, TableHeader, TableHeaderCell, TableRow, TableBody} from "../../../components/table";
 import {TablePagingBar} from "../../../components/table/TablePagingBar";
+import {Tab, TabPanel} from "../../../components/tabpanel/TabPanel";
 
 const useQuery = () => {
   return new URLSearchParams(useLocation().search);
@@ -45,12 +46,17 @@ const ListPage = () => {
 
   return (
       <div>
+        <TabPanel>
+          <Tab selected={true}>
+            Запрос функционала
+          </Tab>
+        </TabPanel>
         <ToolbarBase>
           <ToolbarButtonCreate onClick={() => history.push(`/create`)}/>
           <ToolbarButtonSave disabled={true}/>
-          <ToolbarButtonEdit disabled={!currentFeature} onClick={() => history.push(`/edit/${currentFeature?.featureId}`)}/>
+          <ToolbarButtonEdit disabled={!currentFeature} onClick={() => history.push(`/${currentFeature?.featureId}/edit`)}/>
           <ToolbarButtonDelete disabled={!currentFeature}/>
-          <ToolbarButtonView disabled={!currentFeature} onClick={() => history.push(`/detail/${currentFeature?.featureId}`)}/>
+          <ToolbarButtonView disabled={!currentFeature} onClick={() => history.push(`/${currentFeature?.featureId}/detail`)}/>
           <ToolbarSplitter/>
           <ToolbarButtonBase disabled={true}>Список</ToolbarButtonBase>
           <ToolbarButtonFind onClick={() => history.push(`/`)}/>
@@ -81,7 +87,7 @@ const ListPage = () => {
                         setCurrentFeature(feature)
                       }}
                       onDoubleClick={() => {
-                        history.push(`/detail/${feature.featureId}`);
+                        history.push(`/${feature.featureId}/detail`);
                       }}
                   >
                     <TableColumn label="Идентификатор">{feature.featureId}</TableColumn>

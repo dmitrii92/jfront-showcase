@@ -14,10 +14,11 @@ import ToolbarButtonBase, {
 } from "../../../components/toolbar/buttons";
 import ToolbarBase from "../../../components/toolbar/ToolbarBase";
 import {useForm} from "react-hook-form";
+import {Tab, TabPanel} from "../../../components/tabpanel/TabPanel";
 
 const EditPage = () => {
   const history = useHistory();
-  let {id} = useParams();
+  let {featureId} = useParams();
 
   const [currentFeature, setCurrentFeature] = useState<Feature>();
 
@@ -26,15 +27,15 @@ const EditPage = () => {
   const onSubmit = handleSubmit((data: FeatureUpdate) => {
     console.log(data)
     console.log("data.featureName" + data.featureName)
-    if (id) {
-      updateFeature(id.toString(), data).then(() => {
-        history.push(`/detail/${id}`);
+    if (featureId) {
+      updateFeature(featureId.toString(), data).then(() => {
+        history.push(`/${featureId}/detail`);
       })
     }
   });
 
   useEffect(() => {
-    getFeature(id).then(feature => {
+    getFeature(featureId).then(feature => {
           setCurrentFeature(feature);
         }
     );
@@ -42,6 +43,11 @@ const EditPage = () => {
 
   return (
       <div>
+        <TabPanel>
+          <Tab selected={true}>
+            Запрос функционала
+          </Tab>
+        </TabPanel>
         <ToolbarBase>
           <ToolbarButtonCreate onClick={() => history.push(`/create`)}/>
           <ToolbarButtonSave onClick={() => {

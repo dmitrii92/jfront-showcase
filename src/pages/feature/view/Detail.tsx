@@ -12,15 +12,16 @@ import ToolbarButtonBase, {
   ToolbarButtonSave, ToolbarButtonView, ToolbarSplitter
 } from "../../../components/toolbar/buttons";
 import ToolbarBase from "../../../components/toolbar/ToolbarBase";
+import {Tab, TabPanel} from "../../../components/tabpanel/TabPanel";
 
 const DetailPage = () => {
   const history = useHistory();
-  let {id} = useParams();
-
+  let {featureId} = useParams();
+  const [mainTabSelected, setMainTabSelected] = useState<boolean>(true);
   const [currentFeature, setCurrentFeature] = useState<Feature>();
 
   useEffect(() => {
-    getFeature(id).then(feature => {
+    getFeature(featureId).then(feature => {
           setCurrentFeature(feature);
         }
     );
@@ -28,10 +29,18 @@ const DetailPage = () => {
 
   return (
       <div>
+        <TabPanel>
+          <Tab selected={mainTabSelected} onClick={() => {setMainTabSelected(true)}}>
+            Запрос функционала
+          </Tab>
+          <Tab selected={!mainTabSelected} onClick={() => {setMainTabSelected(false)}}>
+            Статус
+          </Tab>
+        </TabPanel>
         <ToolbarBase>
           <ToolbarButtonCreate onClick={() => history.push(`/create`)}/>
           <ToolbarButtonSave disabled={true}/>
-          <ToolbarButtonEdit onClick={() => history.push(`/edit/${id}`)}/>
+          <ToolbarButtonEdit onClick={() => history.push(`/${featureId}/edit`)}/>
           <ToolbarButtonDelete/>
           <ToolbarButtonView disabled={true}/>
           <ToolbarSplitter/>
