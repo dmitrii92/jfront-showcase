@@ -33,7 +33,10 @@ const DetailPage = () => {
           <Tab selected={mainTabSelected} onClick={() => {setMainTabSelected(true)}}>
             Запрос функционала
           </Tab>
-          <Tab selected={!mainTabSelected} onClick={() => {setMainTabSelected(false)}}>
+          <Tab selected={!mainTabSelected} onClick={() => {
+            setMainTabSelected(false);
+            history.push(`/${featureId}/feature-process`);
+          }}>
             Статус
           </Tab>
         </TabPanel>

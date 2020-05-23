@@ -1,4 +1,4 @@
-import React, {useState} from 'react';
+import React from 'react';
 
 import DetailPage from "./pages/feature/view/Detail";
 import {BrowserRouter, Switch, Route} from "react-router-dom";
