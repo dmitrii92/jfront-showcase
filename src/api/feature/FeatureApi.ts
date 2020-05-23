@@ -3,7 +3,7 @@ import {Feature, FeatureCreate, FeatureSearchTemplate, FeatureUpdate} from "./Fe
 import {SearchRequest} from "../types";
 
 const API_URL = 'http://vsmlapprfid1:8080/JepRiaShowcase/api';
-const USER = 'nagornyys';
+const USER = 'user';
 const PASSWORD = '123';
 
 export const getFeature = (id?: string): Promise<Feature> => {
@@ -38,7 +38,7 @@ export const createFeature = (feature: FeatureCreate): Promise<Feature> => {
           }
         }
     ).then(response => {
-      if (response.status === 201) {
+      if (201 === response.status) {
         let location: string = response.headers['location'];
         console.log("location" + location);
         axios.get(
@@ -51,7 +51,7 @@ export const createFeature = (feature: FeatureCreate): Promise<Feature> => {
               }
             }
         ).then(response => {
-          if (response.status === 200) {
+          if (200 === response.status) {
             resolve(response.data);
           } else {
             reject(response);
@@ -79,7 +79,7 @@ export const updateFeature = (featureId: string, feature: FeatureUpdate): Promis
           }
         }
     ).then(response => {
-      if (response.status === 200) {
+      if (200 === response.status) {
         resolve();
       } else {
         reject(response);
@@ -105,7 +105,7 @@ export const postSearchRequest = (searchRequest: SearchRequest<FeatureSearchTemp
           }
         }
     ).then(response => {
-      if (response.status === 201) {
+      if (201 === response.status) {
         let location: string = response.headers['location'];
         console.log(response)
         resolve(location.split('/').pop());
@@ -131,9 +131,9 @@ export const searchFeatures = (searchId: string, pageSize: number, page: number)
           }
         }
     ).then(response => {
-      if (response.status === 200) {
+      if (200 === response.status) {
         resolve(response.data);
-      } else if (response.status === 204) {
+      } else if (204 === response.status) {
         resolve([]);
       } else {
         reject(response);
@@ -157,7 +157,7 @@ export const getResultSetSize = (searchId: string): Promise<number> => {
           }
         }
     ).then(response => {
-      if (response.status === 200) {
+      if (200 === response.status) {
         resolve(response.data);
       } else {
         reject(response);
