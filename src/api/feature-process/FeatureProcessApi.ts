@@ -71,27 +71,24 @@ export const getFeatureProcess = (featureId: number, featureProcessId: string): 
   const url = `${API_URL}/feature/${featureId}/feature-process/${featureProcessId}`;
   axios.defaults.withCredentials = true;
 
-  return new Promise<FeatureProcess>((resolve, reject) => {
-    axios
-        .get(
-            url,
-            {
-              auth: {username: `${USER}`, password: `${PASSWORD}`},
-              headers: {
-                'Accept': 'application/json;charset=utf-8',
-                'Content-Type': 'application/json;charset=utf-8'
-              }
+  return axios
+      .get(
+          url,
+          {
+            // auth: {username: `${USER}`, password: `${PASSWORD}`},
+            headers: {
+              'Accept': 'application/json;charset=utf-8',
+              'Content-Type': 'application/json;charset=utf-8'
             }
-        )
-        .then(
-            response => response.data
-        )
-        .catch(reason => {
-          console.log(reason)
-          return Promise.reject(reason);
-        })
-  });
-
+          }
+      )
+      .then(
+          response => response.data
+      )
+      .catch(reason => {
+        console.log(reason)
+        return Promise.reject(reason);
+      })
 }
 
 export const deleteFeatureProcess = (featureId: number, featureProcessId: string): Promise<void> => {

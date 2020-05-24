@@ -78,7 +78,7 @@ const FeatureProcessListPage = () => {
                         setCurrent(featureProcess)
                       }}
                       onDoubleClick={() => {
-                        history.push(`/${featureProcess.featureId}/detail`);
+                        history.push(`/${featureProcess.featureId}/feature-process/${featureProcess.featureProcessId}/detail`);
                       }}
                   >
                     <TableColumn label="Статус">{featureProcess.featureStatusName}</TableColumn>

@@ -7,6 +7,7 @@ import SearchPage from "./pages/feature/search/Search";
 import ListPage from "./pages/feature/view/List";
 import EditPage from "./pages/feature/edit/Edit";
 import FeatureProcessListPage from "./pages/feature-process/view/List";
+import FeatureProcessDetailPage from "./pages/feature-process/view/Detail";
 
 function App() {
 
@@ -19,7 +20,8 @@ function App() {
             <Route path="/:featureId/edit" exact component={EditPage}/>
             <Route path="/:featureId/detail" component={DetailPage}/>
             <Route path="/list/:searchId" component={ListPage}/>
-            <Route path="/:featureId/feature-process" component={FeatureProcessListPage}/>
+            <Route path="/:featureId/feature-process" exact component={FeatureProcessListPage}/>
+            <Route path="/:featureId/feature-process/:featureProcessId/detail" component={FeatureProcessDetailPage}/>
           </Switch>
         </BrowserRouter>
       </div>
