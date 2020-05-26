@@ -8,6 +8,7 @@ import ListPage from "./pages/feature/view/List";
 import EditPage from "./pages/feature/edit/Edit";
 import FeatureProcessListPage from "./pages/feature-process/view/List";
 import FeatureProcessDetailPage from "./pages/feature-process/view/Detail";
+import FeatureProcessCreatePage from "./pages/feature-process/create/Create";
 
 function App() {
 
@@ -22,6 +23,7 @@ function App() {
             <Route path="/list/:searchId" component={ListPage}/>
             <Route path="/:featureId/feature-process" exact component={FeatureProcessListPage}/>
             <Route path="/:featureId/feature-process/:featureProcessId/detail" component={FeatureProcessDetailPage}/>
+            <Route path="/:featureId/feature-process/create" exact component={FeatureProcessCreatePage}/>
           </Switch>
         </BrowserRouter>
       </div>

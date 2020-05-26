@@ -44,7 +44,7 @@ const FeatureProcessDetailPage = () => {
           </Tab>
         </TabPanel>
         <ToolbarBase>
-          <ToolbarButtonCreate onClick={() => history.push(`/create`)}/>
+          <ToolbarButtonCreate onClick={() => history.push(`/${featureId}/feature-process/create`)}/>
           <ToolbarButtonSave disabled={true}/>
           <ToolbarButtonEdit onClick={() => history.push(`/${featureId}/edit`)}/>
           <ToolbarButtonDelete/>

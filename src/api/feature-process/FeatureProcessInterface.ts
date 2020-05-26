@@ -9,3 +9,8 @@ export type FeatureProcess = {
 export type FeatureProcessCreate = {
   featureStatusCode: string;
 }
+
+export type FeatureStatusOptions = {
+  name: string;
+  value: string;
+}

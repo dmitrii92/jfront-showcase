@@ -1,5 +1,9 @@
 import axios from 'axios';
-import {FeatureProcess, FeatureProcessCreate} from "./FeatureProcessInterface";
+import {
+  FeatureProcess,
+  FeatureProcessCreate,
+  FeatureStatusOptions
+} from "./FeatureProcessInterface";
 
 const API_URL = 'http://vsmlapprfid1:8080/JepRiaShowcase/api';
 const USER = 'user';
@@ -11,7 +15,7 @@ export const findFeatureProcess = (featureId: number): Promise<FeatureProcess[]>
   return axios
       .get(
           url,
-          {auth: {username: `${USER}`, password: `${PASSWORD}`}}
+          // {auth: {username: `${USER}`, password: `${PASSWORD}`}}
       )
       .then(
           response => response.data
@@ -23,17 +27,17 @@ export const findFeatureProcess = (featureId: number): Promise<FeatureProcess[]>
 }
 
 export const createFeatureProcess = (featureId: number, featureProcessCreate: FeatureProcessCreate):
-    Promise<FeatureProcessCreate> => {
+    Promise<FeatureProcess> => {
 
   const url = `${API_URL}/feature/${featureId}/feature-process`;
   axios.defaults.withCredentials = true;
 
-  return new Promise<FeatureProcessCreate>((resolve, reject) => {
+  return new Promise<FeatureProcess>((resolve, reject) => {
     axios.post(
         url,
         featureProcessCreate,
         {
-          auth: {username: `${USER}`, password: `${PASSWORD}`},
+          // auth: {username: `${USER}`, password: `${PASSWORD}`},
           headers: {
             'Accept': 'application/json;charset=utf-8',
             'Content-Type': 'application/json;charset=utf-8'
@@ -46,7 +50,7 @@ export const createFeatureProcess = (featureId: number, featureProcessCreate: Fe
         axios.get(
             location,
             {
-              auth: {username: `${USER}`, password: `${PASSWORD}`},
+              // auth: {username: `${USER}`, password: `${PASSWORD}`},
               headers: {
                 'Accept': 'application/json;charset=utf-8',
                 'Content-Type': 'application/json;charset=utf-8'
@@ -100,7 +104,7 @@ export const deleteFeatureProcess = (featureId: number, featureProcessId: string
     axios.delete(
         url,
         {
-          auth: {username: `${USER}`, password: `${PASSWORD}`},
+          // auth: {username: `${USER}`, password: `${PASSWORD}`},
           headers: {
             'Accept': 'application/json;charset=utf-8',
             'Content-Type': 'application/json;charset=utf-8'
@@ -114,4 +118,26 @@ export const deleteFeatureProcess = (featureId: number, featureProcessId: string
       }
     }).catch(error => reject(error));
   });
+}
+
+export const getFeatureStatusOptions = (): Promise<FeatureStatusOptions[]> => {
+
+  const url = `${API_URL}/feature/option/feature-status`;
+  axios.defaults.withCredentials = true;
+
+  return axios
+      .get(
+          url,
+          {
+            headers: {
+              'Accept': 'application/json;charset=utf-8',
+              'Content-Type': 'application/json;charset=utf-8'
+            }
+          },
+      ).then(
+          response => response.data
+      ).catch(reason => {
+        console.log(reason);
+        return Promise.reject(reason);
+      });
 }
