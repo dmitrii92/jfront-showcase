@@ -63,7 +63,7 @@ const SearchPage = () => {
           </Tab>
         </TabPanel>
         <ToolbarBase>
-          <ToolbarButtonCreate onClick={() => history.push(`${FEATURE_CREATE_URL}`)}/>
+          <ToolbarButtonCreate onClick={() => history.push(`/create`)}/>
           <ToolbarButtonSave disabled={true}/>
           <ToolbarButtonEdit disabled={true}/>
           <ToolbarButtonDelete disabled={true}/>
