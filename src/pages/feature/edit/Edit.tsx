@@ -76,7 +76,7 @@ const EditPage = () => {
           </FormField>
           <FormField>
             <Label>Статус:</Label>
-            <Input style={{width: "350px", textAlign: "left"}} value={currentFeature?.featureStatus.name}/>
+            <Label style={{width: "350px", textAlign: "left"}}>{currentFeature?.featureStatus.name}</Label>
           </FormField>
           <FormField>
             <Label>Наименование:</Label>

@@ -29,8 +29,7 @@ const ListPage = () => {
   const [features, setFeatures] = useState<Feature[]>([]);
   const [currentFeature, setCurrentFeature] = useState<Feature>();
 
-
-  useEffect(() => {
+  const find = () => {
     if (searchId) {
       getResultSetSize(searchId).then(resultSize => {
             setSearchSize(resultSize);
@@ -42,6 +41,10 @@ const ListPage = () => {
           }
       );
     }
+  }
+
+  useEffect(() => {
+    find();
   }, [location]);
 
   return (
@@ -57,7 +60,9 @@ const ListPage = () => {
           <ToolbarButtonEdit disabled={!currentFeature} onClick={() => history.push(`/${currentFeature?.featureId}/edit`)}/>
           <ToolbarButtonDelete disabled={!currentFeature} onClick={() => {
             if (currentFeature) {
-              deleteFeature(currentFeature.featureId.toString()).then(() => history.goBack());
+              deleteFeature(currentFeature.featureId.toString()).then( () => {
+                find();
+              });
             }
           }}/>
           <ToolbarButtonView disabled={!currentFeature} onClick={() => history.push(`/${currentFeature?.featureId}/detail`)}/>

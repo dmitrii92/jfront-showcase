@@ -28,18 +28,23 @@ const FeatureProcessListPage = () => {
   const [current, setCurrent] = useState<FeatureProcess>();
   let {featureId} = useParams();
 
-  useEffect(() => {
+  const find = () => {
     if (featureId) {
-      findFeatureProcess(parseInt(featureId)).then((processes:FeatureProcess[]) => {
+      findFeatureProcess(parseInt(featureId)).then((processes: FeatureProcess[]) => {
         setFeatureProcesses(processes);
       })
     }
+  }
+
+  useEffect(() => {
+    find()
   }, [location]);
 
   return (
       <div>
         <TabPanel>
-          <Tab selected={mainTabSelected} onClick={() => {setMainTabSelected(true)
+          <Tab selected={mainTabSelected} onClick={() => {
+            setMainTabSelected(true)
             history.push(`/${featureId}/detail`);
           }}>
             Запрос функционала
@@ -51,20 +56,23 @@ const FeatureProcessListPage = () => {
           </Tab>
         </TabPanel>
         <ToolbarBase>
-          <ToolbarButtonCreate onClick={() => history.push(`/${featureId}/feature-process/create`)}/>
+          <ToolbarButtonCreate
+              onClick={() => history.push(`/${featureId}/feature-process/create`)}/>
           <ToolbarButtonSave disabled={true}/>
           <ToolbarButtonEdit disabled={!current}
                              onClick={() => history.push(`/${current?.featureId}/edit`)}/>
           <ToolbarButtonDelete disabled={!current} onClick={() => {
             if (current?.featureId && current.featureProcessId) {
-              deleteFeatureProcess(current?.featureId, current?.featureProcessId);
+              deleteFeatureProcess(current?.featureId, current?.featureProcessId).then(() => {
+                find();
+              });
             }
           }}/>
           <ToolbarButtonView disabled={!current}
-                             onClick={() => history.push(`/${current?.featureId}/detail`)}/>
+                             onClick={() => history.push(`/${current?.featureId}/feature-process/${current?.featureProcessId}/detail`)}/>
           <ToolbarSplitter/>
           <ToolbarButtonBase disabled={true}>Список</ToolbarButtonBase>
-          <ToolbarButtonFind onClick={() => history.push(`/`)}/>
+          <ToolbarButtonFind onClick={() => history.push(`/${featureId}/feature-process/search`)}/>
           <ToolbarButtonBase disabled={true}>Найти</ToolbarButtonBase>
         </ToolbarBase>
         <Table>
@@ -76,7 +84,7 @@ const FeatureProcessListPage = () => {
             </TableRow>
           </TableHeader>
           <TableBody>
-            {featureProcesses? featureProcesses.map(featureProcess => {
+            {featureProcesses ? featureProcesses.map(featureProcess => {
               return (
                   <TableRow
                       key={featureProcess.featureProcessId}

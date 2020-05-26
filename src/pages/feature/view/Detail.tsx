@@ -1,4 +1,4 @@
-import React, {useEffect, useState} from "react";
+import React, {useContext, useEffect, useState} from "react";
 import Form from "../../../components/form";
 import FormField from "../../../components/form-field";
 import Label from "../../../components/label";
@@ -13,12 +13,14 @@ import ToolbarButtonBase, {
 } from "../../../components/toolbar/buttons";
 import ToolbarBase from "../../../components/toolbar/ToolbarBase";
 import {Tab, TabPanel} from "../../../components/tabpanel/TabPanel";
+import {SearchContext} from "../../../context";
 
 const DetailPage = () => {
   const history = useHistory();
   let {featureId} = useParams();
   const [mainTabSelected, setMainTabSelected] = useState<boolean>(true);
   const [currentFeature, setCurrentFeature] = useState<Feature>();
+  const searchContext = useContext(SearchContext);
 
   useEffect(() => {
     getFeature(featureId).then(feature => {
@@ -48,12 +50,26 @@ const DetailPage = () => {
           <ToolbarButtonEdit onClick={() => history.push(`/${featureId}/edit`)}/>
           <ToolbarButtonDelete onClick={() => {
             if (featureId) {
-              deleteFeature(featureId).then(() => history.goBack());
+              deleteFeature(featureId).then(() => {
+                let searchId = searchContext?.getSearch();
+                if (searchId) {
+                  history.push(`/list/${searchId}/?pageSize=25&page=1`)
+                } else {
+                  history.push(`/`);
+                }
+              });
             }
           }}/>
           <ToolbarButtonView disabled={true}/>
           <ToolbarSplitter/>
-          <ToolbarButtonBase onClick={() => history.goBack()}>Список</ToolbarButtonBase>
+          <ToolbarButtonBase onClick={() => {
+            let searchId = searchContext?.getSearch();
+            if (searchId) {
+              history.push(`/list/${searchId}/?pageSize=25&page=1`)
+            } else {
+              history.push("/");
+            }
+          }}>Список</ToolbarButtonBase>
           <ToolbarButtonFind onClick={() => history.push(`/`)}/>
           <ToolbarButtonBase disabled={true}>Найти</ToolbarButtonBase>
         </ToolbarBase>
