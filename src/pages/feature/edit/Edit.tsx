@@ -1,4 +1,4 @@
-import React, {useEffect, useState} from "react";
+import React, {useContext, useEffect, useState} from "react";
 import Form from "../../../components/form";
 import FormField from "../../../components/form-field";
 import Label from "../../../components/label";
@@ -15,10 +15,12 @@ import ToolbarButtonBase, {
 import ToolbarBase from "../../../components/toolbar/ToolbarBase";
 import {useForm} from "react-hook-form";
 import {Tab, TabPanel} from "../../../components/tabpanel/TabPanel";
+import {SearchContext} from "../../../context";
 
 const EditPage = () => {
   const history = useHistory();
   let {featureId} = useParams();
+  const searchContext = useContext(SearchContext);
 
   const [currentFeature, setCurrentFeature] = useState<Feature>();
 
@@ -58,9 +60,12 @@ const EditPage = () => {
           }}/>
           <ToolbarButtonEdit disabled={true}/>
           <ToolbarButtonDelete/>
-          <ToolbarButtonView onClick={() => history.goBack()}/>
+          <ToolbarButtonView onClick={() => history.push(`/${featureId}/detail`)}/>
           <ToolbarSplitter/>
-          <ToolbarButtonBase>Список</ToolbarButtonBase>
+          <ToolbarButtonBase onClick={() => {
+            let searchId = searchContext?.getSearch();
+            history.push(`/list/${searchId}/?pageSize=25&page=1`)
+          }}>Список</ToolbarButtonBase>
           <ToolbarButtonFind onClick={() => history.push(`/`)}/>
           <ToolbarButtonBase disabled={true}>Найти</ToolbarButtonBase>
         </ToolbarBase>

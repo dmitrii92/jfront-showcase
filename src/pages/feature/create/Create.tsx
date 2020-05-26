@@ -1,4 +1,4 @@
-import React from "react";
+import React, {useContext} from "react";
 import Form from "../../../components/form";
 import Input from "../../../components/input";
 import FormField from "../../../components/form-field";
@@ -15,17 +15,18 @@ import { useForm } from "react-hook-form/dist/react-hook-form.ie11";
 import {FeatureCreate} from "../../../api/feature/FeatureInterface";
 import {createFeature} from "../../../api/feature/FeatureApi";
 import {Tab, TabPanel} from "../../../components/tabpanel/TabPanel";
+import {SearchContext} from "../../../context";
 
 const CreatePage = () => {
   const history = useHistory();
-
+  const searchContext = useContext(SearchContext);
   const {register, handleSubmit} = useForm<FeatureCreate>();
 
   const onSubmit = handleSubmit((data: FeatureCreate) => {
     console.log(data)
     console.log("data.featureName" + data.featureName)
     createFeature(data).then((feature) => {
-      history.push(`/detail/${feature.featureId}`);
+      history.push(`/${feature.featureId}/detail`);
     })
   });
 
@@ -48,7 +49,12 @@ const CreatePage = () => {
           <ToolbarButtonDelete disabled={true}/>
           <ToolbarButtonView disabled={true}/>
           <ToolbarSplitter/>
-          <ToolbarButtonBase disabled={true}>Список</ToolbarButtonBase>
+          <ToolbarButtonBase onClick={() => {
+            let searchId = searchContext?.getSearch();
+            if (searchId) {
+              history.push(`/list/${searchId}/?pageSize=25&page=1`)
+            }
+          }}>Список</ToolbarButtonBase>
           <ToolbarButtonFind onClick={() => history.push(`/`)}/>
           <ToolbarButtonBase disabled={true}>Найти</ToolbarButtonBase>
         </ToolbarBase>

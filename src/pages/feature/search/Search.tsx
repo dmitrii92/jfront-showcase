@@ -1,4 +1,4 @@
-import React from "react";
+import React, {useContext} from "react";
 import ToolbarButtonBase, {
   ToolbarButtonCreate,
   ToolbarButtonDelete,
@@ -18,10 +18,13 @@ import {getResultSetSize, postSearchRequest} from "../../../api/feature/FeatureA
 import {SearchRequest} from "../../../api/types";
 import {FeatureSearchTemplate} from "../../../api/feature/FeatureInterface";
 import {Tab, TabPanel} from "../../../components/tabpanel/TabPanel";
+import {SearchContext} from "../../../context";
 
 
 const SearchPage = () => {
   const history = useHistory();
+
+  const searchContext = useContext(SearchContext);
 
   const {register, handleSubmit} = useForm<FeatureSearchTemplate>();
 
@@ -45,6 +48,7 @@ const SearchPage = () => {
     postSearchRequest(searchRequest).then((searchId) => {
       getResultSetSize(searchId).then(resultSize => {
         if (resultSize > 0) {
+          searchContext?.setSearch(searchId);
           history.push(`/list/${searchId}/?pageSize=25&page=1`)
         } else {
           alert("Search empty!")
@@ -68,7 +72,12 @@ const SearchPage = () => {
           <ToolbarButtonDelete disabled={true}/>
           <ToolbarButtonView disabled={true}/>
           <ToolbarSplitter/>
-          <ToolbarButtonBase disabled={true}>Список</ToolbarButtonBase>
+          <ToolbarButtonBase disabled={!searchContext?.getSearch()} onClick={() => {
+            let searchId = searchContext?.getSearch();
+            if (searchId) {
+              history.push(`/list/${searchId}/?pageSize=25&page=1`)
+            }
+          }}>Список</ToolbarButtonBase>
           <ToolbarButtonFind disabled={true}/>
           <ToolbarButtonBase onClick={() => {
             let button = document.getElementById("search-submit");

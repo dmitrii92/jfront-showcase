@@ -39,7 +39,9 @@ const FeatureProcessDetailPage = () => {
   return (
       <div>
         <TabPanel>
-          <Tab selected={mainTabSelected} onClick={() => {history.push("/")}}>
+          <Tab selected={mainTabSelected} onClick={() => {
+            history.push(`/${featureId}/detail`);
+          }}>
             Запрос функционала
           </Tab>
           <Tab selected={!mainTabSelected}>
