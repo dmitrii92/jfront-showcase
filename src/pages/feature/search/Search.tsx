@@ -1,4 +1,4 @@
-import React, {useContext} from "react";
+import React, {useContext, useEffect, useState} from "react";
 import ToolbarButtonBase, {
   ToolbarButtonCreate,
   ToolbarButtonDelete,
@@ -19,21 +19,21 @@ import {SearchRequest} from "../../../api/types";
 import {FeatureSearchTemplate} from "../../../api/feature/FeatureInterface";
 import {Tab, TabPanel} from "../../../components/tabpanel/TabPanel";
 import {SearchContext} from "../../../context";
+import {FeatureStatusOptions} from "../../../api/feature-process/FeatureProcessInterface";
+import {getFeatureStatusOptions} from "../../../api/feature-process/FeatureProcessApi";
 
 
 const SearchPage = () => {
   const history = useHistory();
-
   const searchContext = useContext(SearchContext);
-
   const {register, handleSubmit} = useForm<FeatureSearchTemplate>();
+  let [statusOptions, setStatusOptions] = useState<FeatureStatusOptions[]>();
 
   const onSubmit = handleSubmit((data: FeatureSearchTemplate) => {
-
+    console.log(data)
     if (!data.featureId) {
       data.featureId = undefined;
     }
-
     /*if (!data.dateInsFrom) {
       data.dateInsFrom = new Date();
       console.log(data.dateInsFrom)
@@ -57,6 +57,12 @@ const SearchPage = () => {
     });
 
   });
+
+  useEffect(() => {
+    getFeatureStatusOptions().then((options) => {
+      setStatusOptions(options);
+    });
+  }, [])
 
   return (
       <div>
@@ -107,6 +113,15 @@ const SearchPage = () => {
             <Label>Дата создания, до:</Label>
             <Input name="dateInsTo" ref={register} type="date"/>
           </FormField>*/}
+          <FormField>
+            <Label>Статус</Label>
+            <select name="statusCodeList" ref={register()} multiple={true}>
+              <option value={undefined}></option>
+              {statusOptions ? statusOptions.map(option => {
+                return <option key={option.value} value={option.value}>{option.name}</option>
+              }) : null}
+            </select>
+          </FormField>
           <FormField>
             <Input id="search-submit" type="submit" hidden={true}/>
           </FormField>
