@@ -8,11 +8,12 @@ const PASSWORD = '123';
 
 export const getFeature = (id?: string): Promise<Feature> => {
   const url = `${API_URL}/feature/${id}/`;
+  // console.log(`${}`)
   axios.defaults.withCredentials = true;
   return axios
       .get(
           url,
-          {auth: {username: `${USER}`, password: `${PASSWORD}`}}
+          // {auth: {username: `${USER}`, password: `${PASSWORD}`}}
       )
       .then(
           response => response.data
@@ -31,7 +32,7 @@ export const createFeature = (feature: FeatureCreate): Promise<Feature> => {
         url,
         feature,
         {
-          auth: {username: `${USER}`, password: `${PASSWORD}`},
+          // auth: {username: `${USER}`, password: `${PASSWORD}`},
           headers: {
             'Accept': 'application/json;charset=utf-8',
             'Content-Type': 'application/json;charset=utf-8'
@@ -44,7 +45,7 @@ export const createFeature = (feature: FeatureCreate): Promise<Feature> => {
         axios.get(
             location,
             {
-              auth: {username: `${USER}`, password: `${PASSWORD}`},
+              // auth: {username: `${USER}`, password: `${PASSWORD}`},
               headers: {
                 'Accept': 'application/json;charset=utf-8',
                 'Content-Type': 'application/json;charset=utf-8'
@@ -72,7 +73,7 @@ export const updateFeature = (featureId: string, feature: FeatureUpdate): Promis
         url,
         feature,
         {
-          auth: {username: `${USER}`, password: `${PASSWORD}`},
+          // auth: {username: `${USER}`, password: `${PASSWORD}`},
           headers: {
             'Accept': 'application/json;charset=utf-8',
             'Content-Type': 'application/json;charset=utf-8'
@@ -97,7 +98,7 @@ export const postSearchRequest = (searchRequest: SearchRequest<FeatureSearchTemp
         url,
         searchRequest,
         {
-          auth: {username: `${USER}`, password: `${PASSWORD}`},
+          // auth: {username: `${USER}`, password: `${PASSWORD}`},
           headers: {
             'Accept': 'application/json;charset=utf-8',
             'Content-Type': 'application/json;charset=utf-8',
@@ -123,7 +124,7 @@ export const searchFeatures = (searchId: string, pageSize: number, page: number)
     axios.get(
         url,
         {
-          auth: {username: `${USER}`, password: `${PASSWORD}`},
+          // auth: {username: `${USER}`, password: `${PASSWORD}`},
           headers: {
             'Accept': 'application/json;charset=utf-8',
             'Content-Type': 'application/json;charset=utf-8',
@@ -149,7 +150,7 @@ export const getResultSetSize = (searchId: string): Promise<number> => {
     axios.get(
         url,
         {
-          auth: {username: `${USER}`, password: `${PASSWORD}`},
+          // auth: {username: `${USER}`, password: `${PASSWORD}`},
           headers: {
             'Accept': 'application/json;charset=utf-8',
             'Content-Type': 'application/json;charset=utf-8',
