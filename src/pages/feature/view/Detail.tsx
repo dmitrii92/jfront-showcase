@@ -8,8 +8,11 @@ import {useHistory, useParams} from "react-router-dom";
 import ToolbarButtonBase, {
   ToolbarButtonCreate,
   ToolbarButtonDelete,
-  ToolbarButtonEdit, ToolbarButtonFind,
-  ToolbarButtonSave, ToolbarButtonView, ToolbarSplitter
+  ToolbarButtonEdit,
+  ToolbarButtonFind,
+  ToolbarButtonSave,
+  ToolbarButtonView,
+  ToolbarSplitter
 } from "../../../components/toolbar/buttons";
 import ToolbarBase from "../../../components/toolbar/ToolbarBase";
 import {Tab, TabPanel} from "../../../components/tabpanel/TabPanel";

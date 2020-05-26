@@ -1,7 +1,7 @@
 import React, {useState} from 'react';
 
 import DetailPage from "./pages/feature/view/Detail";
-import {BrowserRouter, Switch, Route} from "react-router-dom";
+import {BrowserRouter, Route, Switch} from "react-router-dom";
 import CreatePage from "./pages/feature/create/Create";
 import SearchPage from "./pages/feature/search/Search";
 import ListPage from "./pages/feature/view/List";
@@ -10,7 +10,6 @@ import FeatureProcessListPage from "./pages/feature-process/view/List";
 import FeatureProcessDetailPage from "./pages/feature-process/view/Detail";
 import FeatureProcessCreatePage from "./pages/feature-process/create/Create";
 import {SearchContext, SearchContextInterface} from './context';
-import FeatureProcessSearchPage from "./pages/feature-process/search/Search";
 
 function App() {
 
@@ -40,7 +39,6 @@ function App() {
                      component={FeatureProcessDetailPage}/>
               <Route path="/:featureId/feature-process/create" exact
                      component={FeatureProcessCreatePage}/>
-              <Route path="/:featureId/feature-process/search" component={FeatureProcessSearchPage}/>
             </Switch>
           </BrowserRouter>
         </SearchContext.Provider>

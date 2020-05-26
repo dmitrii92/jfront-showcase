@@ -1,4 +1,4 @@
-import React, { useReducer, createContext, useContext, useEffect, ReactNode } from 'react';
+import React, {createContext, useContext, useEffect, useReducer} from 'react';
 import styled from 'styled-components';
 import openIcon from './images/openIcon.gif';
 import exclamation from './images/exclamation.gif';

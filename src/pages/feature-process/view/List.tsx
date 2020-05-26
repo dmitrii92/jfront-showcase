@@ -1,11 +1,13 @@
 import React, {useEffect, useState} from "react";
 import ToolbarButtonBase, {
-  ToolbarButtonCreate, ToolbarButtonDelete,
-  ToolbarButtonEdit, ToolbarButtonFind,
-  ToolbarButtonSave, ToolbarButtonView, ToolbarSplitter
+  ToolbarButtonCreate,
+  ToolbarButtonDelete,
+  ToolbarButtonFind,
+  ToolbarButtonView,
+  ToolbarSplitter
 } from "../../../components/toolbar/buttons";
 import ToolbarBase from "../../../components/toolbar/ToolbarBase";
-import {useHistory, useParams, useLocation} from "react-router-dom";
+import {useHistory, useLocation, useParams} from "react-router-dom";
 import {Tab, TabPanel} from "../../../components/tabpanel/TabPanel";
 import Table, {
   TableBody,
@@ -58,9 +60,6 @@ const FeatureProcessListPage = () => {
         <ToolbarBase>
           <ToolbarButtonCreate
               onClick={() => history.push(`/${featureId}/feature-process/create`)}/>
-          <ToolbarButtonSave disabled={true}/>
-          <ToolbarButtonEdit disabled={!current}
-                             onClick={() => history.push(`/${current?.featureId}/edit`)}/>
           <ToolbarButtonDelete disabled={!current} onClick={() => {
             if (current?.featureId && current.featureProcessId) {
               deleteFeatureProcess(current?.featureId, current?.featureProcessId).then(() => {
@@ -72,7 +71,7 @@ const FeatureProcessListPage = () => {
                              onClick={() => history.push(`/${current?.featureId}/feature-process/${current?.featureProcessId}/detail`)}/>
           <ToolbarSplitter/>
           <ToolbarButtonBase disabled={true}>Список</ToolbarButtonBase>
-          <ToolbarButtonFind onClick={() => history.push(`/${featureId}/feature-process/search`)}/>
+          <ToolbarButtonFind disabled={true} onClick={() => history.push(`/${featureId}/feature-process/search`)}/>
           <ToolbarButtonBase disabled={true}>Найти</ToolbarButtonBase>
         </ToolbarBase>
         <Table>
@@ -80,7 +79,6 @@ const FeatureProcessListPage = () => {
             <TableRow>
               <TableHeaderCell>Статус</TableHeaderCell>
               <TableHeaderCell>Дата создания</TableHeaderCell>
-              <TableHeaderCell>Пользователь</TableHeaderCell>
             </TableRow>
           </TableHeader>
           <TableBody>
@@ -98,7 +96,6 @@ const FeatureProcessListPage = () => {
                   >
                     <TableColumn label="Статус">{featureProcess.featureStatusName}</TableColumn>
                     <TableColumn label="Дата создания">{featureProcess.dateIns}</TableColumn>
-                    <TableColumn label="Порядок выполнения"></TableColumn>
                   </TableRow>
               );
             }) : null}

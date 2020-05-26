@@ -2,22 +2,22 @@ import React, {useEffect, useState} from "react";
 import {Tab, TabPanel} from "../../../components/tabpanel/TabPanel";
 import ToolbarBase from "../../../components/toolbar/ToolbarBase";
 import ToolbarButtonBase, {
-  ToolbarButtonCreate, ToolbarButtonDelete,
-  ToolbarButtonEdit, ToolbarButtonFind,
-  ToolbarButtonSave, ToolbarButtonView, ToolbarSplitter
+  ToolbarButtonCreate,
+  ToolbarButtonDelete,
+  ToolbarButtonEdit,
+  ToolbarButtonFind,
+  ToolbarButtonSave,
+  ToolbarButtonView,
+  ToolbarSplitter
 } from "../../../components/toolbar/buttons";
 import {useHistory, useParams} from "react-router-dom";
 import {
-  FeatureProcess, FeatureProcessCreate,
+  FeatureProcess,
+  FeatureProcessCreate,
   FeatureStatusOptions
 } from "../../../api/feature-process/FeatureProcessInterface";
 import Form from "../../../components/form";
 import FormField from "../../../components/form-field";
-import {
-  ComboBox,
-  ComboBoxInput,
-  ComboBoxList, ComboBoxOption, ComboBoxPopup
-} from "../../../components/combobox";
 import {
   createFeatureProcess,
   getFeatureStatusOptions
@@ -28,9 +28,8 @@ import {useForm} from "react-hook-form/dist/react-hook-form.ie11";
 const FeatureProcessCreatePage = () => {
 
   const history = useHistory();
-  let {featureId, featureProcessId} = useParams();
+  let {featureId} = useParams();
   const mainTabSelected = false;
-  const [featureProcess, setFeatureProcess] = useState<FeatureProcess>();
   let [statusOptions, setStatusOptions] = useState<FeatureStatusOptions[]>();
   const {register, handleSubmit} = useForm<FeatureProcessCreate>();
 
@@ -43,7 +42,7 @@ const FeatureProcessCreatePage = () => {
     }
   })
 
-      useEffect(() => {
+  useEffect(() => {
     getFeatureStatusOptions().then((options) => {
       console.log(options);
       setStatusOptions(options);
@@ -83,10 +82,10 @@ const FeatureProcessCreatePage = () => {
           <FormField>
             <Label>Статус</Label>
             <select name="featureStatusCode" ref={register()}>
-                  <option value={undefined}></option>
-                  {statusOptions ? statusOptions.map(option => {
-                    return <option key={option.value} value={option.value}>{option.name}</option>
-                  }) : null}
+              <option value={undefined}></option>
+              {statusOptions ? statusOptions.map(option => {
+                return <option key={option.value} value={option.value}>{option.name}</option>
+              }) : null}
             </select>
           </FormField>
           <FormField>

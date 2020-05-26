@@ -4,13 +4,22 @@ import ToolbarBase from "../../../components/toolbar/ToolbarBase";
 import ToolbarButtonBase, {
   ToolbarButtonCreate,
   ToolbarButtonDelete,
-  ToolbarButtonEdit, ToolbarButtonFind,
-  ToolbarButtonSave, ToolbarButtonView, ToolbarSplitter
+  ToolbarButtonEdit,
+  ToolbarButtonFind,
+  ToolbarButtonSave,
+  ToolbarButtonView,
+  ToolbarSplitter
 } from "../../../components/toolbar/buttons";
-import {useHistory, useParams, useLocation} from "react-router-dom";
+import {useHistory, useLocation, useParams} from "react-router-dom";
 import {deleteFeature, getResultSetSize, searchFeatures} from "../../../api/feature/FeatureApi";
 
-import Table, {TableColumn, TableHeader, TableHeaderCell, TableRow, TableBody} from "../../../components/table";
+import Table, {
+  TableBody,
+  TableColumn,
+  TableHeader,
+  TableHeaderCell,
+  TableRow
+} from "../../../components/table";
 import {TablePagingBar} from "../../../components/table/TablePagingBar";
 import {Tab, TabPanel} from "../../../components/tabpanel/TabPanel";
 
