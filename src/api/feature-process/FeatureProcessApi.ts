@@ -95,7 +95,7 @@ export const getFeatureProcess = (featureId: number, featureProcessId: string): 
       })
 }
 
-export const deleteFeatureProcess = (featureId: number, featureProcessId: string): Promise<void> => {
+export const deleteFeatureProcess = (featureId: number, featureProcessId: number): Promise<void> => {
 
   const url = `${API_URL}/feature/${featureId}/feature-process/${featureProcessId}`;
   axios.defaults.withCredentials = true;

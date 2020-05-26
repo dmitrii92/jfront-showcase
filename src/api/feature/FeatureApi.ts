@@ -89,6 +89,29 @@ export const updateFeature = (featureId: string, feature: FeatureUpdate): Promis
   });
 }
 
+export const deleteFeature = (featureId: string): Promise<void> => {
+  const url = `${API_URL}/feature/${featureId}`;
+  axios.defaults.withCredentials = true;
+
+  return new Promise<void>((resolve, reject) => {
+    axios.delete(
+        url,
+        {
+          headers: {
+            'Accept': 'application/json;charset=utf-8',
+            'Content-Type': 'application/json;charset=utf-8'
+          }
+        }
+    ).then(response => {
+      if (200 === response.status) {
+        resolve();
+      } else {
+        reject(response);
+      }
+    }).catch(error => reject(error));
+  });
+}
+
 export const postSearchRequest = (searchRequest: SearchRequest<FeatureSearchTemplate>) => {
   const url = `${API_URL}/feature/search`;
   axios.defaults.withCredentials = true;

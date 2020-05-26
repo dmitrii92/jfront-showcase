@@ -1,7 +1,10 @@
 import React, {useEffect, useState} from "react";
 import {useHistory, useParams} from "react-router-dom";
 import {FeatureProcess} from "../../../api/feature-process/FeatureProcessInterface";
-import {getFeatureProcess} from "../../../api/feature-process/FeatureProcessApi";
+import {
+  deleteFeatureProcess,
+  getFeatureProcess
+} from "../../../api/feature-process/FeatureProcessApi";
 import {Tab, TabPanel} from "../../../components/tabpanel/TabPanel";
 import ToolbarButtonBase, {
   ToolbarButtonCreate, ToolbarButtonDelete,
@@ -47,7 +50,11 @@ const FeatureProcessDetailPage = () => {
           <ToolbarButtonCreate onClick={() => history.push(`/${featureId}/feature-process/create`)}/>
           <ToolbarButtonSave disabled={true}/>
           <ToolbarButtonEdit onClick={() => history.push(`/${featureId}/edit`)}/>
-          <ToolbarButtonDelete/>
+          <ToolbarButtonDelete onClick={() => {
+            if (featureId && featureProcessId) {
+              deleteFeatureProcess(parseInt(featureId), parseInt(featureProcessId));
+            }
+          }}/>
           <ToolbarButtonView disabled={true}/>
           <ToolbarSplitter/>
           <ToolbarButtonBase onClick={() => history.goBack()}>Список</ToolbarButtonBase>

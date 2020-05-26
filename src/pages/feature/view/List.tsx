@@ -8,7 +8,7 @@ import ToolbarButtonBase, {
   ToolbarButtonSave, ToolbarButtonView, ToolbarSplitter
 } from "../../../components/toolbar/buttons";
 import {useHistory, useParams, useLocation} from "react-router-dom";
-import {getResultSetSize, searchFeatures} from "../../../api/feature/FeatureApi";
+import {deleteFeature, getResultSetSize, searchFeatures} from "../../../api/feature/FeatureApi";
 
 import Table, {TableColumn, TableHeader, TableHeaderCell, TableRow, TableBody} from "../../../components/table";
 import {TablePagingBar} from "../../../components/table/TablePagingBar";
@@ -55,7 +55,11 @@ const ListPage = () => {
           <ToolbarButtonCreate onClick={() => history.push(`/create`)}/>
           <ToolbarButtonSave disabled={true}/>
           <ToolbarButtonEdit disabled={!currentFeature} onClick={() => history.push(`/${currentFeature?.featureId}/edit`)}/>
-          <ToolbarButtonDelete disabled={!currentFeature}/>
+          <ToolbarButtonDelete disabled={!currentFeature} onClick={() => {
+            if (currentFeature) {
+              deleteFeature(currentFeature.featureId.toString()).then(() => history.goBack());
+            }
+          }}/>
           <ToolbarButtonView disabled={!currentFeature} onClick={() => history.push(`/${currentFeature?.featureId}/detail`)}/>
           <ToolbarSplitter/>
           <ToolbarButtonBase disabled={true}>Список</ToolbarButtonBase>

@@ -82,18 +82,12 @@ const FeatureProcessCreatePage = () => {
         <Form onSubmit={onSubmit}>
           <FormField>
             <Label>Статус</Label>
-            <ComboBox>
-              <ComboBoxInput name="featureStatusCode"/>
-              {/*<input name="featureStatusCode" ref={register()}/>*/}
-              <ComboBoxPopup>
-                <ComboBoxList>
-                  <ComboBoxOption name="" value={undefined}/>
+            <select name="featureStatusCode" ref={register()}>
+                  <option value={undefined}></option>
                   {statusOptions ? statusOptions.map(option => {
-                    return <ComboBoxOption key={option.value} name={option.name} value={option.value}/>
+                    return <option key={option.value} value={option.value}>{option.name}</option>
                   }) : null}
-                </ComboBoxList>
-              </ComboBoxPopup>
-            </ComboBox>
+            </select>
           </FormField>
           <FormField>
             <input type="submit" id="feature-process-save" hidden={true}/>

@@ -2,7 +2,7 @@ import React, {useEffect, useState} from "react";
 import Form from "../../../components/form";
 import FormField from "../../../components/form-field";
 import Label from "../../../components/label";
-import {getFeature} from "../../../api/feature/FeatureApi";
+import {deleteFeature, getFeature} from "../../../api/feature/FeatureApi";
 import {Feature} from "../../../api/feature/FeatureInterface";
 import {useHistory, useParams} from "react-router-dom";
 import ToolbarButtonBase, {
@@ -30,7 +30,9 @@ const DetailPage = () => {
   return (
       <div>
         <TabPanel>
-          <Tab selected={mainTabSelected} onClick={() => {setMainTabSelected(true)}}>
+          <Tab selected={mainTabSelected} onClick={() => {
+            setMainTabSelected(true)
+          }}>
             Запрос функционала
           </Tab>
           <Tab selected={!mainTabSelected} onClick={() => {
@@ -44,7 +46,11 @@ const DetailPage = () => {
           <ToolbarButtonCreate onClick={() => history.push(`/create`)}/>
           <ToolbarButtonSave disabled={true}/>
           <ToolbarButtonEdit onClick={() => history.push(`/${featureId}/edit`)}/>
-          <ToolbarButtonDelete/>
+          <ToolbarButtonDelete onClick={() => {
+            if (featureId) {
+              deleteFeature(featureId).then(() => history.goBack());
+            }
+          }}/>
           <ToolbarButtonView disabled={true}/>
           <ToolbarSplitter/>
           <ToolbarButtonBase onClick={() => history.goBack()}>Список</ToolbarButtonBase>
@@ -58,7 +64,10 @@ const DetailPage = () => {
           </FormField>
           <FormField>
             <Label>Статус:</Label>
-            <Label style={{width: "350px", textAlign: "left"}}>{currentFeature?.featureStatus.name}</Label>
+            <Label style={{
+              width: "350px",
+              textAlign: "left"
+            }}>{currentFeature?.featureStatus.name}</Label>
           </FormField>
           <FormField>
             <Label>Наименование:</Label>
@@ -66,7 +75,8 @@ const DetailPage = () => {
           </FormField>
           <FormField>
             <Label>Наименование английское:</Label>
-            <Label style={{width: "350px", textAlign: "left"}}>{currentFeature?.featureNameEn}</Label>
+            <Label
+                style={{width: "350px", textAlign: "left"}}>{currentFeature?.featureNameEn}</Label>
           </FormField>
           <FormField>
             <Label>Дата создания:</Label>
@@ -86,7 +96,10 @@ const DetailPage = () => {
           </FormField>
           <FormField>
             <Label>Ответственный:</Label>
-            <Label style={{width: "350px", textAlign: "left"}}>{currentFeature?.responsible.name}</Label>
+            <Label style={{
+              width: "350px",
+              textAlign: "left"
+            }}>{currentFeature?.responsible.name}</Label>
           </FormField>
         </Form>
       </div>

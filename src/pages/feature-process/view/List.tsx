@@ -15,7 +15,10 @@ import Table, {
   TableRow
 } from "../../../components/table";
 import {FeatureProcess} from "../../../api/feature-process/FeatureProcessInterface";
-import {findFeatureProcess} from "../../../api/feature-process/FeatureProcessApi";
+import {
+  deleteFeatureProcess,
+  findFeatureProcess
+} from "../../../api/feature-process/FeatureProcessApi";
 
 const FeatureProcessListPage = () => {
   const location = useLocation();
@@ -52,7 +55,11 @@ const FeatureProcessListPage = () => {
           <ToolbarButtonSave disabled={true}/>
           <ToolbarButtonEdit disabled={!current}
                              onClick={() => history.push(`/${current?.featureId}/edit`)}/>
-          <ToolbarButtonDelete disabled={!current}/>
+          <ToolbarButtonDelete disabled={!current} onClick={() => {
+            if (current?.featureId && current.featureProcessId) {
+              deleteFeatureProcess(current?.featureId, current?.featureProcessId);
+            }
+          }}/>
           <ToolbarButtonView disabled={!current}
                              onClick={() => history.push(`/${current?.featureId}/detail`)}/>
           <ToolbarSplitter/>

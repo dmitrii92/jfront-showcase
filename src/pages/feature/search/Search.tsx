@@ -17,7 +17,6 @@ import {useForm} from "react-hook-form/dist/react-hook-form.ie11";
 import {getResultSetSize, postSearchRequest} from "../../../api/feature/FeatureApi";
 import {SearchRequest} from "../../../api/types";
 import {FeatureSearchTemplate} from "../../../api/feature/FeatureInterface";
-import {FEATURE_CREATE_URL} from "../../../RouteConst";
 import {Tab, TabPanel} from "../../../components/tabpanel/TabPanel";
 
 
