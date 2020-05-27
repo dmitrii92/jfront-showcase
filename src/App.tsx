@@ -27,7 +27,7 @@ function App() {
   return (
       <div className="App">
         <SearchContext.Provider value={searchFeature}>
-          <BrowserRouter basename="/feature">
+          <BrowserRouter basename={`${process.env.PUBLIC_URL}`}>
             <Switch>
               <Route path="/" exact component={SearchPage}/>
               <Route path="/create" exact component={CreatePage}/>

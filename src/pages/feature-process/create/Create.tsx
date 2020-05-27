@@ -12,7 +12,6 @@ import ToolbarButtonBase, {
 } from "../../../components/toolbar/buttons";
 import {useHistory, useParams} from "react-router-dom";
 import {
-  FeatureProcess,
   FeatureProcessCreate,
   FeatureStatusOptions
 } from "../../../api/feature-process/FeatureProcessInterface";
