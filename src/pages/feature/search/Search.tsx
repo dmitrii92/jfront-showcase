@@ -34,14 +34,14 @@ const SearchPage = () => {
     if (!data.featureId) {
       data.featureId = undefined;
     }
-    /*if (!data.dateInsFrom) {
-      data.dateInsFrom = new Date();
+    if (!data.dateInsFrom) {
       console.log(data.dateInsFrom)
+      data.dateInsFrom = undefined;
     }
     if (!data.dateInsTo) {
-      data.dateInsTo = new Date();
       console.log(data.dateInsTo)
-    }*/
+      data.dateInsTo = undefined;
+    }
 
     let searchRequest: SearchRequest<FeatureSearchTemplate> = {template: data};
 
@@ -105,14 +105,14 @@ const SearchPage = () => {
             <Label>Наименование анлийское:</Label>
             <Input name="featureNameEnTemplate" ref={register}/>
           </FormField>
-{/*          <FormField>
+          <FormField>
             <Label>Дата создания, от:</Label>
             <Input name="dateInsFrom" ref={register} type="date"/>
           </FormField>
           <FormField>
             <Label>Дата создания, до:</Label>
             <Input name="dateInsTo" ref={register} type="date"/>
-          </FormField>*/}
+          </FormField>
           <FormField>
             <Label>Статус</Label>
             <select name="statusCodeList" ref={register()} multiple={true}>
