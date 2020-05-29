@@ -25,7 +25,7 @@ function App() {
   }
 
   return (
-      <div className="App">
+      <>
         <SearchContext.Provider value={searchFeature}>
           <BrowserRouter basename={`${process.env.PUBLIC_URL}`}>
             <Switch>
@@ -42,7 +42,7 @@ function App() {
             </Switch>
           </BrowserRouter>
         </SearchContext.Provider>
-      </div>
+      </>
   );
 }
 
