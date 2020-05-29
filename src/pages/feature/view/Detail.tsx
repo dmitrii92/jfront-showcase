@@ -1,11 +1,13 @@
 import React, {useContext, useEffect, useState} from "react";
-import Form from "../../../components/form";
-import FormField from "../../../components/form-field";
+import {Form} from "jfront-components";
+import {FormField} from "jfront-components";
 import Label from "../../../components/label";
 import {deleteFeature, getFeature} from "../../../api/feature/FeatureApi";
 import {Feature} from "../../../api/feature/FeatureInterface";
 import {useHistory, useParams} from "react-router-dom";
-import ToolbarButtonBase, {
+import {
+  Toolbar,
+  ToolbarButtonBase,
   ToolbarButtonCreate,
   ToolbarButtonDelete,
   ToolbarButtonEdit,
@@ -13,9 +15,8 @@ import ToolbarButtonBase, {
   ToolbarButtonSave,
   ToolbarButtonView,
   ToolbarSplitter
-} from "../../../components/toolbar/buttons";
-import ToolbarBase from "../../../components/toolbar/ToolbarBase";
-import {Tab, TabPanel} from "../../../components/tabpanel/TabPanel";
+} from "jfront-components";
+import {Tab, TabPanel} from "jfront-components";
 import {SearchContext} from "../../../context";
 
 const DetailPage = () => {
@@ -47,7 +48,7 @@ const DetailPage = () => {
             Статус
           </Tab>
         </TabPanel>
-        <ToolbarBase>
+        <Toolbar>
           <ToolbarButtonCreate onClick={() => history.push(`/create`)}/>
           <ToolbarButtonSave disabled={true}/>
           <ToolbarButtonEdit onClick={() => history.push(`/${featureId}/edit`)}/>
@@ -75,7 +76,7 @@ const DetailPage = () => {
           }}>Список</ToolbarButtonBase>
           <ToolbarButtonFind onClick={() => history.push(`/`)}/>
           <ToolbarButtonBase disabled={true}>Найти</ToolbarButtonBase>
-        </ToolbarBase>
+        </Toolbar>
         <Form>
           <FormField>
             <Label>Идентификатор:</Label>

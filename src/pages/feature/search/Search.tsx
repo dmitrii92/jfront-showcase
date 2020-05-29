@@ -1,23 +1,25 @@
 import React, {useContext, useEffect, useState} from "react";
-import ToolbarButtonBase, {
+import {
+  Toolbar,
+  ToolbarButtonBase,
   ToolbarButtonCreate,
   ToolbarButtonDelete,
   ToolbarButtonEdit,
   ToolbarButtonFind,
   ToolbarButtonSave,
-  ToolbarButtonView, ToolbarSplitter
-} from "../../../components/toolbar/buttons";
-import ToolbarBase from "../../../components/toolbar/ToolbarBase";
+  ToolbarButtonView,
+  ToolbarSplitter
+} from "jfront-components";
 import {useHistory} from "react-router-dom";
-import Form from "../../../components/form";
-import FormField from "../../../components/form-field";
+import {Form} from "jfront-components";
+import {FormField} from "jfront-components";
 import Label from "../../../components/label";
 import Input from "../../../components/input";
 import {useForm} from "react-hook-form/dist/react-hook-form.ie11";
 import {getResultSetSize, postSearchRequest} from "../../../api/feature/FeatureApi";
 import {SearchRequest} from "../../../api/types";
 import {FeatureSearchTemplate} from "../../../api/feature/FeatureInterface";
-import {Tab, TabPanel} from "../../../components/tabpanel/TabPanel";
+import {Tab, TabPanel} from "jfront-components";
 import {SearchContext} from "../../../context";
 import {FeatureStatusOptions} from "../../../api/feature-process/FeatureProcessInterface";
 import {getFeatureStatusOptions} from "../../../api/feature-process/FeatureProcessApi";
@@ -71,7 +73,7 @@ const SearchPage = () => {
             Запрос функционала
           </Tab>
         </TabPanel>
-        <ToolbarBase>
+        <Toolbar>
           <ToolbarButtonCreate onClick={() => history.push(`/create`)}/>
           <ToolbarButtonSave disabled={true}/>
           <ToolbarButtonEdit disabled={true}/>
@@ -91,7 +93,7 @@ const SearchPage = () => {
               button.click();
             }
           }}>Найти</ToolbarButtonBase>
-        </ToolbarBase>
+        </Toolbar>
         <Form onSubmit={onSubmit}>
           <FormField>
             <Label>Идентификатор:</Label>

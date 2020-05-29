@@ -1,14 +1,15 @@
 import React, {useEffect, useState} from "react";
-import ToolbarButtonBase, {
+import {
+  Toolbar,
+  ToolbarButtonBase,
   ToolbarButtonCreate,
   ToolbarButtonDelete,
   ToolbarButtonFind,
   ToolbarButtonView,
   ToolbarSplitter
-} from "../../../components/toolbar/buttons";
-import ToolbarBase from "../../../components/toolbar/ToolbarBase";
+} from "jfront-components";
 import {useHistory, useLocation, useParams} from "react-router-dom";
-import {Tab, TabPanel} from "../../../components/tabpanel/TabPanel";
+import {Tab, TabPanel} from "jfront-components";
 import Table, {
   TableBody,
   TableColumn,
@@ -57,7 +58,7 @@ const FeatureProcessListPage = () => {
             Статус
           </Tab>
         </TabPanel>
-        <ToolbarBase>
+        <Toolbar>
           <ToolbarButtonCreate
               onClick={() => history.push(`/${featureId}/feature-process/create`)}/>
           <ToolbarButtonDelete disabled={!current} onClick={() => {
@@ -71,9 +72,10 @@ const FeatureProcessListPage = () => {
                              onClick={() => history.push(`/${current?.featureId}/feature-process/${current?.featureProcessId}/detail`)}/>
           <ToolbarSplitter/>
           <ToolbarButtonBase disabled={true}>Список</ToolbarButtonBase>
-          <ToolbarButtonFind disabled={true} onClick={() => history.push(`/${featureId}/feature-process/search`)}/>
+          <ToolbarButtonFind disabled={true}
+                             onClick={() => history.push(`/${featureId}/feature-process/search`)}/>
           <ToolbarButtonBase disabled={true}>Найти</ToolbarButtonBase>
-        </ToolbarBase>
+        </Toolbar>
         <Table>
           <TableHeader>
             <TableRow>

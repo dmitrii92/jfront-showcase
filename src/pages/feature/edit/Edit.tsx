@@ -1,20 +1,24 @@
 import React, {useContext, useEffect, useState} from "react";
-import Form from "../../../components/form";
-import FormField from "../../../components/form-field";
+import {Form} from "jfront-components";
+import {FormField} from "jfront-components";
 import Label from "../../../components/label";
 import Input from "../../../components/input";
 import {getFeature, updateFeature} from "../../../api/feature/FeatureApi";
 import {Feature, FeatureUpdate} from "../../../api/feature/FeatureInterface";
 import {useHistory, useParams} from "react-router-dom";
-import ToolbarButtonBase, {
+import {
+  Toolbar,
+  ToolbarButtonBase,
   ToolbarButtonCreate,
   ToolbarButtonDelete,
-  ToolbarButtonEdit, ToolbarButtonFind,
-  ToolbarButtonSave, ToolbarButtonView, ToolbarSplitter
-} from "../../../components/toolbar/buttons";
-import ToolbarBase from "../../../components/toolbar/ToolbarBase";
+  ToolbarButtonEdit,
+  ToolbarButtonFind,
+  ToolbarButtonSave,
+  ToolbarButtonView,
+  ToolbarSplitter,
+} from "jfront-components";
 import {useForm} from "react-hook-form";
-import {Tab, TabPanel} from "../../../components/tabpanel/TabPanel";
+import {Tab, TabPanel} from "jfront-components";
 import {SearchContext} from "../../../context";
 
 const EditPage = () => {
@@ -50,7 +54,7 @@ const EditPage = () => {
             Запрос функционала
           </Tab>
         </TabPanel>
-        <ToolbarBase>
+        <Toolbar>
           <ToolbarButtonCreate onClick={() => history.push(`/create`)}/>
           <ToolbarButtonSave onClick={() => {
             let button = document.getElementById("edit-submit");
@@ -68,7 +72,7 @@ const EditPage = () => {
           }}>Список</ToolbarButtonBase>
           <ToolbarButtonFind onClick={() => history.push(`/`)}/>
           <ToolbarButtonBase disabled={true}>Найти</ToolbarButtonBase>
-        </ToolbarBase>
+        </Toolbar>
         <Form id="edit-form" onSubmit={onSubmit}>
           <FormField>
             <Label>Идентификатор:</Label>
@@ -76,7 +80,10 @@ const EditPage = () => {
           </FormField>
           <FormField>
             <Label>Статус:</Label>
-            <Label style={{width: "350px", textAlign: "left"}}>{currentFeature?.featureStatus.name}</Label>
+            <Label style={{
+              width: "350px",
+              textAlign: "left"
+            }}>{currentFeature?.featureStatus.name}</Label>
           </FormField>
           <FormField>
             <Label>Наименование:</Label>
@@ -96,7 +103,10 @@ const EditPage = () => {
           </FormField>
           <FormField>
             <Label>Дата создания:</Label>
-            <Label style={{width: "350px", textAlign: "left"}}>{currentFeature?.dateIns.toString()}</Label>
+            <Label style={{
+              width: "350px",
+              textAlign: "left"
+            }}>{currentFeature?.dateIns.toString()}</Label>
           </FormField>
           <FormField>
             <Label>Описание:</Label>
@@ -116,7 +126,10 @@ const EditPage = () => {
           </FormField>
           <FormField>
             <Label>Ответственный:</Label>
-            <Label style={{width: "350px", textAlign: "left"}}>{currentFeature?.responsible.name}</Label>
+            <Label style={{
+              width: "350px",
+              textAlign: "left"
+            }}>{currentFeature?.responsible.name}</Label>
           </FormField>
           <FormField>
             <Input id="edit-submit" type="submit" hidden={true}/>

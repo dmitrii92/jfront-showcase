@@ -1,20 +1,24 @@
 import React, {useContext} from "react";
-import Form from "../../../components/form";
+import {Form} from "jfront-components";
 import Input from "../../../components/input";
-import FormField from "../../../components/form-field";
+import {FormField} from "jfront-components";
 import Label from "../../../components/label";
-import ToolbarBase from "../../../components/toolbar/ToolbarBase";
-import ToolbarButtonBase, {
+import {
+  Toolbar,
+  ToolbarButtonBase,
   ToolbarButtonCreate,
   ToolbarButtonDelete,
-  ToolbarButtonEdit, ToolbarButtonFind,
-  ToolbarButtonSave, ToolbarButtonView, ToolbarSplitter
-} from "../../../components/toolbar/buttons";
+  ToolbarButtonEdit,
+  ToolbarButtonFind,
+  ToolbarButtonSave,
+  ToolbarButtonView,
+  ToolbarSplitter,
+} from "jfront-components";
 import {useHistory} from "react-router-dom";
-import { useForm } from "react-hook-form/dist/react-hook-form.ie11";
+import {useForm} from "react-hook-form/dist/react-hook-form.ie11";
 import {FeatureCreate} from "../../../api/feature/FeatureInterface";
 import {createFeature} from "../../../api/feature/FeatureApi";
-import {Tab, TabPanel} from "../../../components/tabpanel/TabPanel";
+import {Tab, TabPanel} from "jfront-components";
 import {SearchContext} from "../../../context";
 
 const CreatePage = () => {
@@ -37,7 +41,7 @@ const CreatePage = () => {
             Запрос функционала
           </Tab>
         </TabPanel>
-        <ToolbarBase>
+        <Toolbar>
           <ToolbarButtonCreate disabled={true}/>
           <ToolbarButtonSave onClick={() => {
             let button = document.getElementById("create-submit");
@@ -57,7 +61,7 @@ const CreatePage = () => {
           }}>Список</ToolbarButtonBase>
           <ToolbarButtonFind onClick={() => history.push(`/`)}/>
           <ToolbarButtonBase disabled={true}>Найти</ToolbarButtonBase>
-        </ToolbarBase>
+        </Toolbar>
         <Form id="create-form" onSubmit={onSubmit}>
           <FormField>
             <Label>Наименование:</Label>
