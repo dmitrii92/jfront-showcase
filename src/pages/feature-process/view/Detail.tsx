@@ -5,17 +5,18 @@ import {
   deleteFeatureProcess,
   getFeatureProcess
 } from "../../../api/feature-process/FeatureProcessApi";
-import {Tab, TabPanel} from "../../../components/tabpanel/TabPanel";
-import ToolbarButtonBase, {
+import {Tab, TabPanel} from "jfront-components";
+import {
+  Toolbar,
+  ToolbarButtonBase,
   ToolbarButtonCreate,
   ToolbarButtonDelete,
   ToolbarButtonFind,
   ToolbarButtonView,
   ToolbarSplitter
-} from "../../../components/toolbar/buttons";
-import ToolbarBase from "../../../components/toolbar/ToolbarBase";
-import Form from "../../../components/form";
-import FormField from "../../../components/form-field";
+} from "jfront-components";
+import {Form} from "jfront-components";
+import {FormField} from "jfront-components";
 import Label from "../../../components/label";
 
 const FeatureProcessDetailPage = () => {
@@ -50,7 +51,7 @@ const FeatureProcessDetailPage = () => {
             Статус
           </Tab>
         </TabPanel>
-        <ToolbarBase>
+        <Toolbar>
           <ToolbarButtonCreate
               onClick={() => history.push(`/${featureId}/feature-process/create`)}/>
           <ToolbarButtonDelete onClick={() => {
@@ -67,7 +68,7 @@ const FeatureProcessDetailPage = () => {
           }}>Список</ToolbarButtonBase>
           <ToolbarButtonFind disabled={true}/>
           <ToolbarButtonBase disabled={true}>Найти</ToolbarButtonBase>
-        </ToolbarBase>
+        </Toolbar>
         <Form>
           <FormField>
             <Label>Статус</Label>

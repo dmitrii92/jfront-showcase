@@ -1,7 +1,8 @@
 import React, {useEffect, useState} from "react";
-import {Tab, TabPanel} from "../../../components/tabpanel/TabPanel";
-import ToolbarBase from "../../../components/toolbar/ToolbarBase";
-import ToolbarButtonBase, {
+import {Tab, TabPanel} from "jfront-components";
+import {
+  Toolbar,
+  ToolbarButtonBase,
   ToolbarButtonCreate,
   ToolbarButtonDelete,
   ToolbarButtonEdit,
@@ -9,15 +10,14 @@ import ToolbarButtonBase, {
   ToolbarButtonSave,
   ToolbarButtonView,
   ToolbarSplitter
-} from "../../../components/toolbar/buttons";
+} from "jfront-components";
 import {useHistory, useParams} from "react-router-dom";
 import {
-  FeatureProcess,
   FeatureProcessCreate,
   FeatureStatusOptions
 } from "../../../api/feature-process/FeatureProcessInterface";
-import Form from "../../../components/form";
-import FormField from "../../../components/form-field";
+import {Form} from "jfront-components";
+import {FormField} from "jfront-components";
 import {
   createFeatureProcess,
   getFeatureStatusOptions
@@ -62,7 +62,7 @@ const FeatureProcessCreatePage = () => {
             Статус
           </Tab>
         </TabPanel>
-        <ToolbarBase>
+        <Toolbar>
           <ToolbarButtonCreate onClick={() => history.push(`/create`)}/>
           <ToolbarButtonSave onClick={() => {
             let button = document.getElementById("feature-process-save");
@@ -77,7 +77,7 @@ const FeatureProcessCreatePage = () => {
           <ToolbarButtonBase onClick={() => history.goBack()}>Список</ToolbarButtonBase>
           <ToolbarButtonFind onClick={() => history.push(`/`)}/>
           <ToolbarButtonBase disabled={true}>Найти</ToolbarButtonBase>
-        </ToolbarBase>
+        </Toolbar>
         <Form onSubmit={onSubmit}>
           <FormField>
             <Label>Статус</Label>

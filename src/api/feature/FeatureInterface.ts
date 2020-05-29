@@ -35,8 +35,8 @@ export type FeatureSearchTemplate = {
   featureId?: number;
   featureNameTemplate?: string;
   featureNameEnTemplate?: string;
-  // dateInsFrom: Date;
-  // dateInsTo: Date;
+  dateInsFrom?: Date;
+  dateInsTo?: Date;
   statusCodeList?: string[];
   /*authorId: number;
   responsibleId: number;

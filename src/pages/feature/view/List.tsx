@@ -1,7 +1,8 @@
 import React, {useEffect, useState} from "react";
 import {Feature} from "../../../api/feature/FeatureInterface";
-import ToolbarBase from "../../../components/toolbar/ToolbarBase";
-import ToolbarButtonBase, {
+import {
+  Toolbar,
+  ToolbarButtonBase,
   ToolbarButtonCreate,
   ToolbarButtonDelete,
   ToolbarButtonEdit,
@@ -9,19 +10,20 @@ import ToolbarButtonBase, {
   ToolbarButtonSave,
   ToolbarButtonView,
   ToolbarSplitter
-} from "../../../components/toolbar/buttons";
+} from "jfront-components";
 import {useHistory, useLocation, useParams} from "react-router-dom";
 import {deleteFeature, getResultSetSize, searchFeatures} from "../../../api/feature/FeatureApi";
-
-import Table, {
-  TableBody,
-  TableColumn,
-  TableHeader,
-  TableHeaderCell,
-  TableRow
-} from "../../../components/table";
-import {TablePagingBar} from "../../../components/table/TablePagingBar";
-import {Tab, TabPanel} from "../../../components/tabpanel/TabPanel";
+import {
+  JepGrid as Grid,
+  JepGridTable as Table,
+  JepGridHeaderCell as TableHeaderCell,
+  JepGridHeader as TableHeader,
+  JepGridBody as TableBody,
+  JepGridRow as TableRow,
+  JepGridRowCell as TableColumn,
+  JepGridPagingBar,
+} from "jfront-components";
+import {Tab, TabPanel} from "jfront-components";
 
 const useQuery = () => {
   return new URLSearchParams(useLocation().search);
@@ -57,76 +59,86 @@ const ListPage = () => {
   }, [location]);
 
   return (
-      <div>
+      <>
         <TabPanel>
           <Tab selected={true}>
             Запрос функционала
           </Tab>
         </TabPanel>
-        <ToolbarBase>
+        <Toolbar>
           <ToolbarButtonCreate onClick={() => history.push(`/create`)}/>
           <ToolbarButtonSave disabled={true}/>
-          <ToolbarButtonEdit disabled={!currentFeature} onClick={() => history.push(`/${currentFeature?.featureId}/edit`)}/>
+          <ToolbarButtonEdit disabled={!currentFeature}
+                             onClick={() => history.push(`/${currentFeature?.featureId}/edit`)}/>
           <ToolbarButtonDelete disabled={!currentFeature} onClick={() => {
             if (currentFeature) {
-              deleteFeature(currentFeature.featureId.toString()).then( () => {
+              deleteFeature(currentFeature.featureId.toString()).then(() => {
                 find();
               });
             }
           }}/>
-          <ToolbarButtonView disabled={!currentFeature} onClick={() => history.push(`/${currentFeature?.featureId}/detail`)}/>
+          <ToolbarButtonView disabled={!currentFeature}
+                             onClick={() => history.push(`/${currentFeature?.featureId}/detail`)}/>
           <ToolbarSplitter/>
           <ToolbarButtonBase disabled={true}>Список</ToolbarButtonBase>
           <ToolbarButtonFind onClick={() => history.push(`/`)}/>
           <ToolbarButtonBase disabled={true}>Найти</ToolbarButtonBase>
-        </ToolbarBase>
-        <div>
-          <Table>
-            <TableHeader>
-              <TableRow>
-                <TableHeaderCell>Идентификатор</TableHeaderCell>
-                <TableHeaderCell>Порядок выполнения</TableHeaderCell>
-                <TableHeaderCell>Статус</TableHeaderCell>
-                <TableHeaderCell>Наименование</TableHeaderCell>
-                <TableHeaderCell>Наименование английское</TableHeaderCell>
-                <TableHeaderCell>Описание</TableHeaderCell>
-                <TableHeaderCell>Дата создания</TableHeaderCell>
-                <TableHeaderCell>Автор</TableHeaderCell>
-                <TableHeaderCell>Ответственный</TableHeaderCell>
-              </TableRow>
-            </TableHeader>
-            <TableBody>
-            {features? features.map(feature => {
-              return (
-                  <TableRow
-                      key={feature.featureId}
-                      selected={feature === currentFeature}
-                      onClick={() => {
-                        setCurrentFeature(feature)
-                      }}
-                      onDoubleClick={() => {
-                        history.push(`/${feature.featureId}/detail`);
-                      }}
-                  >
-                    <TableColumn label="Идентификатор">{feature.featureId}</TableColumn>
-                    <TableColumn label="Порядок выполнения"></TableColumn>
-                    <TableColumn label="Статус">{feature.featureStatus.name}</TableColumn>
-                    <TableColumn label="Наименование">{feature.featureName}</TableColumn>
-                    <TableColumn label="Наименование английское">{feature.featureNameEn}</TableColumn>
-                    <TableColumn label="Описание">{feature.description}</TableColumn>
-                    <TableColumn label="Дата создания">{feature.dateIns}</TableColumn>
-                    <TableColumn label="Автор">{feature.author.name}</TableColumn>
-                    <TableColumn label="Ответственный">{feature.responsible.name}</TableColumn>
-                  </TableRow>
-              );
-            }) : null}
-            </TableBody>
-          </Table>
-          <TablePagingBar maxRowCount={searchSize} visibleRowCount={pageSize} onChange={((pageNumber, pageSize) => {
-            history.push({pathname: `/list/${searchId}`, search: `?page=${pageNumber}&pageSize=${pageSize}`})
-          })}/>
-        </div>
-      </div>
+        </Toolbar>
+          <Grid>
+            <Table>
+              <TableHeader>
+                <TableRow>
+                  <TableHeaderCell>Идентификатор</TableHeaderCell>
+                  <TableHeaderCell>Порядок выполнения</TableHeaderCell>
+                  <TableHeaderCell>Статус</TableHeaderCell>
+                  <TableHeaderCell>Наименование</TableHeaderCell>
+                  <TableHeaderCell>Наименование английское</TableHeaderCell>
+                  <TableHeaderCell>Описание</TableHeaderCell>
+                  <TableHeaderCell>Дата создания</TableHeaderCell>
+                  <TableHeaderCell>Автор</TableHeaderCell>
+                  <TableHeaderCell>Ответственный</TableHeaderCell>
+                </TableRow>
+              </TableHeader>
+              <TableBody>
+                {features ? features.map(feature => {
+                  return (
+                      <TableRow
+                          key={feature.featureId}
+                          selected={feature === currentFeature}
+                          onClick={() => {
+                            setCurrentFeature(feature)
+                          }}
+                          onDoubleClick={() => {
+                            history.push(`/${feature.featureId}/detail`);
+                          }}
+                      >
+                        <TableColumn label="Идентификатор">{feature.featureId}</TableColumn>
+                        <TableColumn label="Порядок выполнения"></TableColumn>
+                        <TableColumn label="Статус">{feature.featureStatus.name}</TableColumn>
+                        <TableColumn label="Наименование">{feature.featureName}</TableColumn>
+                        <TableColumn
+                            label="Наименование английское">{feature.featureNameEn}</TableColumn>
+                        <TableColumn label="Описание">{feature.description}</TableColumn>
+                        <TableColumn label="Дата создания">{feature.dateIns}</TableColumn>
+                        <TableColumn label="Автор">{feature.author.name}</TableColumn>
+                        <TableColumn label="Ответственный">{feature.responsible.name}</TableColumn>
+                      </TableRow>
+                  );
+                }) : null}
+              </TableBody>
+            </Table>
+            <JepGridPagingBar
+                rowCount={pageSize}
+                totalRowCount={searchSize}
+                onRefresh={(pageNumber, pageSize) => {
+                  history.push({
+                    pathname: `/list/${searchId}`,
+                    search: `?page=${pageNumber}&pageSize=${pageSize}`
+                  })
+                }}
+            />
+          </Grid>
+      </>
   );
 }
 

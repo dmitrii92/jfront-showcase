@@ -1,21 +1,24 @@
 import React, {useEffect, useState} from "react";
-import ToolbarButtonBase, {
+import {
+  Toolbar,
+  ToolbarButtonBase,
   ToolbarButtonCreate,
   ToolbarButtonDelete,
   ToolbarButtonFind,
   ToolbarButtonView,
   ToolbarSplitter
-} from "../../../components/toolbar/buttons";
-import ToolbarBase from "../../../components/toolbar/ToolbarBase";
+} from "jfront-components";
 import {useHistory, useLocation, useParams} from "react-router-dom";
-import {Tab, TabPanel} from "../../../components/tabpanel/TabPanel";
-import Table, {
-  TableBody,
-  TableColumn,
-  TableHeader,
-  TableHeaderCell,
-  TableRow
-} from "../../../components/table";
+import {Tab, TabPanel} from "jfront-components";
+import {
+  JepGrid as Grid,
+  JepGridTable as Table,
+  JepGridHeaderCell as TableHeaderCell,
+  JepGridHeader as TableHeader,
+  JepGridBody as TableBody,
+  JepGridRow as TableRow,
+  JepGridRowCell as TableColumn,
+} from "jfront-components";
 import {FeatureProcess} from "../../../api/feature-process/FeatureProcessInterface";
 import {
   deleteFeatureProcess,
@@ -43,7 +46,7 @@ const FeatureProcessListPage = () => {
   }, [location]);
 
   return (
-      <div>
+      <>
         <TabPanel>
           <Tab selected={mainTabSelected} onClick={() => {
             setMainTabSelected(true)
@@ -57,7 +60,7 @@ const FeatureProcessListPage = () => {
             Статус
           </Tab>
         </TabPanel>
-        <ToolbarBase>
+        <Toolbar>
           <ToolbarButtonCreate
               onClick={() => history.push(`/${featureId}/feature-process/create`)}/>
           <ToolbarButtonDelete disabled={!current} onClick={() => {
@@ -71,37 +74,40 @@ const FeatureProcessListPage = () => {
                              onClick={() => history.push(`/${current?.featureId}/feature-process/${current?.featureProcessId}/detail`)}/>
           <ToolbarSplitter/>
           <ToolbarButtonBase disabled={true}>Список</ToolbarButtonBase>
-          <ToolbarButtonFind disabled={true} onClick={() => history.push(`/${featureId}/feature-process/search`)}/>
+          <ToolbarButtonFind disabled={true}
+                             onClick={() => history.push(`/${featureId}/feature-process/search`)}/>
           <ToolbarButtonBase disabled={true}>Найти</ToolbarButtonBase>
-        </ToolbarBase>
-        <Table>
-          <TableHeader>
-            <TableRow>
-              <TableHeaderCell>Статус</TableHeaderCell>
-              <TableHeaderCell>Дата создания</TableHeaderCell>
-            </TableRow>
-          </TableHeader>
-          <TableBody>
-            {featureProcesses ? featureProcesses.map(featureProcess => {
-              return (
-                  <TableRow
-                      key={featureProcess.featureProcessId}
-                      selected={featureProcess === current}
-                      onClick={() => {
-                        setCurrent(featureProcess)
-                      }}
-                      onDoubleClick={() => {
-                        history.push(`/${featureProcess.featureId}/feature-process/${featureProcess.featureProcessId}/detail`);
-                      }}
-                  >
-                    <TableColumn label="Статус">{featureProcess.featureStatusName}</TableColumn>
-                    <TableColumn label="Дата создания">{featureProcess.dateIns}</TableColumn>
-                  </TableRow>
-              );
-            }) : null}
-          </TableBody>
-        </Table>
-      </div>
+        </Toolbar>
+        <Grid>
+          <Table>
+            <TableHeader>
+              <TableRow>
+                <TableHeaderCell>Статус</TableHeaderCell>
+                <TableHeaderCell>Дата создания</TableHeaderCell>
+              </TableRow>
+            </TableHeader>
+            <TableBody>
+              {featureProcesses ? featureProcesses.map(featureProcess => {
+                return (
+                    <TableRow
+                        key={featureProcess.featureProcessId}
+                        selected={featureProcess === current}
+                        onClick={() => {
+                          setCurrent(featureProcess)
+                        }}
+                        onDoubleClick={() => {
+                          history.push(`/${featureProcess.featureId}/feature-process/${featureProcess.featureProcessId}/detail`);
+                        }}
+                    >
+                      <TableColumn label="Статус">{featureProcess.featureStatusName}</TableColumn>
+                      <TableColumn label="Дата создания">{featureProcess.dateIns}</TableColumn>
+                    </TableRow>
+                );
+              }) : null}
+            </TableBody>
+          </Table>
+        </Grid>
+      </>
   );
 }
 
