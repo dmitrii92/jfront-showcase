@@ -55,7 +55,7 @@ const EditPage = () => {
   });
 
   return (
-      <div>
+      <>
         <TabPanel>
           <Tab selected={true}>
             Запрос функционала
@@ -148,7 +148,7 @@ const EditPage = () => {
             <Input id="edit-submit" type="submit" hidden={true}/>
           </FormField>
         </Form>
-      </div>
+      </>
   );
 }
 

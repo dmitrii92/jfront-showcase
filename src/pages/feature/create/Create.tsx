@@ -45,7 +45,7 @@ const CreatePage = () => {
   });
 
   return (
-      <div>
+      <>
         <TabPanel>
           <Tab selected={true}>
             Запрос функционала
@@ -89,7 +89,7 @@ const CreatePage = () => {
             <Input id="create-submit" type="submit" hidden={true}/>
           </FormField>
         </Form>
-      </div>
+      </>
   );
 }
 

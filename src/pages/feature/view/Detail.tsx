@@ -34,7 +34,7 @@ const DetailPage = () => {
   }, []);
 
   return (
-      <div>
+      <>
         <TabPanel>
           <Tab selected={mainTabSelected} onClick={() => {
             setMainTabSelected(true)
@@ -122,7 +122,7 @@ const DetailPage = () => {
             }}>{currentFeature?.responsible.name}</Label>
           </FormField>
         </Form>
-      </div>
+      </>
   );
 }
 

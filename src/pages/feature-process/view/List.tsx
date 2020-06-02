@@ -81,10 +81,8 @@ const FeatureProcessListPage = () => {
         <Grid>
           <Table>
             <TableHeader>
-              <TableRow>
                 <TableHeaderCell>Статус</TableHeaderCell>
                 <TableHeaderCell>Дата создания</TableHeaderCell>
-              </TableRow>
             </TableHeader>
             <TableBody>
               {featureProcesses ? featureProcesses.map(featureProcess => {
