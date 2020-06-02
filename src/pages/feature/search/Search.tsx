@@ -23,7 +23,8 @@ import {SearchContext} from "../../../context";
 import {FeatureStatusOptions} from "../../../api/feature-process/FeatureProcessInterface";
 import {getFeatureStatusOptions} from "../../../api/feature-process/FeatureProcessApi";
 import {useFormik} from "formik";
-
+import ReactDatePicker from "react-datepicker";
+import "react-datepicker/dist/react-datepicker.css";
 
 const SearchPage = () => {
   const history = useHistory();
@@ -36,11 +37,11 @@ const SearchPage = () => {
       data.featureId = undefined;
     }
     if (!data.dateInsFrom) {
-      console.log(data.dateInsFrom)
+      console.log("data.dateInsFrom =" + data.dateInsFrom)
       data.dateInsFrom = undefined;
     }
     if (!data.dateInsTo) {
-      console.log(data.dateInsTo)
+      console.log("data.dateInsTo =" + data.dateInsTo)
       data.dateInsTo = undefined;
     }
 
@@ -66,9 +67,7 @@ const SearchPage = () => {
   }, [])
 
   const formik = useFormik<FeatureSearchTemplate>({
-    initialValues: {
-
-    },
+    initialValues: {},
     onSubmit: (values: FeatureSearchTemplate) => {
       onSubmit(values);
     }
@@ -105,27 +104,58 @@ const SearchPage = () => {
         <Form onSubmit={formik.handleSubmit}>
           <FormField>
             <Label>Идентификатор:</Label>
-            <Input name="featureId" value={formik.values.featureId} onChange={formik.handleChange} type="number"/>
+            <Input name="featureId" value={formik.values.featureId} onChange={formik.handleChange}
+                   type="number" autoComplete="off"/>
           </FormField>
           <FormField>
             <Label>Наименование:</Label>
-            <Input name="featureNameTemplate" value={formik.values.featureNameTemplate} onChange={formik.handleChange}/>
+            <Input name="featureNameTemplate" value={formik.values.featureNameTemplate}
+                   onChange={formik.handleChange} autoComplete="off"
+            />
           </FormField>
           <FormField>
             <Label>Наименование анлийское:</Label>
-            <Input name="featureNameEnTemplate" value={formik.values.featureNameEnTemplate} onChange={formik.handleChange}/>
+            <Input name="featureNameEnTemplate" value={formik.values.featureNameEnTemplate}
+                   onChange={formik.handleChange} autoComplete="off"/>
           </FormField>
           <FormField>
             <Label>Дата создания, от:</Label>
-            {/* <Input name="dateInsFrom" value={formik.values.dateInsFrom} onChange={formik.handleChange} type="date"/> */}
+            <ReactDatePicker
+                name="dateInsFrom"
+                selected={formik.values.dateInsFrom}
+                onChange={(date) => {
+                  formik.setFieldValue("dateInsFrom", date)
+                }}
+                peekNextMonth
+                showMonthDropdown
+                showYearDropdown
+                dropdownMode="select"
+                dateFormat={"yyyy-MM-dd"}
+                autoComplete="off"
+                locale="ru-RU"
+            />
           </FormField>
           <FormField>
             <Label>Дата создания, до:</Label>
-            {/* <Input name="dateInsTo" value={formik.values.dateInsTo} onChange={formik.handleChange} type="date"/> */}
+            <ReactDatePicker
+                name="dateInsTo"
+                selected={formik.values.dateInsTo}
+                onChange={(date) => {
+                  formik.setFieldValue("dateInsTo", date)
+                }}
+                peekNextMonth
+                showMonthDropdown
+                showYearDropdown
+                dropdownMode="select"
+                dateFormat={"yyyy-MM-dd"}
+                autoComplete="off"
+                locale="pt-BR"
+            />
           </FormField>
           <FormField>
             <Label>Статус</Label>
-            <select name="statusCodeList" value={formik.values.statusCodeList} onChange={formik.handleChange} multiple={true}>
+            <select name="statusCodeList" value={formik.values.statusCodeList}
+                    onChange={formik.handleChange} multiple={true}>
               <option value={undefined}></option>
               {statusOptions ? statusOptions.map(option => {
                 return <option key={option.value} value={option.value}>{option.name}</option>
