@@ -23,7 +23,7 @@ import {
   getFeatureStatusOptions
 } from "../../../api/feature-process/FeatureProcessApi";
 import Label from "../../../components/label";
-import {useForm} from "react-hook-form/dist/react-hook-form.ie11";
+import {useFormik} from "formik";
 
 const FeatureProcessCreatePage = () => {
 
@@ -31,16 +31,16 @@ const FeatureProcessCreatePage = () => {
   let {featureId} = useParams();
   const mainTabSelected = false;
   let [statusOptions, setStatusOptions] = useState<FeatureStatusOptions[]>();
-  const {register, handleSubmit} = useForm<FeatureProcessCreate>();
+  // const {register, handleSubmit} = useForm<FeatureProcessCreate>();
 
-  const onSubmit = handleSubmit((data: FeatureProcessCreate) => {
+  const onSubmit = (data: FeatureProcessCreate) => {
     console.log(data.featureStatusCode)
     if (featureId) {
       createFeatureProcess(parseInt(featureId), data).then(value => {
         history.push(`/${value.featureId}/feature-process/${value.featureProcessId}/detail`);
       });
     }
-  })
+  };
 
   useEffect(() => {
     getFeatureStatusOptions().then((options) => {
@@ -50,8 +50,17 @@ const FeatureProcessCreatePage = () => {
     });
   }, [])
 
+  const formik = useFormik<FeatureProcessCreate>({
+    initialValues: {
+      featureStatusCode: ""
+    },
+    onSubmit: (values: FeatureProcessCreate) => {
+      onSubmit(values);
+    }
+  });
+
   return (
-      <div>
+      <>
         <TabPanel>
           <Tab selected={mainTabSelected} onClick={() => {
             history.push("/")
@@ -78,10 +87,14 @@ const FeatureProcessCreatePage = () => {
           <ToolbarButtonFind onClick={() => history.push(`/`)}/>
           <ToolbarButtonBase disabled={true}>Найти</ToolbarButtonBase>
         </Toolbar>
-        <Form onSubmit={onSubmit}>
+        <Form onSubmit={formik.handleSubmit}>
           <FormField>
             <Label>Статус</Label>
-            <select name="featureStatusCode" ref={register()}>
+            <select 
+                name="featureStatusCode" 
+                value={formik.values.featureStatusCode}
+                onChange={formik.handleChange}
+            >
               <option value={undefined}></option>
               {statusOptions ? statusOptions.map(option => {
                 return <option key={option.value} value={option.value}>{option.name}</option>
@@ -92,7 +105,7 @@ const FeatureProcessCreatePage = () => {
             <input type="submit" id="feature-process-save" hidden={true}/>
           </FormField>
         </Form>
-      </div>
+      </>
   );
 }
 
