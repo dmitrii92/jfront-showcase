@@ -21,14 +21,14 @@ export interface Feature {
 export type FeatureCreate = {
   featureName: string;
   featureNameEn: string;
-  description: string;
+  description?: string;
 }
 
 export type FeatureUpdate = {
   featureName: string;
   featureNameEn: string;
-  description: string;
-  responsibleId: number;
+  description?: string;
+  responsibleId?: number;
 }
 
 export type FeatureSearchTemplate = {

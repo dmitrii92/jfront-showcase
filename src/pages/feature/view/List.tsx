@@ -87,7 +87,6 @@ const ListPage = () => {
           <Grid>
             <Table>
               <TableHeader>
-                <TableRow>
                   <TableHeaderCell>Идентификатор</TableHeaderCell>
                   <TableHeaderCell>Порядок выполнения</TableHeaderCell>
                   <TableHeaderCell>Статус</TableHeaderCell>
@@ -97,7 +96,6 @@ const ListPage = () => {
                   <TableHeaderCell>Дата создания</TableHeaderCell>
                   <TableHeaderCell>Автор</TableHeaderCell>
                   <TableHeaderCell>Ответственный</TableHeaderCell>
-                </TableRow>
               </TableHeader>
               <TableBody>
                 {features ? features.map(feature => {

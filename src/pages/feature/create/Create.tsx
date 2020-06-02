@@ -15,23 +15,33 @@ import {
   ToolbarSplitter,
 } from "jfront-components";
 import {useHistory} from "react-router-dom";
-import {useForm} from "react-hook-form/dist/react-hook-form.ie11";
 import {FeatureCreate} from "../../../api/feature/FeatureInterface";
 import {createFeature} from "../../../api/feature/FeatureApi";
 import {Tab, TabPanel} from "jfront-components";
 import {SearchContext} from "../../../context";
+import {useFormik} from "formik";
 
 const CreatePage = () => {
   const history = useHistory();
   const searchContext = useContext(SearchContext);
-  const {register, handleSubmit} = useForm<FeatureCreate>();
 
-  const onSubmit = handleSubmit((data: FeatureCreate) => {
+  const onSubmit = (data: FeatureCreate) => {
     console.log(data)
     console.log("data.featureName" + data.featureName)
     createFeature(data).then((feature) => {
       history.push(`/${feature.featureId}/detail`);
     })
+  };
+
+  const formik = useFormik<FeatureCreate>({
+    initialValues: {
+      description: "",
+      featureName: "",
+      featureNameEn: "",
+    },
+    onSubmit: (values: FeatureCreate) => {
+      onSubmit(values);
+    }
   });
 
   return (
@@ -62,18 +72,18 @@ const CreatePage = () => {
           <ToolbarButtonFind onClick={() => history.push(`/`)}/>
           <ToolbarButtonBase disabled={true}>Найти</ToolbarButtonBase>
         </Toolbar>
-        <Form id="create-form" onSubmit={onSubmit}>
+        <Form id="create-form" onSubmit={formik.handleSubmit}>
           <FormField>
             <Label>Наименование:</Label>
-            <Input name="featureName" ref={register}/>
+            <Input name="featureName" value={formik.values.featureName} onChange={formik.handleChange}/>
           </FormField>
           <FormField>
             <Label>Наименование английское:</Label>
-            <Input name="featureNameEn" ref={register}/>
+            <Input name="featureNameEn" value={formik.values.featureNameEn} onChange={formik.handleChange}/>
           </FormField>
           <FormField>
             <Label>Описание:</Label>
-            <textarea name="description" ref={register}/>
+            <textarea name="description" value={formik.values.description} onChange={formik.handleChange}/>
           </FormField>
           <FormField>
             <Input id="create-submit" type="submit" hidden={true}/>

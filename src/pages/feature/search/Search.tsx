@@ -15,7 +15,6 @@ import {Form} from "jfront-components";
 import {FormField} from "jfront-components";
 import Label from "../../../components/label";
 import Input from "../../../components/input";
-import {useForm} from "react-hook-form/dist/react-hook-form.ie11";
 import {getResultSetSize, postSearchRequest} from "../../../api/feature/FeatureApi";
 import {SearchRequest} from "../../../api/types";
 import {FeatureSearchTemplate} from "../../../api/feature/FeatureInterface";
@@ -23,15 +22,15 @@ import {Tab, TabPanel} from "jfront-components";
 import {SearchContext} from "../../../context";
 import {FeatureStatusOptions} from "../../../api/feature-process/FeatureProcessInterface";
 import {getFeatureStatusOptions} from "../../../api/feature-process/FeatureProcessApi";
+import {useFormik} from "formik";
 
 
 const SearchPage = () => {
   const history = useHistory();
   const searchContext = useContext(SearchContext);
-  const {register, handleSubmit} = useForm<FeatureSearchTemplate>();
   let [statusOptions, setStatusOptions] = useState<FeatureStatusOptions[]>();
 
-  const onSubmit = handleSubmit((data: FeatureSearchTemplate) => {
+  const onSubmit = (data: FeatureSearchTemplate) => {
     console.log(data)
     if (!data.featureId) {
       data.featureId = undefined;
@@ -58,7 +57,7 @@ const SearchPage = () => {
       });
     });
 
-  });
+  };
 
   useEffect(() => {
     getFeatureStatusOptions().then((options) => {
@@ -66,8 +65,17 @@ const SearchPage = () => {
     });
   }, [])
 
+  const formik = useFormik<FeatureSearchTemplate>({
+    initialValues: {
+
+    },
+    onSubmit: (values: FeatureSearchTemplate) => {
+      onSubmit(values);
+    }
+  });
+
   return (
-      <div>
+      <>
         <TabPanel>
           <Tab selected={true}>
             Запрос функционала
@@ -94,30 +102,30 @@ const SearchPage = () => {
             }
           }}>Найти</ToolbarButtonBase>
         </Toolbar>
-        <Form onSubmit={onSubmit}>
+        <Form onSubmit={formik.handleSubmit}>
           <FormField>
             <Label>Идентификатор:</Label>
-            <Input name="featureId" ref={register({pattern: /\d+/})} type="number"/>
+            <Input name="featureId" value={formik.values.featureId} onChange={formik.handleChange} type="number"/>
           </FormField>
           <FormField>
             <Label>Наименование:</Label>
-            <Input name="featureNameTemplate" ref={register}/>
+            <Input name="featureNameTemplate" value={formik.values.featureNameTemplate} onChange={formik.handleChange}/>
           </FormField>
           <FormField>
             <Label>Наименование анлийское:</Label>
-            <Input name="featureNameEnTemplate" ref={register}/>
+            <Input name="featureNameEnTemplate" value={formik.values.featureNameEnTemplate} onChange={formik.handleChange}/>
           </FormField>
           <FormField>
             <Label>Дата создания, от:</Label>
-            <Input name="dateInsFrom" ref={register} type="date"/>
+            {/* <Input name="dateInsFrom" value={formik.values.dateInsFrom} onChange={formik.handleChange} type="date"/> */}
           </FormField>
           <FormField>
             <Label>Дата создания, до:</Label>
-            <Input name="dateInsTo" ref={register} type="date"/>
+            {/* <Input name="dateInsTo" value={formik.values.dateInsTo} onChange={formik.handleChange} type="date"/> */}
           </FormField>
           <FormField>
             <Label>Статус</Label>
-            <select name="statusCodeList" ref={register()} multiple={true}>
+            <select name="statusCodeList" value={formik.values.statusCodeList} onChange={formik.handleChange} multiple={true}>
               <option value={undefined}></option>
               {statusOptions ? statusOptions.map(option => {
                 return <option key={option.value} value={option.value}>{option.name}</option>
@@ -128,7 +136,7 @@ const SearchPage = () => {
             <Input id="search-submit" type="submit" hidden={true}/>
           </FormField>
         </Form>
-      </div>
+      </>
   );
 }
 

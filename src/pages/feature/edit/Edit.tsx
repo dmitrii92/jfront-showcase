@@ -17,20 +17,17 @@ import {
   ToolbarButtonView,
   ToolbarSplitter,
 } from "jfront-components";
-import {useForm} from "react-hook-form";
 import {Tab, TabPanel} from "jfront-components";
 import {SearchContext} from "../../../context";
+import {useFormik} from "formik";
 
 const EditPage = () => {
   const history = useHistory();
   let {featureId} = useParams();
   const searchContext = useContext(SearchContext);
-
   const [currentFeature, setCurrentFeature] = useState<Feature>();
 
-  const {register, handleSubmit} = useForm<FeatureUpdate>();
-
-  const onSubmit = handleSubmit((data: FeatureUpdate) => {
+  const onSubmit = (data: FeatureUpdate) => {
     console.log(data)
     console.log("data.featureName" + data.featureName)
     if (featureId) {
@@ -38,7 +35,7 @@ const EditPage = () => {
         history.push(`/${featureId}/detail`);
       })
     }
-  });
+  };
 
   useEffect(() => {
     getFeature(featureId).then(feature => {
@@ -46,6 +43,16 @@ const EditPage = () => {
         }
     );
   }, []);
+
+  const formik = useFormik<FeatureUpdate>({
+    initialValues: {
+      featureName: "",
+      featureNameEn: "",
+    },
+    onSubmit: (values: FeatureUpdate) => {
+      onSubmit(values);
+    }
+  });
 
   return (
       <div>
@@ -73,7 +80,7 @@ const EditPage = () => {
           <ToolbarButtonFind onClick={() => history.push(`/`)}/>
           <ToolbarButtonBase disabled={true}>Найти</ToolbarButtonBase>
         </Toolbar>
-        <Form id="edit-form" onSubmit={onSubmit}>
+        <Form id="edit-form" onSubmit={formik.handleSubmit}>
           <FormField>
             <Label>Идентификатор:</Label>
             <Label style={{width: "350px", textAlign: "left"}}>{currentFeature?.featureId}</Label>
@@ -90,7 +97,9 @@ const EditPage = () => {
             <Input
                 style={{width: "350px", textAlign: "left"}}
                 defaultValue={currentFeature?.featureName}
-                name="featureName" ref={register}
+                name="featureName"
+                value={formik.values.featureNameEn}
+                onChange={formik.handleChange}
             />
           </FormField>
           <FormField>
@@ -98,7 +107,9 @@ const EditPage = () => {
             <Input
                 style={{width: "350px", textAlign: "left"}}
                 defaultValue={currentFeature?.featureNameEn}
-                name="featureNameEn" ref={register}
+                name="featureNameEn"
+                value={formik.values.featureNameEn}
+                onChange={formik.handleChange}
             />
           </FormField>
           <FormField>
@@ -113,7 +124,9 @@ const EditPage = () => {
             <Input
                 style={{width: "350px", textAlign: "left"}}
                 defaultValue={currentFeature?.description}
-                name="description" ref={register}
+                name="description"
+                value={formik.values.description}
+                onChange={formik.handleChange}
             />
           </FormField>
           <FormField>
