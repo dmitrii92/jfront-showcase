@@ -23,6 +23,7 @@ import {
   JepGridRowCell as TableColumn,
   JepGridPagingBar,
 } from "jfront-components";
+import {Page, Content, Header} from "jfront-components";
 import {Tab, TabPanel} from "jfront-components";
 
 const useQuery = () => {
@@ -59,31 +60,34 @@ const ListPage = () => {
   }, [location]);
 
   return (
-      <>
-        <TabPanel>
-          <Tab selected={true}>
-            Запрос функционала
-          </Tab>
-        </TabPanel>
-        <Toolbar>
-          <ToolbarButtonCreate onClick={() => history.push(`/create`)}/>
-          <ToolbarButtonSave disabled={true}/>
-          <ToolbarButtonEdit disabled={!currentFeature}
-                             onClick={() => history.push(`/${currentFeature?.featureId}/edit`)}/>
-          <ToolbarButtonDelete disabled={!currentFeature} onClick={() => {
-            if (currentFeature) {
-              deleteFeature(currentFeature.featureId.toString()).then(() => {
-                find();
-              });
-            }
-          }}/>
-          <ToolbarButtonView disabled={!currentFeature}
-                             onClick={() => history.push(`/${currentFeature?.featureId}/detail`)}/>
-          <ToolbarSplitter/>
-          <ToolbarButtonBase disabled={true}>Список</ToolbarButtonBase>
-          <ToolbarButtonFind onClick={() => history.push(`/`)}/>
-          <ToolbarButtonBase disabled={true}>Найти</ToolbarButtonBase>
-        </Toolbar>
+      <Page>
+        <Header>
+          <TabPanel>
+            <Tab selected={true}>
+              Запрос функционала
+            </Tab>
+          </TabPanel>
+          <Toolbar>
+            <ToolbarButtonCreate onClick={() => history.push(`/create`)}/>
+            <ToolbarButtonSave disabled={true}/>
+            <ToolbarButtonEdit disabled={!currentFeature}
+                               onClick={() => history.push(`/${currentFeature?.featureId}/edit`)}/>
+            <ToolbarButtonDelete disabled={!currentFeature} onClick={() => {
+              if (currentFeature) {
+                deleteFeature(currentFeature.featureId.toString()).then(() => {
+                  find();
+                });
+              }
+            }}/>
+            <ToolbarButtonView disabled={!currentFeature}
+                               onClick={() => history.push(`/${currentFeature?.featureId}/detail`)}/>
+            <ToolbarSplitter/>
+            <ToolbarButtonBase disabled={true}>Список</ToolbarButtonBase>
+            <ToolbarButtonFind onClick={() => history.push(`/`)}/>
+            <ToolbarButtonBase disabled={true}>Найти</ToolbarButtonBase>
+          </Toolbar>
+        </Header>
+        <Content>
           <Grid>
             <Table>
               <TableHeader>
@@ -136,7 +140,8 @@ const ListPage = () => {
                 }}
             />
           </Grid>
-      </>
+        </Content>
+      </Page>
   );
 }
 
