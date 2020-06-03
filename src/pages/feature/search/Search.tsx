@@ -23,8 +23,7 @@ import {SearchContext} from "../../../context";
 import {FeatureStatusOptions} from "../../../api/feature-process/FeatureProcessInterface";
 import {getFeatureStatusOptions} from "../../../api/feature-process/FeatureProcessApi";
 import {useFormik} from "formik";
-import "react-datepicker/dist/react-datepicker.css";
-import {DatePicker} from "../../../components/datepicker";
+import {DatePicker} from "jfront-components";
 
 const SearchPage = () => {
   const history = useHistory();
