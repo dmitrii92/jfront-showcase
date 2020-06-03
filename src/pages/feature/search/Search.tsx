@@ -23,8 +23,8 @@ import {SearchContext} from "../../../context";
 import {FeatureStatusOptions} from "../../../api/feature-process/FeatureProcessInterface";
 import {getFeatureStatusOptions} from "../../../api/feature-process/FeatureProcessApi";
 import {useFormik} from "formik";
-import ReactDatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
+import {DatePicker} from "../../../components/datepicker";
 
 const SearchPage = () => {
   const history = useHistory();
@@ -120,36 +120,22 @@ const SearchPage = () => {
           </FormField>
           <FormField>
             <Label>Дата создания, от:</Label>
-            <ReactDatePicker
+            <DatePicker
                 name="dateInsFrom"
                 selected={formik.values.dateInsFrom}
                 onChange={(date) => {
                   formik.setFieldValue("dateInsFrom", date)
                 }}
-                peekNextMonth
-                showMonthDropdown
-                showYearDropdown
-                dropdownMode="select"
-                dateFormat={"yyyy-MM-dd"}
-                autoComplete="off"
-                locale="ru-RU"
             />
           </FormField>
           <FormField>
             <Label>Дата создания, до:</Label>
-            <ReactDatePicker
+            <DatePicker
                 name="dateInsTo"
                 selected={formik.values.dateInsTo}
                 onChange={(date) => {
                   formik.setFieldValue("dateInsTo", date)
                 }}
-                peekNextMonth
-                showMonthDropdown
-                showYearDropdown
-                dropdownMode="select"
-                dateFormat={"yyyy-MM-dd"}
-                autoComplete="off"
-                locale="pt-BR"
             />
           </FormField>
           <FormField>
