@@ -24,14 +24,14 @@ import {
 } from "../../../api/feature-process/FeatureProcessApi";
 import Label from "../../../components/label";
 import {useFormik} from "formik";
+import {useTranslation} from "react-i18next";
 
 const FeatureProcessCreatePage = () => {
-
+  const {t} = useTranslation();
   const history = useHistory();
   let {featureId} = useParams();
   const mainTabSelected = false;
   let [statusOptions, setStatusOptions] = useState<FeatureStatusOptions[]>();
-  // const {register, handleSubmit} = useForm<FeatureProcessCreate>();
 
   const onSubmit = (data: FeatureProcessCreate) => {
     console.log(data.featureStatusCode)
@@ -44,9 +44,7 @@ const FeatureProcessCreatePage = () => {
 
   useEffect(() => {
     getFeatureStatusOptions().then((options) => {
-      console.log(options);
       setStatusOptions(options);
-      console.log(statusOptions);
     });
   }, [])
 
@@ -65,10 +63,10 @@ const FeatureProcessCreatePage = () => {
           <Tab selected={mainTabSelected} onClick={() => {
             history.push("/")
           }}>
-            Запрос функционала
+            {t("feature.header")}
           </Tab>
           <Tab selected={!mainTabSelected}>
-            Статус
+            {t("feature-process.header")}
           </Tab>
         </TabPanel>
         <Toolbar>
@@ -83,13 +81,13 @@ const FeatureProcessCreatePage = () => {
           <ToolbarButtonDelete/>
           <ToolbarButtonView disabled={true}/>
           <ToolbarSplitter/>
-          <ToolbarButtonBase onClick={() => history.goBack()}>Список</ToolbarButtonBase>
+          <ToolbarButtonBase onClick={() => history.goBack()}>{t("toolbar.list")}</ToolbarButtonBase>
           <ToolbarButtonFind onClick={() => history.push(`/`)}/>
-          <ToolbarButtonBase disabled={true}>Найти</ToolbarButtonBase>
+          <ToolbarButtonBase disabled={true}>{t("toolbar.find")}</ToolbarButtonBase>
         </Toolbar>
         <Form onSubmit={formik.handleSubmit}>
           <FormField>
-            <Label>Статус</Label>
+            <Label>{t("feature-process.featureStatusCode")}</Label>
             <select 
                 name="featureStatusCode" 
                 value={formik.values.featureStatusCode}

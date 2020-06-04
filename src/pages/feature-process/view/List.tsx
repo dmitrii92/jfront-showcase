@@ -24,6 +24,7 @@ import {
   deleteFeatureProcess,
   findFeatureProcess
 } from "../../../api/feature-process/FeatureProcessApi";
+import {useTranslation} from "react-i18next";
 
 const FeatureProcessListPage = () => {
   const location = useLocation();
@@ -32,6 +33,7 @@ const FeatureProcessListPage = () => {
   const [featureProcesses, setFeatureProcesses] = useState<FeatureProcess[]>();
   const [current, setCurrent] = useState<FeatureProcess>();
   let {featureId} = useParams();
+  const {t} = useTranslation();
 
   const find = () => {
     if (featureId) {
@@ -52,12 +54,12 @@ const FeatureProcessListPage = () => {
             setMainTabSelected(true)
             history.push(`/${featureId}/detail`);
           }}>
-            Запрос функционала
+            {t("feature.header")}
           </Tab>
           <Tab selected={!mainTabSelected} onClick={() => {
             setMainTabSelected(false);
           }}>
-            Статус
+            {t("feature-process.header")}
           </Tab>
         </TabPanel>
         <Toolbar>
@@ -73,16 +75,16 @@ const FeatureProcessListPage = () => {
           <ToolbarButtonView disabled={!current}
                              onClick={() => history.push(`/${current?.featureId}/feature-process/${current?.featureProcessId}/detail`)}/>
           <ToolbarSplitter/>
-          <ToolbarButtonBase disabled={true}>Список</ToolbarButtonBase>
+          <ToolbarButtonBase disabled={true}>{t("toolbar.list")}</ToolbarButtonBase>
           <ToolbarButtonFind disabled={true}
                              onClick={() => history.push(`/${featureId}/feature-process/search`)}/>
-          <ToolbarButtonBase disabled={true}>Найти</ToolbarButtonBase>
+          <ToolbarButtonBase disabled={true}>{t("toolbar.find")}</ToolbarButtonBase>
         </Toolbar>
         <Grid>
           <Table>
             <TableHeader>
-                <TableHeaderCell>Статус</TableHeaderCell>
-                <TableHeaderCell>Дата создания</TableHeaderCell>
+                <TableHeaderCell>{t("feature-process.featureStatusName")}</TableHeaderCell>
+                <TableHeaderCell>{t("feature-process.dateIns")}</TableHeaderCell>
             </TableHeader>
             <TableBody>
               {featureProcesses ? featureProcesses.map(featureProcess => {
@@ -97,8 +99,8 @@ const FeatureProcessListPage = () => {
                           history.push(`/${featureProcess.featureId}/feature-process/${featureProcess.featureProcessId}/detail`);
                         }}
                     >
-                      <TableColumn label="Статус">{featureProcess.featureStatusName}</TableColumn>
-                      <TableColumn label="Дата создания">{featureProcess.dateIns}</TableColumn>
+                      <TableColumn label={t("feature-process.featureStatusName")}>{featureProcess.featureStatusName}</TableColumn>
+                      <TableColumn label={t("feature-process.dateIns")}>{featureProcess.dateIns}</TableColumn>
                     </TableRow>
                 );
               }) : null}

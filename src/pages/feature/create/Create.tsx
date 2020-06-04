@@ -20,10 +20,12 @@ import {createFeature} from "../../../api/feature/FeatureApi";
 import {Tab, TabPanel} from "jfront-components";
 import {SearchContext} from "../../../context";
 import {useFormik} from "formik";
+import {useTranslation} from "react-i18next";
 
 const CreatePage = () => {
   const history = useHistory();
   const searchContext = useContext(SearchContext);
+  const {t} = useTranslation();
 
   const onSubmit = (data: FeatureCreate) => {
     console.log(data)
@@ -48,7 +50,7 @@ const CreatePage = () => {
       <>
         <TabPanel>
           <Tab selected={true}>
-            Запрос функционала
+            {t("feature.header")}
           </Tab>
         </TabPanel>
         <Toolbar>
@@ -68,21 +70,21 @@ const CreatePage = () => {
             if (searchId) {
               history.push(`/list/${searchId}/?pageSize=25&page=1`)
             }
-          }}>Список</ToolbarButtonBase>
+          }}>{t("toolbar.list")}</ToolbarButtonBase>
           <ToolbarButtonFind onClick={() => history.push(`/`)}/>
-          <ToolbarButtonBase disabled={true}>Найти</ToolbarButtonBase>
+          <ToolbarButtonBase disabled={true}>{t("toolbar.find")}</ToolbarButtonBase>
         </Toolbar>
         <Form id="create-form" onSubmit={formik.handleSubmit}>
           <FormField>
-            <Label>Наименование:</Label>
+            <Label>{t("feature.featureName")}:</Label>
             <Input name="featureName" value={formik.values.featureName} onChange={formik.handleChange}/>
           </FormField>
           <FormField>
-            <Label>Наименование английское:</Label>
+            <Label>{t("feature.featureNameEn")}:</Label>
             <Input name="featureNameEn" value={formik.values.featureNameEn} onChange={formik.handleChange}/>
           </FormField>
           <FormField>
-            <Label>Описание:</Label>
+            <Label>{t("feature.description")}:</Label>
             <textarea name="description" value={formik.values.description} onChange={formik.handleChange}/>
           </FormField>
           <FormField>

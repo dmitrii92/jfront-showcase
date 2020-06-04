@@ -18,6 +18,7 @@ import {
 } from "jfront-components";
 import {Tab, TabPanel} from "jfront-components";
 import {SearchContext} from "../../../context";
+import {useTranslation} from "react-i18next";
 
 const DetailPage = () => {
   const history = useHistory();
@@ -25,6 +26,7 @@ const DetailPage = () => {
   const [mainTabSelected, setMainTabSelected] = useState<boolean>(true);
   const [currentFeature, setCurrentFeature] = useState<Feature>();
   const searchContext = useContext(SearchContext);
+  const {t} = useTranslation();
 
   useEffect(() => {
     getFeature(featureId).then(feature => {
@@ -39,13 +41,13 @@ const DetailPage = () => {
           <Tab selected={mainTabSelected} onClick={() => {
             setMainTabSelected(true)
           }}>
-            Запрос функционала
+            {t("feature.header")}
           </Tab>
           <Tab selected={!mainTabSelected} onClick={() => {
             setMainTabSelected(false);
             history.push(`/${featureId}/feature-process`);
           }}>
-            Статус
+            {t("feature-process.header")}
           </Tab>
         </TabPanel>
         <Toolbar>
@@ -73,41 +75,41 @@ const DetailPage = () => {
             } else {
               history.push("/");
             }
-          }}>Список</ToolbarButtonBase>
+          }}>{t("toolbar.list")}</ToolbarButtonBase>
           <ToolbarButtonFind onClick={() => history.push(`/`)}/>
-          <ToolbarButtonBase disabled={true}>Найти</ToolbarButtonBase>
+          <ToolbarButtonBase disabled={true}>{t("toolbar.find")}</ToolbarButtonBase>
         </Toolbar>
         <Form>
           <FormField>
-            <Label>Идентификатор:</Label>
+            <Label>{t("feature.featureId")}:</Label>
             <Label style={{width: "350px", textAlign: "left"}}>{currentFeature?.featureId}</Label>
           </FormField>
           <FormField>
-            <Label>Статус:</Label>
+            <Label>{t("feature.featureStatus")}:</Label>
             <Label style={{
               width: "350px",
               textAlign: "left"
             }}>{currentFeature?.featureStatus.name}</Label>
           </FormField>
           <FormField>
-            <Label>Наименование:</Label>
+            <Label>{t("feature.featureName")}:</Label>
             <Label style={{width: "350px", textAlign: "left"}}>{currentFeature?.featureName}</Label>
           </FormField>
           <FormField>
-            <Label>Наименование английское:</Label>
+            <Label>{t("feature.featureNameEn")}:</Label>
             <Label
                 style={{width: "350px", textAlign: "left"}}>{currentFeature?.featureNameEn}</Label>
           </FormField>
           <FormField>
-            <Label>Дата создания:</Label>
+            <Label>{t("feature.dateIns")}:</Label>
             <Label style={{width: "350px", textAlign: "left"}}>{currentFeature?.dateIns}</Label>
           </FormField>
           <FormField>
-            <Label>Описание:</Label>
+            <Label>{t("feature.description")}:</Label>
             <Label style={{width: "350px", textAlign: "left"}}>{currentFeature?.description}</Label>
           </FormField>
           <FormField>
-            <Label>Автор:</Label>
+            <Label>{t("feature.author")}:</Label>
             <Label style={{width: "350px", textAlign: "left"}}>{currentFeature?.author.name}</Label>
           </FormField>
           <FormField>
@@ -115,7 +117,7 @@ const DetailPage = () => {
             <Label/>
           </FormField>
           <FormField>
-            <Label>Ответственный:</Label>
+            <Label>{t("feature.responsible")}:</Label>
             <Label style={{
               width: "350px",
               textAlign: "left"
