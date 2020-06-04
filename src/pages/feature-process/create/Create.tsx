@@ -87,7 +87,7 @@ const FeatureProcessCreatePage = () => {
         </Toolbar>
         <Form onSubmit={formik.handleSubmit}>
           <FormField>
-            <Label>{t("feature-process.featureStatusCode")}</Label>
+            <Label>{t("feature-process.fields.featureStatusCode")}</Label>
             <select 
                 name="featureStatusCode" 
                 value={formik.values.featureStatusCode}

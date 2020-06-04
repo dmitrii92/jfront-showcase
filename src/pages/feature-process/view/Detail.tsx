@@ -67,11 +67,11 @@ const FeatureProcessDetailPage = () => {
         </Toolbar>
         <Form>
           <FormField>
-            <Label>{t("feature-process.featureStatusCode")}</Label>
+            <Label>{t("feature-process.fields.featureStatusCode")}</Label>
             <Label>{featureProcess?.featureStatusName}</Label>
           </FormField>
           <FormField>
-            <Label>{t("feature-process.dateIns")}</Label>
+            <Label>{t("feature-process.fields.dateIns")}</Label>
             <Label>{featureProcess?.dateIns}</Label>
           </FormField>
         </Form>

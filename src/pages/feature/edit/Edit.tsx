@@ -84,18 +84,18 @@ const EditPage = () => {
         </Toolbar>
         <Form id="edit-form" onSubmit={formik.handleSubmit}>
           <FormField>
-            <Label>{t("feature.featureId")}:</Label>
+            <Label>{t("feature.fields.featureId")}:</Label>
             <Label style={{width: "350px", textAlign: "left"}}>{currentFeature?.featureId}</Label>
           </FormField>
           <FormField>
-            <Label>{t("feature.featureStatus")}:</Label>
+            <Label>{t("feature.fields.featureStatus")}:</Label>
             <Label style={{
               width: "350px",
               textAlign: "left"
             }}>{currentFeature?.featureStatus.name}</Label>
           </FormField>
           <FormField>
-            <Label>{t("feature.featureName")}:</Label>
+            <Label>{t("feature.fields.featureName")}:</Label>
             <Input
                 style={{width: "350px", textAlign: "left"}}
                 defaultValue={currentFeature?.featureName}
@@ -105,7 +105,7 @@ const EditPage = () => {
             />
           </FormField>
           <FormField>
-            <Label>{t("feature.featureNameEn")}:</Label>
+            <Label>{t("feature.fields.featureNameEn")}:</Label>
             <Input
                 style={{width: "350px", textAlign: "left"}}
                 defaultValue={currentFeature?.featureNameEn}
@@ -115,14 +115,14 @@ const EditPage = () => {
             />
           </FormField>
           <FormField>
-            <Label>{t("feature.dateIns")}:</Label>
+            <Label>{t("feature.fields.dateIns")}:</Label>
             <Label style={{
               width: "350px",
               textAlign: "left"
             }}>{currentFeature?.dateIns.toString()}</Label>
           </FormField>
           <FormField>
-            <Label>{t("feature.description")}:</Label>
+            <Label>{t("feature.fields.description")}:</Label>
             <Input
                 style={{width: "350px", textAlign: "left"}}
                 defaultValue={currentFeature?.description}
@@ -132,11 +132,11 @@ const EditPage = () => {
             />
           </FormField>
           <FormField>
-            <Label>{t("feature.author")}:</Label>
+            <Label>{t("feature.fields.author")}:</Label>
             <Label style={{width: "350px", textAlign: "left"}}>{currentFeature?.author.name}</Label>
           </FormField>
           <FormField>
-            <Label>{t("feature.responsible")}:</Label>
+            <Label>{t("feature.fields.responsible")}:</Label>
             <Label style={{
               width: "350px",
               textAlign: "left"

@@ -81,35 +81,35 @@ const DetailPage = () => {
         </Toolbar>
         <Form>
           <FormField>
-            <Label>{t("feature.featureId")}:</Label>
+            <Label>{t("feature.fields.featureId")}:</Label>
             <Label style={{width: "350px", textAlign: "left"}}>{currentFeature?.featureId}</Label>
           </FormField>
           <FormField>
-            <Label>{t("feature.featureStatus")}:</Label>
+            <Label>{t("feature.fields.featureStatus")}:</Label>
             <Label style={{
               width: "350px",
               textAlign: "left"
             }}>{currentFeature?.featureStatus.name}</Label>
           </FormField>
           <FormField>
-            <Label>{t("feature.featureName")}:</Label>
+            <Label>{t("feature.fields.featureName")}:</Label>
             <Label style={{width: "350px", textAlign: "left"}}>{currentFeature?.featureName}</Label>
           </FormField>
           <FormField>
-            <Label>{t("feature.featureNameEn")}:</Label>
+            <Label>{t("feature.fields.featureNameEn")}:</Label>
             <Label
                 style={{width: "350px", textAlign: "left"}}>{currentFeature?.featureNameEn}</Label>
           </FormField>
           <FormField>
-            <Label>{t("feature.dateIns")}:</Label>
+            <Label>{t("feature.fields.dateIns")}:</Label>
             <Label style={{width: "350px", textAlign: "left"}}>{currentFeature?.dateIns}</Label>
           </FormField>
           <FormField>
-            <Label>{t("feature.description")}:</Label>
+            <Label>{t("feature.fields.description")}:</Label>
             <Label style={{width: "350px", textAlign: "left"}}>{currentFeature?.description}</Label>
           </FormField>
           <FormField>
-            <Label>{t("feature.author")}:</Label>
+            <Label>{t("feature.fields.author")}:</Label>
             <Label style={{width: "350px", textAlign: "left"}}>{currentFeature?.author.name}</Label>
           </FormField>
           <FormField>
@@ -117,7 +117,7 @@ const DetailPage = () => {
             <Label/>
           </FormField>
           <FormField>
-            <Label>{t("feature.responsible")}:</Label>
+            <Label>{t("feature.fields.responsible")}:</Label>
             <Label style={{
               width: "350px",
               textAlign: "left"

@@ -93,15 +93,15 @@ const ListPage = () => {
           <Grid>
             <Table>
               <TableHeader>
-                  <TableHeaderCell>{t("feature.featureId")}</TableHeaderCell>
-                  <TableHeaderCell>{t("feature.workSequence")}</TableHeaderCell>
-                  <TableHeaderCell>{t("feature.featureStatus")}</TableHeaderCell>
-                  <TableHeaderCell>{t("feature.featureName")}</TableHeaderCell>
-                  <TableHeaderCell>{t("feature.featureNameEn")}</TableHeaderCell>
-                  <TableHeaderCell>{t("feature.description")}</TableHeaderCell>
-                  <TableHeaderCell>{t("feature.dateIns")}</TableHeaderCell>
-                  <TableHeaderCell>{t("feature.author")}</TableHeaderCell>
-                  <TableHeaderCell>{t("feature.responsible")}</TableHeaderCell>
+                  <TableHeaderCell>{t("feature.fields.featureId")}</TableHeaderCell>
+                  <TableHeaderCell>{t("feature.fields.workSequence")}</TableHeaderCell>
+                  <TableHeaderCell>{t("feature.fields.featureStatus")}</TableHeaderCell>
+                  <TableHeaderCell>{t("feature.fields.featureName")}</TableHeaderCell>
+                  <TableHeaderCell>{t("feature.fields.featureNameEn")}</TableHeaderCell>
+                  <TableHeaderCell>{t("feature.fields.description")}</TableHeaderCell>
+                  <TableHeaderCell>{t("feature.fields.dateIns")}</TableHeaderCell>
+                  <TableHeaderCell>{t("feature.fields.author")}</TableHeaderCell>
+                  <TableHeaderCell>{t("feature.fields.responsible")}</TableHeaderCell>
               </TableHeader>
               <TableBody>
                 {features ? features.map(feature => {
@@ -116,16 +116,16 @@ const ListPage = () => {
                             history.push(`/${feature.featureId}/detail`);
                           }}
                       >
-                        <TableColumn label={t("feature.featureId")}>{feature.featureId}</TableColumn>
-                        <TableColumn label={t("feature.workSequence")}></TableColumn>
-                        <TableColumn label={t("feature.featureStatus")}>{feature.featureStatus.name}</TableColumn>
-                        <TableColumn label={t("feature.featureName")}>{feature.featureName}</TableColumn>
+                        <TableColumn label={t("feature.fields.featureId")}>{feature.featureId}</TableColumn>
+                        <TableColumn label={t("feature.fields.workSequence")}></TableColumn>
+                        <TableColumn label={t("feature.fields.featureStatus")}>{feature.featureStatus.name}</TableColumn>
+                        <TableColumn label={t("feature.fields.featureName")}>{feature.featureName}</TableColumn>
                         <TableColumn
-                            label={t("feature.featureNameEn")}>{feature.featureNameEn}</TableColumn>
-                        <TableColumn label={t("feature.description")}>{feature.description}</TableColumn>
-                        <TableColumn label={t("feature.dateIns")}>{feature.dateIns}</TableColumn>
-                        <TableColumn label={t("feature.author")}>{feature.author.name}</TableColumn>
-                        <TableColumn label={t("feature.responsible")}>{feature.responsible.name}</TableColumn>
+                            label={t("feature.fields.featureNameEn")}>{feature.featureNameEn}</TableColumn>
+                        <TableColumn label={t("feature.fields.description")}>{feature.description}</TableColumn>
+                        <TableColumn label={t("feature.fields.dateIns")}>{feature.dateIns}</TableColumn>
+                        <TableColumn label={t("feature.fields.author")}>{feature.author.name}</TableColumn>
+                        <TableColumn label={t("feature.fields.responsible")}>{feature.responsible.name}</TableColumn>
                       </TableRow>
                   );
                 }) : null}

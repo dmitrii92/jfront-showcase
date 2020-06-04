@@ -76,15 +76,15 @@ const CreatePage = () => {
         </Toolbar>
         <Form id="create-form" onSubmit={formik.handleSubmit}>
           <FormField>
-            <Label>{t("feature.featureName")}:</Label>
+            <Label>{t("feature.fields.featureName")}:</Label>
             <Input name="featureName" value={formik.values.featureName} onChange={formik.handleChange}/>
           </FormField>
           <FormField>
-            <Label>{t("feature.featureNameEn")}:</Label>
+            <Label>{t("feature.fields.featureNameEn")}:</Label>
             <Input name="featureNameEn" value={formik.values.featureNameEn} onChange={formik.handleChange}/>
           </FormField>
           <FormField>
-            <Label>{t("feature.description")}:</Label>
+            <Label>{t("feature.fields.description")}:</Label>
             <textarea name="description" value={formik.values.description} onChange={formik.handleChange}/>
           </FormField>
           <FormField>

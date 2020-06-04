@@ -83,8 +83,8 @@ const FeatureProcessListPage = () => {
         <Grid>
           <Table>
             <TableHeader>
-                <TableHeaderCell>{t("feature-process.featureStatusName")}</TableHeaderCell>
-                <TableHeaderCell>{t("feature-process.dateIns")}</TableHeaderCell>
+                <TableHeaderCell>{t("feature-process.fields.featureStatusName")}</TableHeaderCell>
+                <TableHeaderCell>{t("feature-process.fields.dateIns")}</TableHeaderCell>
             </TableHeader>
             <TableBody>
               {featureProcesses ? featureProcesses.map(featureProcess => {
@@ -99,8 +99,8 @@ const FeatureProcessListPage = () => {
                           history.push(`/${featureProcess.featureId}/feature-process/${featureProcess.featureProcessId}/detail`);
                         }}
                     >
-                      <TableColumn label={t("feature-process.featureStatusName")}>{featureProcess.featureStatusName}</TableColumn>
-                      <TableColumn label={t("feature-process.dateIns")}>{featureProcess.dateIns}</TableColumn>
+                      <TableColumn label={t("feature-process.fields.featureStatusName")}>{featureProcess.featureStatusName}</TableColumn>
+                      <TableColumn label={t("feature-process.fields.dateIns")}>{featureProcess.dateIns}</TableColumn>
                     </TableRow>
                 );
               }) : null}

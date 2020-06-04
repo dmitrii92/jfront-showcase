@@ -104,23 +104,23 @@ const SearchPage = () => {
         </Toolbar>
         <Form onSubmit={formik.handleSubmit}>
           <FormField>
-            <Label>{t("feature.featureId")}:</Label>
+            <Label>{t("feature.fields.featureId")}:</Label>
             <Input name="featureId" value={formik.values.featureId} onChange={formik.handleChange}
                    type="number" autoComplete="off"/>
           </FormField>
           <FormField>
-            <Label>{t("feature.featureNameTemplate")}:</Label>
+            <Label>{t("feature.fields.featureNameTemplate")}:</Label>
             <Input name="featureNameTemplate" value={formik.values.featureNameTemplate}
                    onChange={formik.handleChange} autoComplete="off"
             />
           </FormField>
           <FormField>
-            <Label>{t("feature.featureNameEnTemplate")}:</Label>
+            <Label>{t("feature.fields.featureNameEnTemplate")}:</Label>
             <Input name="featureNameEnTemplate" value={formik.values.featureNameEnTemplate}
                    onChange={formik.handleChange} autoComplete="off"/>
           </FormField>
           <FormField>
-            <Label>{t("feature.dateInsFrom")}:</Label>
+            <Label>{t("feature.fields.dateInsFrom")}:</Label>
             <DatePicker
                 name="dateInsFrom"
                 selected={formik.values.dateInsFrom}
@@ -130,7 +130,7 @@ const SearchPage = () => {
             />
           </FormField>
           <FormField>
-            <Label>{t("feature.dateInsTo")}:</Label>
+            <Label>{t("feature.fields.dateInsTo")}:</Label>
             <DatePicker
                 name="dateInsTo"
                 selected={formik.values.dateInsTo}
@@ -140,7 +140,7 @@ const SearchPage = () => {
             />
           </FormField>
           <FormField>
-            <Label>{t("feature.statusCodeList")}</Label>
+            <Label>{t("feature.fields.statusCodeList")}</Label>
             <select name="statusCodeList" value={formik.values.statusCodeList}
                     onChange={formik.handleChange} multiple={true}>
               <option value={undefined}></option>

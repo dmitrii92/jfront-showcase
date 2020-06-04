@@ -19,7 +19,7 @@
       "description": "Описание",
       "author": "Автор",
       "responsible": "Ответственный",
-      "work_sequence": "Порядок выполнения"
+      "workSequence": "Порядок выполнения"
     }
   },
   "feature-process": {
