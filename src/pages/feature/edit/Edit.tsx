@@ -20,12 +20,14 @@ import {
 import {Tab, TabPanel} from "jfront-components";
 import {SearchContext} from "../../../context";
 import {useFormik} from "formik";
+import {useTranslation} from "react-i18next";
 
 const EditPage = () => {
   const history = useHistory();
   let {featureId} = useParams();
   const searchContext = useContext(SearchContext);
   const [currentFeature, setCurrentFeature] = useState<Feature>();
+  const {t} = useTranslation();
 
   const onSubmit = (data: FeatureUpdate) => {
     console.log(data)
@@ -58,7 +60,7 @@ const EditPage = () => {
       <>
         <TabPanel>
           <Tab selected={true}>
-            Запрос функционала
+            {t("feature.header")}
           </Tab>
         </TabPanel>
         <Toolbar>
@@ -76,34 +78,34 @@ const EditPage = () => {
           <ToolbarButtonBase onClick={() => {
             let searchId = searchContext?.getSearch();
             history.push(`/list/${searchId}/?pageSize=25&page=1`)
-          }}>Список</ToolbarButtonBase>
+          }}>{t("toolbar.list")}</ToolbarButtonBase>
           <ToolbarButtonFind onClick={() => history.push(`/`)}/>
-          <ToolbarButtonBase disabled={true}>Найти</ToolbarButtonBase>
+          <ToolbarButtonBase disabled={true}>{t("toolbar.find")}</ToolbarButtonBase>
         </Toolbar>
         <Form id="edit-form" onSubmit={formik.handleSubmit}>
           <FormField>
-            <Label>Идентификатор:</Label>
+            <Label>{t("feature.featureId")}:</Label>
             <Label style={{width: "350px", textAlign: "left"}}>{currentFeature?.featureId}</Label>
           </FormField>
           <FormField>
-            <Label>Статус:</Label>
+            <Label>{t("feature.featureStatus")}:</Label>
             <Label style={{
               width: "350px",
               textAlign: "left"
             }}>{currentFeature?.featureStatus.name}</Label>
           </FormField>
           <FormField>
-            <Label>Наименование:</Label>
+            <Label>{t("feature.featureName")}:</Label>
             <Input
                 style={{width: "350px", textAlign: "left"}}
                 defaultValue={currentFeature?.featureName}
                 name="featureName"
-                value={formik.values.featureNameEn}
+                value={formik.values.featureName}
                 onChange={formik.handleChange}
             />
           </FormField>
           <FormField>
-            <Label>Наименование английское:</Label>
+            <Label>{t("feature.featureNameEn")}:</Label>
             <Input
                 style={{width: "350px", textAlign: "left"}}
                 defaultValue={currentFeature?.featureNameEn}
@@ -113,14 +115,14 @@ const EditPage = () => {
             />
           </FormField>
           <FormField>
-            <Label>Дата создания:</Label>
+            <Label>{t("feature.dateIns")}:</Label>
             <Label style={{
               width: "350px",
               textAlign: "left"
             }}>{currentFeature?.dateIns.toString()}</Label>
           </FormField>
           <FormField>
-            <Label>Описание:</Label>
+            <Label>{t("feature.description")}:</Label>
             <Input
                 style={{width: "350px", textAlign: "left"}}
                 defaultValue={currentFeature?.description}
@@ -130,15 +132,11 @@ const EditPage = () => {
             />
           </FormField>
           <FormField>
-            <Label>Автор:</Label>
+            <Label>{t("feature.author")}:</Label>
             <Label style={{width: "350px", textAlign: "left"}}>{currentFeature?.author.name}</Label>
           </FormField>
           <FormField>
-            <Label>Порядок выполнения:</Label>
-            <Label/>
-          </FormField>
-          <FormField>
-            <Label>Ответственный:</Label>
+            <Label>{t("feature.responsible")}:</Label>
             <Label style={{
               width: "350px",
               textAlign: "left"

@@ -24,8 +24,10 @@ import {FeatureStatusOptions} from "../../../api/feature-process/FeatureProcessI
 import {getFeatureStatusOptions} from "../../../api/feature-process/FeatureProcessApi";
 import {useFormik} from "formik";
 import {DatePicker} from "jfront-components";
+import {useTranslation} from "react-i18next";
 
 const SearchPage = () => {
+  const {t} = useTranslation();
   const history = useHistory();
   const searchContext = useContext(SearchContext);
   let [statusOptions, setStatusOptions] = useState<FeatureStatusOptions[]>();
@@ -76,7 +78,7 @@ const SearchPage = () => {
       <>
         <TabPanel>
           <Tab selected={true}>
-            Запрос функционала
+            {t("feature.header")}
           </Tab>
         </TabPanel>
         <Toolbar>
@@ -91,34 +93,34 @@ const SearchPage = () => {
             if (searchId) {
               history.push(`/list/${searchId}/?pageSize=25&page=1`)
             }
-          }}>Список</ToolbarButtonBase>
+          }}>{t("toolbar.list")}</ToolbarButtonBase>
           <ToolbarButtonFind disabled={true}/>
           <ToolbarButtonBase onClick={() => {
             let button = document.getElementById("search-submit");
             if (button) {
               button.click();
             }
-          }}>Найти</ToolbarButtonBase>
+          }}>{t("toolbar.find")}</ToolbarButtonBase>
         </Toolbar>
         <Form onSubmit={formik.handleSubmit}>
           <FormField>
-            <Label>Идентификатор:</Label>
+            <Label>{t("feature.featureId")}:</Label>
             <Input name="featureId" value={formik.values.featureId} onChange={formik.handleChange}
                    type="number" autoComplete="off"/>
           </FormField>
           <FormField>
-            <Label>Наименование:</Label>
+            <Label>{t("feature.featureNameTemplate")}:</Label>
             <Input name="featureNameTemplate" value={formik.values.featureNameTemplate}
                    onChange={formik.handleChange} autoComplete="off"
             />
           </FormField>
           <FormField>
-            <Label>Наименование анлийское:</Label>
+            <Label>{t("feature.featureNameEnTemplate")}:</Label>
             <Input name="featureNameEnTemplate" value={formik.values.featureNameEnTemplate}
                    onChange={formik.handleChange} autoComplete="off"/>
           </FormField>
           <FormField>
-            <Label>Дата создания, от:</Label>
+            <Label>{t("feature.dateInsFrom")}:</Label>
             <DatePicker
                 name="dateInsFrom"
                 selected={formik.values.dateInsFrom}
@@ -128,7 +130,7 @@ const SearchPage = () => {
             />
           </FormField>
           <FormField>
-            <Label>Дата создания, до:</Label>
+            <Label>{t("feature.dateInsTo")}:</Label>
             <DatePicker
                 name="dateInsTo"
                 selected={formik.values.dateInsTo}
@@ -138,7 +140,7 @@ const SearchPage = () => {
             />
           </FormField>
           <FormField>
-            <Label>Статус</Label>
+            <Label>{t("feature.statusCodeList")}</Label>
             <select name="statusCodeList" value={formik.values.statusCodeList}
                     onChange={formik.handleChange} multiple={true}>
               <option value={undefined}></option>

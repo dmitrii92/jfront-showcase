@@ -18,22 +18,18 @@ import {
 import {Form} from "jfront-components";
 import {FormField} from "jfront-components";
 import Label from "../../../components/label";
+import {useTranslation} from "react-i18next";
 
 const FeatureProcessDetailPage = () => {
-
+  const {t} = useTranslation();
   const history = useHistory();
   let {featureId, featureProcessId} = useParams();
   const [mainTabSelected, setMainTabSelected] = useState<boolean>(false);
   const [featureProcess, setFeatureProcess] = useState<FeatureProcess>();
 
   useEffect(() => {
-    console.log("FeatureProcessDetailPage effect");
-    console.log(featureId)
-    console.log(featureProcessId)
     if (featureId && featureProcessId) {
-      console.log("&&")
       getFeatureProcess(parseInt(featureId), featureProcessId).then(featureProcess => {
-        console.log(featureProcess);
         setFeatureProcess(featureProcess);
       })
     }
@@ -45,10 +41,10 @@ const FeatureProcessDetailPage = () => {
           <Tab selected={mainTabSelected} onClick={() => {
             history.push(`/${featureId}/detail`);
           }}>
-            Запрос функционала
+            {t("feature.header")}
           </Tab>
           <Tab selected={!mainTabSelected}>
-            Статус
+            {t("feature-process.header")}
           </Tab>
         </TabPanel>
         <Toolbar>
@@ -65,17 +61,17 @@ const FeatureProcessDetailPage = () => {
           <ToolbarSplitter/>
           <ToolbarButtonBase onClick={() => {
             history.push(`/${featureId}/feature-process`);
-          }}>Список</ToolbarButtonBase>
+          }}>{t("toolbar.list")}</ToolbarButtonBase>
           <ToolbarButtonFind disabled={true}/>
-          <ToolbarButtonBase disabled={true}>Найти</ToolbarButtonBase>
+          <ToolbarButtonBase disabled={true}>{t("toolbar.find")}</ToolbarButtonBase>
         </Toolbar>
         <Form>
           <FormField>
-            <Label>Статус</Label>
+            <Label>{t("feature-process.featureStatusCode")}</Label>
             <Label>{featureProcess?.featureStatusName}</Label>
           </FormField>
           <FormField>
-            <Label>Дата создания</Label>
+            <Label>{t("feature-process.dateIns")}</Label>
             <Label>{featureProcess?.dateIns}</Label>
           </FormField>
         </Form>
