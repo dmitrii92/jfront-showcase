@@ -36,7 +36,7 @@ const FeatureProcessDetailPage = () => {
   }, []);
 
   return (
-      <div>
+      <>
         <TabPanel>
           <Tab selected={mainTabSelected} onClick={() => {
             history.push(`/${featureId}/detail`);
@@ -75,7 +75,7 @@ const FeatureProcessDetailPage = () => {
             <Label>{featureProcess?.dateIns}</Label>
           </FormField>
         </Form>
-      </div>
+      </>
   );
 }
 

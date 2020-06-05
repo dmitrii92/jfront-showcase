@@ -33,16 +33,14 @@ const SearchPage = () => {
   let [statusOptions, setStatusOptions] = useState<FeatureStatusOptions[]>();
 
   const onSubmit = (data: FeatureSearchTemplate) => {
-    console.log(data)
+
     if (!data.featureId) {
       data.featureId = undefined;
     }
     if (!data.dateInsFrom) {
-      console.log("data.dateInsFrom =" + data.dateInsFrom)
       data.dateInsFrom = undefined;
     }
     if (!data.dateInsTo) {
-      console.log("data.dateInsTo =" + data.dateInsTo)
       data.dateInsTo = undefined;
     }
 

@@ -30,8 +30,6 @@ const EditPage = () => {
   const {t} = useTranslation();
 
   const onSubmit = (data: FeatureUpdate) => {
-    console.log(data)
-    console.log("data.featureName" + data.featureName)
     if (featureId) {
       updateFeature(featureId.toString(), data).then(() => {
         history.push(`/${featureId}/detail`);

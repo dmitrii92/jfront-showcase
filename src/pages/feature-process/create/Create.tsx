@@ -34,7 +34,6 @@ const FeatureProcessCreatePage = () => {
   let [statusOptions, setStatusOptions] = useState<FeatureStatusOptions[]>();
 
   const onSubmit = (data: FeatureProcessCreate) => {
-    console.log(data.featureStatusCode)
     if (featureId) {
       createFeatureProcess(parseInt(featureId), data).then(value => {
         history.push(`/${value.featureId}/feature-process/${value.featureProcessId}/detail`);

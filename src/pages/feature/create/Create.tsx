@@ -28,8 +28,6 @@ const CreatePage = () => {
   const {t} = useTranslation();
 
   const onSubmit = (data: FeatureCreate) => {
-    console.log(data)
-    console.log("data.featureName" + data.featureName)
     createFeature(data).then((feature) => {
       history.push(`/${feature.featureId}/detail`);
     })
