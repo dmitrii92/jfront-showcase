@@ -1,26 +1,26 @@
 {
   "files": {
-    "main.css": "/JepRiaShowcase/react/static/css/main.07e49c89.chunk.css",
-    "main.js": "/JepRiaShowcase/react/static/js/main.e542565a.chunk.js",
-    "main.js.map": "/JepRiaShowcase/react/static/js/main.e542565a.chunk.js.map",
-    "runtime-main.js": "/JepRiaShowcase/react/static/js/runtime-main.d825523c.js",
-    "runtime-main.js.map": "/JepRiaShowcase/react/static/js/runtime-main.d825523c.js.map",
-    "static/css/2.ecffae5e.chunk.css": "/JepRiaShowcase/react/static/css/2.ecffae5e.chunk.css",
-    "static/js/2.cc19d79a.chunk.js": "/JepRiaShowcase/react/static/js/2.cc19d79a.chunk.js",
-    "static/js/2.cc19d79a.chunk.js.map": "/JepRiaShowcase/react/static/js/2.cc19d79a.chunk.js.map",
-    "index.html": "/JepRiaShowcase/react/index.html",
-    "precache-manifest.adf34cca9c6b2437a479000008a840df.js": "/JepRiaShowcase/react/precache-manifest.adf34cca9c6b2437a479000008a840df.js",
-    "service-worker.js": "/JepRiaShowcase/react/service-worker.js",
-    "static/css/2.ecffae5e.chunk.css.map": "/JepRiaShowcase/react/static/css/2.ecffae5e.chunk.css.map",
-    "static/css/main.07e49c89.chunk.css.map": "/JepRiaShowcase/react/static/css/main.07e49c89.chunk.css.map",
-    "static/js/2.cc19d79a.chunk.js.LICENSE.txt": "/JepRiaShowcase/react/static/js/2.cc19d79a.chunk.js.LICENSE.txt",
-    "static/media/getFetch.cjs": "/JepRiaShowcase/react/static/media/getFetch.013f0b90.cjs"
+    "main.css": "/jfront-showcase/static/css/main.07e49c89.chunk.css",
+    "main.js": "/jfront-showcase/static/js/main.3def1979.chunk.js",
+    "main.js.map": "/jfront-showcase/static/js/main.3def1979.chunk.js.map",
+    "runtime-main.js": "/jfront-showcase/static/js/runtime-main.4f400f71.js",
+    "runtime-main.js.map": "/jfront-showcase/static/js/runtime-main.4f400f71.js.map",
+    "static/css/2.ecffae5e.chunk.css": "/jfront-showcase/static/css/2.ecffae5e.chunk.css",
+    "static/js/2.0d914fe1.chunk.js": "/jfront-showcase/static/js/2.0d914fe1.chunk.js",
+    "static/js/2.0d914fe1.chunk.js.map": "/jfront-showcase/static/js/2.0d914fe1.chunk.js.map",
+    "index.html": "/jfront-showcase/index.html",
+    "precache-manifest.7f6f73eb5569e6f5a924ce4954218fc1.js": "/jfront-showcase/precache-manifest.7f6f73eb5569e6f5a924ce4954218fc1.js",
+    "service-worker.js": "/jfront-showcase/service-worker.js",
+    "static/css/2.ecffae5e.chunk.css.map": "/jfront-showcase/static/css/2.ecffae5e.chunk.css.map",
+    "static/css/main.07e49c89.chunk.css.map": "/jfront-showcase/static/css/main.07e49c89.chunk.css.map",
+    "static/js/2.0d914fe1.chunk.js.LICENSE.txt": "/jfront-showcase/static/js/2.0d914fe1.chunk.js.LICENSE.txt",
+    "static/media/getFetch.cjs": "/jfront-showcase/static/media/getFetch.013f0b90.cjs"
   },
   "entrypoints": [
-    "static/js/runtime-main.d825523c.js",
+    "static/js/runtime-main.4f400f71.js",
     "static/css/2.ecffae5e.chunk.css",
-    "static/js/2.cc19d79a.chunk.js",
+    "static/js/2.0d914fe1.chunk.js",
     "static/css/main.07e49c89.chunk.css",
-    "static/js/main.e542565a.chunk.js"
+    "static/js/main.3def1979.chunk.js"
   ]
 }
