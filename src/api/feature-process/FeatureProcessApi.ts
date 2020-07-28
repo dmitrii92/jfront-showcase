@@ -5,7 +5,7 @@ import {
   FeatureStatusOptions
 } from "./FeatureProcessInterface";
 
-const API_URL = 'http://jepria-spring-feature.herokuapp.com';
+const API_URL = 'https://jepria-spring-feature.herokuapp.com';
 const USER = 'user';
 const PASSWORD = '123';
 const withCredentials = false;

@@ -2,14 +2,14 @@ import axios from 'axios';
 import {Feature, FeatureCreate, FeatureSearchTemplate, FeatureUpdate} from "./FeatureInterface";
 import {SearchRequest} from "../types";
 
-const API_URL = 'http://jepria-spring-feature.herokuapp.com';
+const API_URL = 'https://jepria-spring-feature.herokuapp.com';
 const USER = 'user';
 const PASSWORD = '123';
 const withCredentials = false;
 
 export const getFeature = (id?: string): Promise<Feature> => {
   const url = `${API_URL}/feature/${id}/`;
-  // console.log(`${}`)
+
   axios.defaults.withCredentials = withCredentials;
   return axios
       .get(
