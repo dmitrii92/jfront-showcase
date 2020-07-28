@@ -1,0 +1,26 @@
+{
+  "files": {
+    "main.css": "/JepRiaShowcase/react/static/css/main.07e49c89.chunk.css",
+    "main.js": "/JepRiaShowcase/react/static/js/main.e542565a.chunk.js",
+    "main.js.map": "/JepRiaShowcase/react/static/js/main.e542565a.chunk.js.map",
+    "runtime-main.js": "/JepRiaShowcase/react/static/js/runtime-main.d825523c.js",
+    "runtime-main.js.map": "/JepRiaShowcase/react/static/js/runtime-main.d825523c.js.map",
+    "static/css/2.ecffae5e.chunk.css": "/JepRiaShowcase/react/static/css/2.ecffae5e.chunk.css",
+    "static/js/2.cc19d79a.chunk.js": "/JepRiaShowcase/react/static/js/2.cc19d79a.chunk.js",
+    "static/js/2.cc19d79a.chunk.js.map": "/JepRiaShowcase/react/static/js/2.cc19d79a.chunk.js.map",
+    "index.html": "/JepRiaShowcase/react/index.html",
+    "precache-manifest.adf34cca9c6b2437a479000008a840df.js": "/JepRiaShowcase/react/precache-manifest.adf34cca9c6b2437a479000008a840df.js",
+    "service-worker.js": "/JepRiaShowcase/react/service-worker.js",
+    "static/css/2.ecffae5e.chunk.css.map": "/JepRiaShowcase/react/static/css/2.ecffae5e.chunk.css.map",
+    "static/css/main.07e49c89.chunk.css.map": "/JepRiaShowcase/react/static/css/main.07e49c89.chunk.css.map",
+    "static/js/2.cc19d79a.chunk.js.LICENSE.txt": "/JepRiaShowcase/react/static/js/2.cc19d79a.chunk.js.LICENSE.txt",
+    "static/media/getFetch.cjs": "/JepRiaShowcase/react/static/media/getFetch.013f0b90.cjs"
+  },
+  "entrypoints": [
+    "static/js/runtime-main.d825523c.js",
+    "static/css/2.ecffae5e.chunk.css",
+    "static/js/2.cc19d79a.chunk.js",
+    "static/css/main.07e49c89.chunk.css",
+    "static/js/main.e542565a.chunk.js"
+  ]
+}
