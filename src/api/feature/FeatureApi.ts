@@ -2,14 +2,15 @@ import axios from 'axios';
 import {Feature, FeatureCreate, FeatureSearchTemplate, FeatureUpdate} from "./FeatureInterface";
 import {SearchRequest} from "../types";
 
-const API_URL = 'http://vsmlapprfid1:8080/JepRiaShowcase/api';
+const API_URL = 'http://jepria-spring-feature.herokuapp.com';
 const USER = 'user';
 const PASSWORD = '123';
+const withCredentials = false;
 
 export const getFeature = (id?: string): Promise<Feature> => {
   const url = `${API_URL}/feature/${id}/`;
   // console.log(`${}`)
-  axios.defaults.withCredentials = true;
+  axios.defaults.withCredentials = withCredentials;
   return axios
       .get(
           url,
@@ -91,7 +92,7 @@ export const updateFeature = (featureId: string, feature: FeatureUpdate): Promis
 
 export const deleteFeature = (featureId: string): Promise<void> => {
   const url = `${API_URL}/feature/${featureId}`;
-  axios.defaults.withCredentials = true;
+  axios.defaults.withCredentials = withCredentials;
 
   return new Promise<void>((resolve, reject) => {
     axios.delete(
@@ -114,7 +115,7 @@ export const deleteFeature = (featureId: string): Promise<void> => {
 
 export const postSearchRequest = (searchRequest: SearchRequest<FeatureSearchTemplate>) => {
   const url = `${API_URL}/feature/search`;
-  axios.defaults.withCredentials = true;
+  axios.defaults.withCredentials = withCredentials;
   console.log(searchRequest)
   return new Promise<string>((resolve, reject) => {
     axios.post(
@@ -142,7 +143,7 @@ export const postSearchRequest = (searchRequest: SearchRequest<FeatureSearchTemp
 
 export const searchFeatures = (searchId: string, pageSize: number, page: number): Promise<Array<Feature>> => {
   const url = `${API_URL}/feature/search/${searchId}/resultset?pageSize=${pageSize}&page=${page}`;
-  axios.defaults.withCredentials = true;
+  axios.defaults.withCredentials = withCredentials;
   return new Promise<Array<Feature>>((resolve, reject) => {
     axios.get(
         url,
@@ -168,7 +169,7 @@ export const searchFeatures = (searchId: string, pageSize: number, page: number)
 
 export const getResultSetSize = (searchId: string): Promise<number> => {
   const url = `${API_URL}/feature/search/${searchId}/resultset-size`;
-  axios.defaults.withCredentials = true;
+  axios.defaults.withCredentials = withCredentials;
   return new Promise<number>((resolve, reject) => {
     axios.get(
         url,

@@ -16,9 +16,9 @@ i18n
   // for all options read: https://www.i18next.com/overview/configuration-options
   .init({
     backend: {
-      loadPath: "./locales/{{lng}}/translation.json"
+      loadPath: `${process.env.PUBLIC_URL}/locales/{{lng}}/translation.json`
     },
-    fallbackLng: 'ru',
+    fallbackLng: 'ru-RU',
     debug: true,
 
     interpolation: {

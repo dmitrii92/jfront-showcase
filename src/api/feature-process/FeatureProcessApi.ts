@@ -5,13 +5,14 @@ import {
   FeatureStatusOptions
 } from "./FeatureProcessInterface";
 
-const API_URL = 'http://vsmlapprfid1:8080/JepRiaShowcase/api';
+const API_URL = 'http://jepria-spring-feature.herokuapp.com';
 const USER = 'user';
 const PASSWORD = '123';
+const withCredentials = false;
 
 export const findFeatureProcess = (featureId: number): Promise<FeatureProcess[]> => {
   const url = `${API_URL}/feature/${featureId}/feature-process`;
-  axios.defaults.withCredentials = true;
+  axios.defaults.withCredentials = withCredentials;
   return axios
       .get(
           url,
@@ -30,7 +31,7 @@ export const createFeatureProcess = (featureId: number, featureProcessCreate: Fe
     Promise<FeatureProcess> => {
 
   const url = `${API_URL}/feature/${featureId}/feature-process`;
-  axios.defaults.withCredentials = true;
+  axios.defaults.withCredentials = withCredentials;
 
   return new Promise<FeatureProcess>((resolve, reject) => {
     axios.post(
@@ -73,7 +74,7 @@ export const createFeatureProcess = (featureId: number, featureProcessCreate: Fe
 export const getFeatureProcess = (featureId: number, featureProcessId: string): Promise<FeatureProcess> => {
 
   const url = `${API_URL}/feature/${featureId}/feature-process/${featureProcessId}`;
-  axios.defaults.withCredentials = true;
+  axios.defaults.withCredentials = withCredentials;
 
   return axios
       .get(
@@ -98,7 +99,7 @@ export const getFeatureProcess = (featureId: number, featureProcessId: string): 
 export const deleteFeatureProcess = (featureId: number, featureProcessId: number): Promise<void> => {
 
   const url = `${API_URL}/feature/${featureId}/feature-process/${featureProcessId}`;
-  axios.defaults.withCredentials = true;
+  axios.defaults.withCredentials = withCredentials;
 
   return new Promise<void>((resolve, reject) => {
     axios.delete(
@@ -123,7 +124,7 @@ export const deleteFeatureProcess = (featureId: number, featureProcessId: number
 export const getFeatureStatusOptions = (): Promise<FeatureStatusOptions[]> => {
 
   const url = `${API_URL}/feature/option/feature-status`;
-  axios.defaults.withCredentials = true;
+  axios.defaults.withCredentials = withCredentials;
 
   return axios
       .get(

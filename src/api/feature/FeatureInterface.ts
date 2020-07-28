@@ -4,15 +4,15 @@ export interface Feature {
   featureNameEn: string;
   description: string;
   dateIns: Date;
-  featureStatus: {
+  featureStatus?: {
     name: string;
     value: number
   };
-  author: {
+  author?: {
     name: string;
     value: number;
   };
-  responsible: {
+  responsible?: {
     name: string;
     value: number;
   };
