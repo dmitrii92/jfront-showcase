@@ -28,6 +28,8 @@ import { getFeatureStatusOptions } from "../../../api/feature-process/FeaturePro
 import { useFormik } from "formik";
 import { DatePicker } from "jfront-components";
 import { useTranslation } from "react-i18next";
+import CheckBoxGroup from "../../../components/checkbox-group";
+// import CheckBox from "../../../components/checkbox-group";
 
 const SearchPage = () => {
   const { t } = useTranslation();
@@ -74,6 +76,39 @@ const SearchPage = () => {
       onSubmit(values);
     },
   });
+
+  const options = [
+    {
+      name: "123",
+      value: "123",
+    },
+    {
+      name: "111",
+      value: "111",
+    },
+    {
+      name: "222",
+      value: "222",
+    },
+    {
+      name: "333",
+      value: "333",
+    },
+    {
+      name: "444",
+      value: "444",
+    },
+  ];
+
+  const [fruits, setFruits] = useState<string[]>(["apple", "watermelon"]);
+
+  useEffect(() => {
+    const timer = setTimeout(() => {
+      setFruits(["apple", "orange"]);
+    }, 5000);
+
+    return () => clearTimeout(timer);
+  }, []);
 
   return (
     <>
@@ -161,7 +196,7 @@ const SearchPage = () => {
         </FormField>
         <FormField>
           <Label>{t("feature.fields.statusCodeList")}</Label>
-          <select
+          {/* <select
             name="statusCodeList"
             value={formik.values.statusCodeList}
             onChange={formik.handleChange}
@@ -177,7 +212,45 @@ const SearchPage = () => {
                   );
                 })
               : null}
-          </select>
+          </select> */}
+          <CheckBoxGroup
+            name="fruits"
+            value={
+              formik.values.statusCodeList ? formik.values.statusCodeList : []
+            }
+            onChange={(newValue) => {
+              formik.setFieldValue("statusCodeList",
+              newValue
+              );
+            }} //formik.handleChange
+          >
+            {(Checkbox) => (
+              <>
+                <label>
+                  <Checkbox value="apple" /> Apple
+                </label>
+                <label>
+                  <Checkbox value="orange" /> Orange
+                </label>
+                <label>
+                  <Checkbox value="watermelon" /> Watermelon
+                </label>
+                {statusOptions
+                  ? statusOptions.map((option) => {
+                      return (
+                        <label>
+                          <Checkbox value={option.value} />{" "}
+                          {option.name.toString()}
+                        </label>
+                      );
+                    })
+                  : null}
+              </>
+            )}
+          </CheckBoxGroup>
+        </FormField>
+        <FormField>
+          <input type="checkbox" value="text" />
         </FormField>
         <FormField>
           <Input id="search-submit" type="submit" hidden={true} />
