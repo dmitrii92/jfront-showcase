@@ -11,7 +11,7 @@ interface ICheckboxGroupProps {
   onChange: (newValue: any[]) => any;
 }
 
-const CheckboxGroup: React.FC<ICheckboxGroupProps> = (props) => {
+const CheckBoxGroupNew: React.FC<ICheckboxGroupProps> = (props) => {
   const { children, name, value: checkedValues, onChange } = props;
 
   const onCheckboxChange = (
@@ -46,4 +46,4 @@ const CheckboxGroup: React.FC<ICheckboxGroupProps> = (props) => {
   return children(Checkbox);
 };
 
-export default CheckboxGroup;
+export default CheckBoxGroupNew;

@@ -28,7 +28,10 @@ import { getFeatureStatusOptions } from "../../../api/feature-process/FeaturePro
 import { useFormik } from "formik";
 import { DatePicker } from "jfront-components";
 import { useTranslation } from "react-i18next";
-import CheckBoxGroup from "../../../components/checkbox-group";
+import CheckBoxGroup, {
+  CheckBoxGroupNew,
+} from "../../../components/checkbox-group";
+import CheckBox from "../../../components/checkbox";
 // import CheckBox from "../../../components/checkbox-group";
 
 const SearchPage = () => {
@@ -213,16 +216,14 @@ const SearchPage = () => {
                 })
               : null}
           </select> */}
-          <CheckBoxGroup
+          <CheckBoxGroupNew
             name="fruits"
             value={
               formik.values.statusCodeList ? formik.values.statusCodeList : []
             }
             onChange={(newValue) => {
-              formik.setFieldValue("statusCodeList",
-              newValue
-              );
-            }} //formik.handleChange
+              formik.setFieldValue("statusCodeList", newValue);
+            }}
           >
             {(Checkbox) => (
               <>
@@ -247,10 +248,17 @@ const SearchPage = () => {
                   : null}
               </>
             )}
-          </CheckBoxGroup>
+          </CheckBoxGroupNew>
         </FormField>
         <FormField>
-          <input type="checkbox" value="text" />
+          <CheckBoxGroup>
+            {statusOptions
+              ? statusOptions.map((option) => {
+                  return <CheckBox value={option.value} label={option.name} />;
+                })
+              : null}
+          </CheckBoxGroup>
+          <CheckBox />
         </FormField>
         <FormField>
           <Input id="search-submit" type="submit" hidden={true} />

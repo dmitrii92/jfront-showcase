@@ -1,12 +1,14 @@
 import React, { useState, useEffect } from "react";
 import styled from "styled-components";
 import Label from "../label";
-import {CheckBoxInterface} from "../checkbox/CheckBox";
+import { CheckBoxInterface } from "../checkbox/CheckBox";
 
 interface CheckBoxGroupInterface {
+  // children: (CheckBox: React.FC<CheckBoxInterface>) => JSX.Element;
+  name?: string;
+  value?: any[];
   text?: string;
   onChange?: (newValue: any[]) => any;
-  children: (CheckBox: React.FC<CheckBoxInterface>) => JSX.Element;
 }
 
 const StyledCheckBoxGroup = styled.div`
