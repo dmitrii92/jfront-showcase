@@ -80,38 +80,6 @@ const SearchPage = () => {
     },
   });
 
-  const options = [
-    {
-      name: "123",
-      value: "123",
-    },
-    {
-      name: "111",
-      value: "111",
-    },
-    {
-      name: "222",
-      value: "222",
-    },
-    {
-      name: "333",
-      value: "333",
-    },
-    {
-      name: "444",
-      value: "444",
-    },
-  ];
-
-  const [fruits, setFruits] = useState<string[]>(["apple", "watermelon"]);
-
-  useEffect(() => {
-    const timer = setTimeout(() => {
-      setFruits(["apple", "orange"]);
-    }, 5000);
-
-    return () => clearTimeout(timer);
-  }, []);
 
   return (
     <>
@@ -216,7 +184,7 @@ const SearchPage = () => {
                 })
               : null}
           </select> */}
-          <CheckBoxGroupNew
+          {/* <CheckBoxGroupNew
             name="fruits"
             value={
               formik.values.statusCodeList ? formik.values.statusCodeList : []
@@ -248,17 +216,24 @@ const SearchPage = () => {
                   : null}
               </>
             )}
-          </CheckBoxGroupNew>
+          </CheckBoxGroupNew> */}
         </FormField>
         <FormField>
-          <CheckBoxGroup>
+          <CheckBoxGroup
+            value={
+              formik.values.statusCodeList ? formik.values.statusCodeList : []
+            }
+            onChange={(newValue) => {
+              console.log(newValue);
+              formik.setFieldValue("statusCodeList", newValue);
+            }}
+          >
             {statusOptions
               ? statusOptions.map((option) => {
                   return <CheckBox value={option.value} label={option.name} />;
                 })
               : null}
           </CheckBoxGroup>
-          <CheckBox />
         </FormField>
         <FormField>
           <Input id="search-submit" type="submit" hidden={true} />

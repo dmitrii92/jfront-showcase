@@ -45,7 +45,7 @@ const StyledCheckBox = styled.span`
 
 const CheckBox: React.FC<CheckBoxInterface> = (props) => {
   const htmlId = props.id ? props.id : nextId();
-  console.log(props);
+  // console.log(props);
   return (
     <StyledCheckBox>
       <StyledCheckBoxLabel htmlFor={htmlId}>{props.label}</StyledCheckBoxLabel>
