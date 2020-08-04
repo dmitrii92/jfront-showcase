@@ -28,11 +28,8 @@ import { getFeatureStatusOptions } from "../../../api/feature-process/FeaturePro
 import { useFormik } from "formik";
 import { DatePicker } from "jfront-components";
 import { useTranslation } from "react-i18next";
-import CheckBoxGroup, {
-  CheckBoxGroupNew,
-} from "../../../components/checkbox-group";
+import CheckBoxGroup from "../../../components/checkbox-group";
 import CheckBox from "../../../components/checkbox";
-// import CheckBox from "../../../components/checkbox-group";
 
 const SearchPage = () => {
   const { t } = useTranslation();
@@ -79,7 +76,6 @@ const SearchPage = () => {
       onSubmit(values);
     },
   });
-
 
   return (
     <>
@@ -167,64 +163,12 @@ const SearchPage = () => {
         </FormField>
         <FormField>
           <Label>{t("feature.fields.statusCodeList")}</Label>
-          {/* <select
-            name="statusCodeList"
-            value={formik.values.statusCodeList}
-            onChange={formik.handleChange}
-            multiple={true}
-          >
-            <option value={undefined}></option>
-            {statusOptions
-              ? statusOptions.map((option) => {
-                  return (
-                    <option key={option.value} value={option.value}>
-                      {option.name}
-                    </option>
-                  );
-                })
-              : null}
-          </select> */}
-          {/* <CheckBoxGroupNew
-            name="fruits"
-            value={
-              formik.values.statusCodeList ? formik.values.statusCodeList : []
-            }
-            onChange={(newValue) => {
-              formik.setFieldValue("statusCodeList", newValue);
-            }}
-          >
-            {(Checkbox) => (
-              <>
-                <label>
-                  <Checkbox value="apple" /> Apple
-                </label>
-                <label>
-                  <Checkbox value="orange" /> Orange
-                </label>
-                <label>
-                  <Checkbox value="watermelon" /> Watermelon
-                </label>
-                {statusOptions
-                  ? statusOptions.map((option) => {
-                      return (
-                        <label>
-                          <Checkbox value={option.value} />{" "}
-                          {option.name.toString()}
-                        </label>
-                      );
-                    })
-                  : null}
-              </>
-            )}
-          </CheckBoxGroupNew> */}
-        </FormField>
-        <FormField>
           <CheckBoxGroup
+            name="statusCodeList"
             value={
               formik.values.statusCodeList ? formik.values.statusCodeList : []
             }
             onChange={(newValue) => {
-              console.log(newValue);
               formik.setFieldValue("statusCodeList", newValue);
             }}
           >

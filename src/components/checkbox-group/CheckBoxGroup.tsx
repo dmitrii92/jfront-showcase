@@ -1,15 +1,13 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, ReactNode } from "react";
 import styled from "styled-components";
 import Label from "../label";
-import { CheckBoxInterface } from "../checkbox/CheckBox";
-import createFragment from "react-addons-create-fragment";
 
 interface CheckBoxGroupInterface {
-  // children: (CheckBox: React.FC<CheckBoxInterface>) => JSX.Element;
+  children: ReactNode[];
   name?: string;
   value?: any[];
   text?: string;
-  // onChange?: (newValue: any[]) => any;
+  disabled?: boolean;
 
   /**
    * Обработчик изменения значения 'checked' одного из дочерних элементов
@@ -40,22 +38,18 @@ const CheckBoxGroup: React.FC<CheckBoxGroupInterface> = (props) => {
     setIsLoading(isLoading);
   }, [isLoading]);
 
-  let checkboxes: any[];
-  const checkboxGroupParts = {};
-  // let state = {
-  //   value: [],
-  // };
+  let [state, setState] = useState<any[]>([]);
 
-  let [state, setState] = useState<any[]>([]); //{value: [],}
-
-  let handleCheckboxChange = (value, checked, event) => {
-    console.log(handleCheckboxChange);
+  const handleCheckboxChange = (
+    value: React.ReactText,
+    event: React.ChangeEvent<any> | undefined
+  ) => {
     const newValue = props.value ? props.value.slice() : state.slice();
     const changedValueIndex = newValue.findIndex(
-      (stateValue: any) => stateValue === value
+      (stateValue) => stateValue === value
     );
 
-    if (checked) {
+    if (event.target.checked) {
       newValue.push(value);
     } else {
       newValue.splice(changedValueIndex, 1);
@@ -68,45 +62,26 @@ const CheckBoxGroup: React.FC<CheckBoxGroupInterface> = (props) => {
     }
   };
 
-  let children: React.ReactNode = null;
-
-  if (props.children) {
-    const { children: propsChildren } = props;
-
-    children = React.Children.toArray(propsChildren);
-  }
-
-  if (children) {
-    checkboxes = [];
-
-    const value = props.value === undefined ? state : props.value;
-
-    React.Children.forEach(children, (checkbox, index) => {
-      if (React.isValidElement(checkbox)) {
-        const checkboxNode = React.cloneElement(checkbox, {
-          ref: (checkbox: any) => checkboxes.push(checkbox),
-          checked:
-            checkbox.props.checked === undefined
-              ? value.some((groupValue) => groupValue === checkbox.props.value)
-              : checkbox.props.checked,
-          onChange:
-            checkbox.props.onChange === undefined
-              ? (checked: any, _text: any, event: any) =>
-                  handleCheckboxChange(checkbox.props.value, checked, event)
-              : checkbox.props.onChange,
-          ...props,
-        });
-
-        checkboxGroupParts[`checkbox-${index}`] = checkboxNode;
-      }
-    });
-  }
-
   return (
     <StyledCheckBoxGroup>
       <Label>{props.text}</Label>
-      {/* <StyledUl>{props.children}</StyledUl> */}
-      <div>{createFragment(checkboxGroupParts)}</div>
+      <StyledUl>
+        {React.Children.map(props.children, (checkbox, index) => {
+          if (!React.isValidElement(checkbox)) {
+            return null;
+          }
+
+          return React.cloneElement(checkbox, {
+            disabled: checkbox.props.disabled || props.disabled,
+            value: props.value[index],
+            onChange:
+              checkbox.props.onChange === undefined
+                ? (event: any, _text: any) =>
+                    handleCheckboxChange(checkbox.props.value, event)
+                : checkbox.props.onChange,
+          });
+        })}
+      </StyledUl>
     </StyledCheckBoxGroup>
   );
 };
