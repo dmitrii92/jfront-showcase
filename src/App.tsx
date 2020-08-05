@@ -46,7 +46,7 @@ function Main() {
             <Route path="/create" exact component={CreatePage}/>
             <Route path="/:featureId/edit" exact component={EditPage}/>
             <Route path="/:featureId/detail" component={DetailPage}/>
-            <Route path="/list/:searchId" component={ListPage}/>
+            <Route path="/list" component={ListPage}/>
             <Route path="/:featureId/feature-process" exact component={FeatureProcessListPage}/>
             <Route path="/:featureId/feature-process/:featureProcessId/detail"
                    component={FeatureProcessDetailPage}/>

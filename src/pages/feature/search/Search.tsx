@@ -30,6 +30,7 @@ import { DatePicker } from "jfront-components";
 import { useTranslation } from "react-i18next";
 import CheckBoxGroup from "../../../components/checkbox-group";
 import CheckBox from "../../../components/checkbox";
+import queryString from "query-string";
 
 const SearchPage = () => {
   const { t } = useTranslation();
@@ -52,16 +53,25 @@ const SearchPage = () => {
       template: data,
     };
 
-    postSearchRequest(searchRequest).then((searchId) => {
-      getResultSetSize(searchId).then((resultSize) => {
-        if (resultSize > 0) {
-          searchContext?.setSearch(searchId);
-          history.push(`/list/${searchId}/?pageSize=25&page=1`);
-        } else {
-          alert("Search empty!");
-        }
-      });
-    });
+    // postSearchRequest(searchRequest).then((searchId) => {
+    //   getResultSetSize(searchId).then((resultSize) => {
+    //     if (resultSize > 0) {
+    //       searchContext?.setSearch(searchId);
+    //       history.push(`/list/${searchId}/?pageSize=25&page=1`);
+    //     } else {
+    //       alert("Search empty!");
+    //     }
+    //   });
+    // });
+    // history.push(`/list/${searchId}/?pageSize=25&page=1`);
+    console.log("queryString.stringify(data):");
+    console.log(queryString.stringify(data));
+    let query = queryString.stringify(data);
+    if (query) {
+      query = "&" + query;
+    }
+    history.push(`/list/?pageSize=25&page=1${query}`);
+
   };
 
   useEffect(() => {
@@ -89,7 +99,7 @@ const SearchPage = () => {
         <ToolbarButtonDelete disabled={true} />
         <ToolbarButtonView disabled={true} />
         <ToolbarSplitter />
-        <ToolbarButtonBase
+        <ToolbarButtonBase //TODO: think about code bellow
           disabled={!searchContext?.getSearch()}
           onClick={() => {
             let searchId = searchContext?.getSearch();

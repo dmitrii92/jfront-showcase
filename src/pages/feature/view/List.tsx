@@ -1,5 +1,8 @@
 import React, { useEffect, useState } from "react";
-import { Feature } from "../../../api/feature/FeatureInterface";
+import {
+  Feature,
+  FeatureSearchTemplate,
+} from "../../../api/feature/FeatureInterface";
 import {
   Toolbar,
   ToolbarButtonBase,
@@ -16,6 +19,7 @@ import {
   deleteFeature,
   getResultSetSize,
   searchFeatures,
+  postSearchRequest,
 } from "../../../api/feature/FeatureApi";
 import {
   JepGrid as Grid,
@@ -30,6 +34,8 @@ import {
 import { Page, Content, Header } from "jfront-components";
 import { Tab, TabPanel } from "jfront-components";
 import { useTranslation } from "react-i18next";
+import queryString from "query-string";
+import { SearchRequest } from "../../../api/types";
 
 const useQuery = () => {
   return new URLSearchParams(useLocation().search);
@@ -48,16 +54,30 @@ const ListPage = () => {
   const { t } = useTranslation();
 
   const find = () => {
-    if (searchId) {
+    let searchTemplate = queryString.parse(location.search);
+
+    let searchRequest: SearchRequest<FeatureSearchTemplate> = {
+      template: searchTemplate,
+    };
+
+    // Перед тем, как постить запрос проверять, что запрос нужно делать
+    // возможно предыдущий запрос был с тем же шаблоном
+    // но может быть необходимость обновлять запрос после удаления записи или принудительного вызова refresh
+    postSearchRequest(searchRequest).then((searchId) => {
       getResultSetSize(searchId).then((resultSize) => {
-        setSearchSize(resultSize);
-        if (searchId) {
-          searchFeatures(searchId, pageSize, page).then((features) => {
-            setFeatures(features);
-          });
+        if (resultSize > 0) {
+          // Добавить сохранение searchId и searchTemplate(query) в контекст
+          setSearchSize(resultSize);
+          if (searchId) {
+            searchFeatures(searchId, pageSize, page).then((features) => {
+              setFeatures(features);
+            });
+          }
+        } else {
+          alert("Search empty!");
         }
       });
-    }
+    });
   };
 
   useEffect(() => {
@@ -160,7 +180,9 @@ const ListPage = () => {
                           {feature.description}
                         </TableColumn>
                         <TableColumn label={t("feature.fields.dateIns")}>
-                          {new Date(feature.dateIns.toString()).toLocaleDateString()}
+                          {new Date(
+                            feature.dateIns.toString()
+                          ).toLocaleDateString()}
                         </TableColumn>
                         <TableColumn label={t("feature.fields.author")}>
                           {feature.author?.name}
