@@ -1,8 +1,11 @@
 import React from "react";
+import { FeatureSearchTemplate } from "./api/feature/FeatureInterface";
 
 export interface SearchContextInterface {
-  getSearch(): string,
-  setSearch(searchId: string): void
+  getId(): string;
+  setId(searchId: string): void;
+  getTemplate(): FeatureSearchTemplate;
+  setTemplate(template: FeatureSearchTemplate): void;
 }
 
 export const SearchContext = React.createContext<SearchContextInterface | null>(null);

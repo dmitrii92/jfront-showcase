@@ -65,7 +65,7 @@ const CreatePage = () => {
         <ToolbarSplitter />
         <ToolbarButtonBase
           onClick={() => {
-            let searchId = searchContext?.getSearch();
+            let searchId = searchContext?.getId();
             if (searchId) {
               history.push(`/list/${searchId}/?pageSize=25&page=1`);
             }

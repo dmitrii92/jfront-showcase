@@ -84,7 +84,7 @@ const EditPage = () => {
         <ToolbarSplitter />
         <ToolbarButtonBase
           onClick={() => {
-            let searchId = searchContext?.getSearch();
+            let searchId = searchContext?.getId();
             history.push(`/list/${searchId}/?pageSize=25&page=1`);
           }}
         >

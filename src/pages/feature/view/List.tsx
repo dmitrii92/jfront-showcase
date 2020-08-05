@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, {useContext, useEffect, useState} from "react";
 import {
   Feature,
   FeatureSearchTemplate,
@@ -14,7 +14,7 @@ import {
   ToolbarButtonView,
   ToolbarSplitter,
 } from "jfront-components";
-import { useHistory, useLocation, useParams } from "react-router-dom";
+import { useHistory, useLocation } from "react-router-dom";
 import {
   deleteFeature,
   getResultSetSize,
@@ -36,6 +36,7 @@ import { Tab, TabPanel } from "jfront-components";
 import { useTranslation } from "react-i18next";
 import queryString from "query-string";
 import { SearchRequest } from "../../../api/types";
+import {SearchContext} from "../../../context";
 
 const useQuery = () => {
   return new URLSearchParams(useLocation().search);
@@ -44,7 +45,6 @@ const useQuery = () => {
 const ListPage = () => {
   const history = useHistory();
   const location = useLocation();
-  let { searchId } = useParams();
   let query = useQuery();
   const [searchSize, setSearchSize] = useState<number>(25);
   const pageSize: number = parseInt(query.get("pageSize") as string);
@@ -52,35 +52,50 @@ const ListPage = () => {
   const [features, setFeatures] = useState<Feature[]>([]);
   const [currentFeature, setCurrentFeature] = useState<Feature>();
   const { t } = useTranslation();
+  const searchContext = useContext(SearchContext);
 
   const find = () => {
     let searchTemplate = queryString.parse(location.search);
+
+    if (searchTemplate.page) {
+      searchTemplate.page = undefined;
+    }
+    if (searchTemplate.pageSize) {
+      searchTemplate.pageSize = undefined;
+    }
 
     let searchRequest: SearchRequest<FeatureSearchTemplate> = {
       template: searchTemplate,
     };
 
-    // Перед тем, как постить запрос проверять, что запрос нужно делать
-    // возможно предыдущий запрос был с тем же шаблоном
-    // но может быть необходимость обновлять запрос после удаления записи или принудительного вызова refresh
-    postSearchRequest(searchRequest).then((searchId) => {
-      getResultSetSize(searchId).then((resultSize) => {
-        if (resultSize > 0) {
-          // Добавить сохранение searchId и searchTemplate(query) в контекст
-          setSearchSize(resultSize);
-          if (searchId) {
-            searchFeatures(searchId, pageSize, page).then((features) => {
-              setFeatures(features);
-            });
+    if (!Object.is(JSON.stringify(searchContext.getTemplate()), JSON.stringify(queryString.parse(location.search)))) {
+      postSearchRequest(searchRequest).then((searchId) => {
+        getResultSetSize(searchId).then((resultSize) => {
+          if (resultSize > 0) {
+
+            searchContext.setTemplate(searchRequest.template);
+            searchContext.setId(searchId);
+
+            setSearchSize(resultSize);
+            if (searchId) {
+              searchFeatures(searchId, pageSize, page).then((features) => {
+                setFeatures(features);
+              });
+            }
+          } else {
+            alert("Search empty!");
           }
-        } else {
-          alert("Search empty!");
-        }
+        });
       });
-    });
+    } else {
+      searchFeatures(searchContext.getId(), pageSize, page).then((features) => {
+        setFeatures(features);
+      });
+    }
   };
 
   useEffect(() => {
+    console.log("effect from List page")
     find();
   }, [location]);
 
@@ -200,9 +215,9 @@ const ListPage = () => {
             currentPage={page}
             rowCount={pageSize}
             totalRowCount={searchSize}
-            onRefresh={(pageNumber, pageSize) => {
+            onRefresh={(pageNumber, pageSize) => { //TODO need refresh search
               history.push({
-                pathname: `/list/${searchId}`,
+                pathname: `/list`,
                 search: `?page=${pageNumber}&pageSize=${pageSize}`,
               });
             }}

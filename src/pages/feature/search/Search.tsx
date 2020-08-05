@@ -15,11 +15,6 @@ import { Form } from "jfront-components";
 import { FormField } from "jfront-components";
 import Label from "../../../components/label";
 import Input from "../../../components/input";
-import {
-  getResultSetSize,
-  postSearchRequest,
-} from "../../../api/feature/FeatureApi";
-import { SearchRequest } from "../../../api/types";
 import { FeatureSearchTemplate } from "../../../api/feature/FeatureInterface";
 import { Tab, TabPanel } from "jfront-components";
 import { SearchContext } from "../../../context";
@@ -49,21 +44,6 @@ const SearchPage = () => {
       data.dateInsTo = undefined;
     }
 
-    let searchRequest: SearchRequest<FeatureSearchTemplate> = {
-      template: data,
-    };
-
-    // postSearchRequest(searchRequest).then((searchId) => {
-    //   getResultSetSize(searchId).then((resultSize) => {
-    //     if (resultSize > 0) {
-    //       searchContext?.setSearch(searchId);
-    //       history.push(`/list/${searchId}/?pageSize=25&page=1`);
-    //     } else {
-    //       alert("Search empty!");
-    //     }
-    //   });
-    // });
-    // history.push(`/list/${searchId}/?pageSize=25&page=1`);
     console.log("queryString.stringify(data):");
     console.log(queryString.stringify(data));
     let query = queryString.stringify(data);
@@ -71,7 +51,6 @@ const SearchPage = () => {
       query = "&" + query;
     }
     history.push(`/list/?pageSize=25&page=1${query}`);
-
   };
 
   useEffect(() => {
@@ -81,7 +60,7 @@ const SearchPage = () => {
   }, []);
 
   const formik = useFormik<FeatureSearchTemplate>({
-    initialValues: {},
+    initialValues: searchContext.getTemplate(),
     onSubmit: (values: FeatureSearchTemplate) => {
       onSubmit(values);
     },
@@ -100,9 +79,9 @@ const SearchPage = () => {
         <ToolbarButtonView disabled={true} />
         <ToolbarSplitter />
         <ToolbarButtonBase //TODO: think about code bellow
-          disabled={!searchContext?.getSearch()}
+          disabled={!searchContext?.getId()}
           onClick={() => {
-            let searchId = searchContext?.getSearch();
+            let searchId = searchContext?.getId();
             if (searchId) {
               history.push(`/list/${searchId}/?pageSize=25&page=1`);
             }
@@ -175,9 +154,7 @@ const SearchPage = () => {
           <Label>{t("feature.fields.statusCodeList")}</Label>
           <CheckBoxGroup
             name="statusCodeList"
-            value={
-              formik.values.statusCodeList ? formik.values.statusCodeList : []
-            }
+            value={formik.values.statusCodeList ? formik.values.statusCodeList : []}
             onChange={(newValue) => {
               formik.setFieldValue("statusCodeList", newValue);
             }}
