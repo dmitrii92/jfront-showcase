@@ -32,6 +32,7 @@ const SearchPage = () => {
   const history = useHistory();
   const searchContext = useContext(SearchContext);
   let [statusOptions, setStatusOptions] = useState<FeatureStatusOptions[]>();
+  const [isLoading, setIsLoading] = useState<boolean>(true);
 
   const onSubmit = (data: FeatureSearchTemplate) => {
     if (!data.featureId) {
@@ -56,6 +57,7 @@ const SearchPage = () => {
   useEffect(() => {
     getFeatureStatusOptions().then((options) => {
       setStatusOptions(options);
+      setIsLoading(false);
     });
   }, []);
 
@@ -151,13 +153,15 @@ const SearchPage = () => {
           />
         </FormField>
         <FormField>
-          <Label>{t("feature.fields.statusCodeList")}</Label>
+          {/*<Label>{t("feature.fields.statusCodeList")}</Label>*/}
           <CheckBoxGroup
             name="statusCodeList"
+            text={t("feature.fields.statusCodeList")}
             value={formik.values.statusCodeList ? formik.values.statusCodeList : []}
             onChange={(newValue) => {
               formik.setFieldValue("statusCodeList", newValue);
             }}
+            isLoading={isLoading}
           >
             {statusOptions
               ? statusOptions.map((option) => {

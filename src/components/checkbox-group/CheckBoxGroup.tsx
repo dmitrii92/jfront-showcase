@@ -8,7 +8,7 @@ interface CheckBoxGroupInterface {
   value?: any[];
   text?: string;
   disabled?: boolean;
-
+  isLoading? : boolean;
   /**
    * Обработчик изменения значения 'checked' одного из дочерних элементов
    */
@@ -32,12 +32,6 @@ const StyledUl = styled.div`
 `;
 
 const CheckBoxGroup: React.FC<CheckBoxGroupInterface> = (props) => {
-  const [isLoading, setIsLoading] = useState();
-
-  useEffect(() => {
-    setIsLoading(isLoading);
-  }, [isLoading]);
-
   let [state, setState] = useState<any[]>([]);
 
   const handleCheckboxChange = (
@@ -65,23 +59,25 @@ const CheckBoxGroup: React.FC<CheckBoxGroupInterface> = (props) => {
   return (
     <StyledCheckBoxGroup>
       <Label>{props.text}</Label>
-      <StyledUl>
-        {React.Children.map(props.children, (checkbox, index) => {
-          if (!React.isValidElement(checkbox)) {
-            return null;
-          }
+      {props.isLoading ? <div>Loading...</div> :
+          <StyledUl>
+            {React.Children.map(props.children, (checkbox, index) => {
+              if (!React.isValidElement(checkbox)) {
+                return null;
+              }
 
-          return React.cloneElement(checkbox, {
-            disabled: checkbox.props.disabled || props.disabled,
-            value: props.value[index],
-            onChange:
-              checkbox.props.onChange === undefined
-                ? (event: any, _text: any) =>
-                    handleCheckboxChange(checkbox.props.value, event)
-                : checkbox.props.onChange,
-          });
-        })}
-      </StyledUl>
+              return React.cloneElement(checkbox, {
+                disabled: checkbox.props.disabled || props.disabled,
+                value: props.value[index],
+                onChange:
+                    checkbox.props.onChange === undefined
+                        ? (event: any, _text: any) =>
+                            handleCheckboxChange(checkbox.props.value, event)
+                        : checkbox.props.onChange,
+              });
+            })}
+          </StyledUl>
+      }
     </StyledCheckBoxGroup>
   );
 };
