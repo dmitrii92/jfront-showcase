@@ -1,7 +1,7 @@
 import React, { useContext } from "react";
-import { Form } from "jfront-components";
+import { Form } from "@jfront/ui-core";
 import Input from "../../../components/input";
-import { FormField } from "jfront-components";
+import { FormField } from "@jfront/ui-core";
 import Label from "../../../components/label";
 import {
   Toolbar,
@@ -13,11 +13,11 @@ import {
   ToolbarButtonSave,
   ToolbarButtonView,
   ToolbarSplitter,
-} from "jfront-components";
+} from "@jfront/ui-core";
 import { useHistory } from "react-router-dom";
 import { FeatureCreate } from "../../../api/feature/FeatureInterface";
 import { createFeature } from "../../../api/feature/FeatureApi";
-import { Tab, TabPanel } from "jfront-components";
+import { Tab, TabPanel } from "@jfront/ui-core";
 import { SearchContext } from "../../../context";
 import { useFormik } from "formik";
 import { useTranslation } from "react-i18next";

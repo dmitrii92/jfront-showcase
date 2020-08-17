@@ -7,9 +7,9 @@ import {
   ToolbarButtonFind,
   ToolbarButtonView,
   ToolbarSplitter
-} from "jfront-components";
+} from "@jfront/ui-core";
 import {useHistory, useLocation, useParams} from "react-router-dom";
-import {Tab, TabPanel} from "jfront-components";
+import {Tab, TabPanel} from "@jfront/ui-core";
 import {
   JepGrid as Grid,
   JepGridTable as Table,
@@ -18,7 +18,7 @@ import {
   JepGridBody as TableBody,
   JepGridRow as TableRow,
   JepGridRowCell as TableColumn,
-} from "jfront-components";
+} from "@jfront/ui-core";
 import {FeatureProcess} from "../../../api/feature-process/FeatureProcessInterface";
 import {
   deleteFeatureProcess,

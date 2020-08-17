@@ -1,5 +1,5 @@
 import React, {useEffect, useState} from "react";
-import {Tab, TabPanel} from "jfront-components";
+import {Tab, TabPanel} from "@jfront/ui-core";
 import {
   Toolbar,
   ToolbarButtonBase,
@@ -10,14 +10,14 @@ import {
   ToolbarButtonSave,
   ToolbarButtonView,
   ToolbarSplitter
-} from "jfront-components";
+} from "@jfront/ui-core";
 import {useHistory, useParams} from "react-router-dom";
 import {
   FeatureProcessCreate,
   FeatureStatusOptions
 } from "../../../api/feature-process/FeatureProcessInterface";
-import {Form} from "jfront-components";
-import {FormField} from "jfront-components";
+import {Form} from "@jfront/ui-core";
+import {FormField} from "@jfront/ui-core";
 import {
   createFeatureProcess,
   getFeatureStatusOptions

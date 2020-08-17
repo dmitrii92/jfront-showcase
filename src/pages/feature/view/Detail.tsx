@@ -1,6 +1,6 @@
 import React, { useContext, useEffect, useState } from "react";
-import { Form } from "jfront-components";
-import { FormField } from "jfront-components";
+import { Form } from "@jfront/ui-core";
+import { FormField } from "@jfront/ui-core";
 import Label from "../../../components/label";
 import { deleteFeature, getFeature } from "../../../api/feature/FeatureApi";
 import { Feature } from "../../../api/feature/FeatureInterface";
@@ -15,8 +15,8 @@ import {
   ToolbarButtonSave,
   ToolbarButtonView,
   ToolbarSplitter,
-} from "jfront-components";
-import { Tab, TabPanel } from "jfront-components";
+} from "@jfront/ui-core";
+import { Tab, TabPanel } from "@jfront/ui-core";
 import { SearchContext } from "../../../context";
 import { useTranslation } from "react-i18next";
 

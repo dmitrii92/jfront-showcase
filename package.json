@@ -4,6 +4,7 @@
   "private": true,
   "homepage": "http://dmitrii92.github.io/jfront-showcase",
   "dependencies": {
+    "@jfront/ui-core": "^0.1.1",
     "@testing-library/jest-dom": "^4.2.4",
     "@testing-library/react": "^9.5.0",
     "@testing-library/user-event": "^7.2.1",
@@ -18,7 +19,6 @@
     "i18next": "19.4.3",
     "i18next-browser-languagedetector": "4.2.0",
     "i18next-http-backend": "1.0.15",
-    "jfront-components": "git+https://github.com/Jepria/jfront-components.git",
     "query-string": "^6.13.1",
     "react": "^16.13.1",
     "react-addons-create-fragment": "^15.6.2",

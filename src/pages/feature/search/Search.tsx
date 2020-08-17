@@ -9,19 +9,19 @@ import {
   ToolbarButtonSave,
   ToolbarButtonView,
   ToolbarSplitter,
-} from "jfront-components";
+} from "@jfront/ui-core";
 import { useHistory } from "react-router-dom";
-import { Form } from "jfront-components";
-import { FormField } from "jfront-components";
+import { Form } from "@jfront/ui-core";
+import { FormField } from "@jfront/ui-core";
 import Label from "../../../components/label";
 import Input from "../../../components/input";
 import { FeatureSearchTemplate } from "../../../api/feature/FeatureInterface";
-import { Tab, TabPanel } from "jfront-components";
+import { Tab, TabPanel } from "@jfront/ui-core";
 import { SearchContext } from "../../../context";
 import { FeatureStatusOptions } from "../../../api/feature-process/FeatureProcessInterface";
 import { getFeatureStatusOptions } from "../../../api/feature-process/FeatureProcessApi";
 import { useFormik } from "formik";
-import { DatePicker } from "jfront-components";
+import { DatePicker } from "@jfront/ui-core";
 import { useTranslation } from "react-i18next";
 import CheckBoxGroup from "../../../components/checkbox-group";
 import CheckBox from "../../../components/checkbox";

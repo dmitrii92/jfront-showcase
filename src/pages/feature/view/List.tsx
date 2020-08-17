@@ -10,7 +10,7 @@ import {
   ToolbarButtonSave,
   ToolbarButtonView,
   ToolbarSplitter,
-} from "jfront-components";
+} from "@jfront/ui-core";
 import { useHistory, useLocation } from "react-router-dom";
 import {
   deleteFeature,
@@ -27,9 +27,9 @@ import {
   JepGridRow as TableRow,
   JepGridRowCell as TableColumn,
   JepGridPagingBar,
-} from "jfront-components";
-import { Page, Content, Header } from "jfront-components";
-import { Tab, TabPanel } from "jfront-components";
+} from "@jfront/ui-core";
+import { Page, Content, Header } from "@jfront/ui-core";
+import { Tab, TabPanel } from "@jfront/ui-core";
 import { useTranslation } from "react-i18next";
 import queryString from "query-string";
 import { SearchRequest } from "../../../api/types";
@@ -88,6 +88,7 @@ const ListPage = () => {
             }
           } else {
             alert("Search empty!");
+            setIsLoading(false);
           }
         });
       });
