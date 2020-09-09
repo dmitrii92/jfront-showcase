@@ -133,9 +133,9 @@ const SearchPage = () => {
           />
         </FormField>
         <FormField>
-          <Label>{t("feature.fields.dateInsFrom")}:</Label>
           <DatePicker
             name="dateInsFrom"
+            label={t("feature.fields.dateInsFrom")}
             selected={formik.values.dateInsFrom}
             onChange={(date) => {
               formik.setFieldValue("dateInsFrom", date);
@@ -143,9 +143,9 @@ const SearchPage = () => {
           />
         </FormField>
         <FormField>
-          <Label>{t("feature.fields.dateInsTo")}:</Label>
           <DatePicker
             name="dateInsTo"
+            label={t("feature.fields.dateInsTo")}
             selected={formik.values.dateInsTo}
             onChange={(date) => {
               formik.setFieldValue("dateInsTo", date);
@@ -159,13 +159,19 @@ const SearchPage = () => {
             text={t("feature.fields.statusCodeList")}
             value={formik.values.statusCodeList ? formik.values.statusCodeList : []}
             onChange={(newValue) => {
+              console.log(newValue);
               formik.setFieldValue("statusCodeList", newValue);
             }}
             isLoading={isLoading}
           >
             {statusOptions
               ? statusOptions.map((option) => {
-                  return <CheckBox value={option.value} label={option.name} />;
+                  return (
+                    <CheckBox
+                      value={option.value}
+                      label={option.name}
+                    />
+                  );
                 })
               : null}
           </CheckBoxGroup>
