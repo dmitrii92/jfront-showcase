@@ -1,4 +1,4 @@
-import React, { useState, useEffect, ReactNode } from "react";
+import React, { ReactNode } from "react";
 import styled from "styled-components";
 import Label from "../label";
 
@@ -32,13 +32,13 @@ const StyledUl = styled.div`
 `;
 
 const CheckBoxGroup: React.FC<CheckBoxGroupInterface> = (props) => {
-  let [state, setState] = useState<any[]>([]);
 
   const handleCheckboxChange = (
     value: React.ReactText,
     event: React.ChangeEvent<any> | undefined
   ) => {
-    const newValue = props.value ? props.value.slice() : state.slice();
+    const newValue = props.value;
+
     const changedValueIndex = newValue.findIndex(
       (stateValue) => stateValue === value
     );
@@ -48,8 +48,6 @@ const CheckBoxGroup: React.FC<CheckBoxGroupInterface> = (props) => {
     } else {
       newValue.splice(changedValueIndex, 1);
     }
-
-    setState(newValue);
 
     if (props.onChange) {
       props.onChange(newValue, event);
@@ -61,14 +59,23 @@ const CheckBoxGroup: React.FC<CheckBoxGroupInterface> = (props) => {
       <Label>{props.text}</Label>
       {props.isLoading ? <div>Loading...</div> :
           <StyledUl>
-            {React.Children.map(props.children, (checkbox, index) => {
+            {React.Children.map(props.children, (checkbox) => {
               if (!React.isValidElement(checkbox)) {
                 return null;
               }
 
+              const isFound = props.value.find(
+                (stateValue) => stateValue === checkbox.props.value
+              );
+
+              const checked = (undefined === isFound)? false : true;
+              
+              // console.log(`checked[${index}] = ` + checked);
+
               return React.cloneElement(checkbox, {
                 disabled: checkbox.props.disabled || props.disabled,
-                value: props.value[index],
+                // value: props.value[index],
+                checked: checked,
                 onChange:
                     checkbox.props.onChange === undefined
                         ? (event: any, _text: any) =>

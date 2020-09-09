@@ -1,4 +1,4 @@
-import React, {useEffect, useState} from "react";
+import React, { useEffect, useState } from "react";
 import {
   Toolbar,
   ToolbarButtonBase,
@@ -6,25 +6,17 @@ import {
   ToolbarButtonDelete,
   ToolbarButtonFind,
   ToolbarButtonView,
-  ToolbarSplitter
+  ToolbarSplitter,
 } from "@jfront/ui-core";
-import {useHistory, useLocation, useParams} from "react-router-dom";
-import {Tab, TabPanel} from "@jfront/ui-core";
-import {
-  JepGrid as Grid,
-  JepGridTable as Table,
-  JepGridHeaderCell as TableHeaderCell,
-  JepGridHeader as TableHeader,
-  JepGridBody as TableBody,
-  JepGridRow as TableRow,
-  JepGridRowCell as TableColumn,
-} from "@jfront/ui-core";
-import {FeatureProcess} from "../../../api/feature-process/FeatureProcessInterface";
+import { useHistory, useLocation, useParams } from "react-router-dom";
+import { Tab, TabPanel } from "@jfront/ui-core";
+import { Grid } from "@jfront/ui-core";
+import { FeatureProcess } from "../../../api/feature-process/FeatureProcessInterface";
 import {
   deleteFeatureProcess,
-  findFeatureProcess
+  findFeatureProcess,
 } from "../../../api/feature-process/FeatureProcessApi";
-import {useTranslation} from "react-i18next";
+import { useTranslation } from "react-i18next";
 
 const FeatureProcessListPage = () => {
   const location = useLocation();
@@ -32,83 +24,101 @@ const FeatureProcessListPage = () => {
   const [mainTabSelected, setMainTabSelected] = useState<boolean>(false);
   const [featureProcesses, setFeatureProcesses] = useState<FeatureProcess[]>();
   const [current, setCurrent] = useState<FeatureProcess>();
-  let {featureId} = useParams();
-  const {t} = useTranslation();
+  let { featureId } = useParams();
+  const { t } = useTranslation();
 
   const find = () => {
     if (featureId) {
       findFeatureProcess(parseInt(featureId)).then((processes: FeatureProcess[]) => {
         setFeatureProcesses(processes);
-      })
+      });
     }
-  }
+  };
 
   useEffect(() => {
-    find()
+    find();
   }, [location]);
 
+  console.log("Render");
+
   return (
-      <>
-        <TabPanel>
-          <Tab selected={mainTabSelected} onClick={() => {
-            setMainTabSelected(true)
+    <>
+      <TabPanel>
+        <Tab
+          selected={mainTabSelected}
+          onClick={() => {
+            setMainTabSelected(true);
             history.push(`/${featureId}/detail`);
-          }}>
-            {t("feature.header")}
-          </Tab>
-          <Tab selected={!mainTabSelected} onClick={() => {
+          }}
+        >
+          {t("feature.header")}
+        </Tab>
+        <Tab
+          selected={!mainTabSelected}
+          onClick={() => {
             setMainTabSelected(false);
-          }}>
-            {t("feature-process.header")}
-          </Tab>
-        </TabPanel>
-        <Toolbar>
-          <ToolbarButtonCreate
-              onClick={() => history.push(`/${featureId}/feature-process/create`)}/>
-          <ToolbarButtonDelete disabled={!current} onClick={() => {
+          }}
+        >
+          {t("feature-process.header")}
+        </Tab>
+      </TabPanel>
+      <Toolbar>
+        <ToolbarButtonCreate onClick={() => history.push(`/${featureId}/feature-process/create`)} />
+        <ToolbarButtonDelete
+          disabled={!current}
+          onClick={() => {
             if (current?.featureId && current.featureProcessId) {
               deleteFeatureProcess(current?.featureId, current?.featureProcessId).then(() => {
                 find();
               });
             }
-          }}/>
-          <ToolbarButtonView disabled={!current}
-                             onClick={() => history.push(`/${current?.featureId}/feature-process/${current?.featureProcessId}/detail`)}/>
-          <ToolbarSplitter/>
-          <ToolbarButtonBase disabled={true}>{t("toolbar.list")}</ToolbarButtonBase>
-          <ToolbarButtonFind disabled={true}
-                             onClick={() => history.push(`/${featureId}/feature-process/search`)}/>
-          <ToolbarButtonBase disabled={true}>{t("toolbar.find")}</ToolbarButtonBase>
-        </Toolbar>
-        <Grid>
-          <Table>
-            <TableHeader>
-                <TableHeaderCell>{t("feature-process.fields.featureStatusName")}</TableHeaderCell>
-                <TableHeaderCell>{t("feature-process.fields.dateIns")}</TableHeaderCell>
-            </TableHeader>
-            <TableBody>
-              {featureProcesses ? featureProcesses.map(featureProcess => {
-                return (
-                    <TableRow
-                        key={featureProcess.featureProcessId}
-                        selected={featureProcess === current}
-                        onClick={() => {
-                          setCurrent(featureProcess)
-                        }}
-                        onDoubleClick={() => {
-                          history.push(`/${featureProcess.featureId}/feature-process/${featureProcess.featureProcessId}/detail`);
-                        }}
-                    >
-                      <TableColumn label={t("feature-process.fields.featureStatusName")}>{featureProcess.featureStatusName}</TableColumn>
-                      <TableColumn label={t("feature-process.fields.dateIns")}>{featureProcess.dateIns}</TableColumn>
-                    </TableRow>
-                );
-              }) : null}
-            </TableBody>
-          </Table>
-        </Grid>
-      </>
+          }}
+        />
+        <ToolbarButtonView
+          disabled={!current}
+          onClick={() =>
+            history.push(
+              `/${current?.featureId}/feature-process/${current?.featureProcessId}/detail`
+            )
+          }
+        />
+        <ToolbarSplitter />
+        <ToolbarButtonBase disabled={true}>{t("toolbar.list")}</ToolbarButtonBase>
+        <ToolbarButtonFind
+          disabled={true}
+          onClick={() => history.push(`/${featureId}/feature-process/search`)}
+        />
+        <ToolbarButtonBase disabled={true}>{t("toolbar.find")}</ToolbarButtonBase>
+      </Toolbar>
+      <Grid
+        id="table"
+        columns={[
+          {
+            Header: t("feature-process.fields.featureStatusName"),
+            accessor: "featureStatusName",
+          },
+          {
+            Header: t("feature-process.fields.dateIns"),
+            accessor: "dateIns",
+          },          
+        ]}
+        data={featureProcesses ? featureProcesses : []} //todo: bug in library
+        onSelection={(selected) => {
+          console.log(selected);
+          if (selected.length === 1) {
+            setCurrent(selected[0]);
+          } else {
+            setCurrent(undefined);
+          }
+        }}
+        onDoubleClick={(featureProcess) => {
+          history.push(
+            `/${featureProcess.featureId}/feature-process/${featureProcess.featureProcessId}/detail`
+          );
+        }}
+      />      
+    </>
   );
-}
+};
 
 export default FeatureProcessListPage;
