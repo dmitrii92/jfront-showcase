@@ -1,8 +1,7 @@
 import React, { useContext } from "react";
 import { Form } from "@jfront/ui-core";
-import Input from "../../../components/input";
 import { FormField } from "@jfront/ui-core";
-import Label from "../../../components/label";
+import {Label} from "@jfront/ui-label";
 import {
   Toolbar,
   ToolbarButtonBase,
@@ -21,6 +20,7 @@ import { Tab, TabPanel } from "@jfront/ui-core";
 import { SearchContext } from "../../../context";
 import { useFormik } from "formik";
 import { useTranslation } from "react-i18next";
+import { TextInput } from "@jfront/ui-core";
 
 const CreatePage = () => {
   const history = useHistory();
@@ -80,17 +80,17 @@ const CreatePage = () => {
       </Toolbar>
       <Form id="create-form" onSubmit={formik.handleSubmit}>
         <FormField>
-          <Label>{t("feature.fields.featureName")}:</Label>
-          <Input
+          <TextInput
             name="featureName"
+            label={t("feature.fields.featureName")}
             value={formik.values.featureName}
             onChange={formik.handleChange}
           />
         </FormField>
         <FormField>
-          <Label>{t("feature.fields.featureNameEn")}:</Label>
-          <Input
+          <TextInput
             name="featureNameEn"
+            label={t("feature.fields.featureNameEn")}
             value={formik.values.featureNameEn}
             onChange={formik.handleChange}
           />
@@ -104,7 +104,7 @@ const CreatePage = () => {
           />
         </FormField>
         <FormField>
-          <Input id="create-submit" type="submit" hidden={true} />
+          <input id="create-submit" type="submit" hidden={true} />
         </FormField>
       </Form>
     </>

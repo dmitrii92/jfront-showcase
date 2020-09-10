@@ -2,18 +2,12 @@
   "name": "jfront-showcase",
   "version": "0.1.0",
   "private": true,
-  "homepage": "http://dmitrii92.github.io/jfront-showcase",
   "dependencies": {
-    "@jfront/ui-core": "^0.1.1",
+    "@jfront/ui-core": "^0.3.1",
+    "@jfront/ui-label": "^0.3.1",
     "@testing-library/jest-dom": "^4.2.4",
     "@testing-library/react": "^9.5.0",
     "@testing-library/user-event": "^7.2.1",
-    "@types/jest": "^24.9.1",
-    "@types/node": "^12.12.36",
-    "@types/react": "^16.9.34",
-    "@types/react-dom": "^16.9.6",
-    "@types/react-router-dom": "^5.1.4",
-    "@types/styled-components": "^5.1.0",
     "axios": "^0.19.2",
     "formik": "^2.1.4",
     "i18next": "19.4.3",
@@ -56,6 +50,14 @@
     ]
   },
   "devDependencies": {
-    "gh-pages": "^2.2.0"
+    "@types/jest": "^24.9.1",
+    "@types/node": "^12.12.36",
+    "@types/react": "^16.9.34",
+    "@types/react-dom": "^16.9.6",
+    "@types/react-router-dom": "^5.1.4",
+    "@types/styled-components": "^5.1.0",
+    "gh-pages": "^2.2.0",
+    "namor": "^2.0.2",
+    "puppeteer": "^5.2.1"
   }
 }

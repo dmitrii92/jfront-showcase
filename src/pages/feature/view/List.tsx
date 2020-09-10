@@ -18,16 +18,7 @@ import {
   searchFeatures,
   postSearchRequest,
 } from "../../../api/feature/FeatureApi";
-import {
-  JepGrid as Grid,
-  JepGridTable as Table,
-  JepGridHeaderCell as TableHeaderCell,
-  JepGridHeader as TableHeader,
-  JepGridBody as TableBody,
-  JepGridRow as TableRow,
-  JepGridRowCell as TableColumn,
-  JepGridPagingBar,
-} from "@jfront/ui-core";
+import { Grid } from "@jfront/ui-core";
 import { Page, Content, Header } from "@jfront/ui-core";
 import { Tab, TabPanel } from "@jfront/ui-core";
 import { useTranslation } from "react-i18next";
@@ -51,6 +42,8 @@ const ListPage = () => {
   const { t } = useTranslation();
   const searchContext = useContext(SearchContext);
   const [isLoading, setIsLoading] = useState<boolean>(true);
+
+  console.log("Render");
 
   const find = () => {
     let searchTemplate = queryString.parse(location.search);
@@ -141,77 +134,60 @@ const ListPage = () => {
         {isLoading ? (
           <div style={{ textAlign: "center" }}>Loading...</div>
         ) : (
-          <Grid>
-            <Table>
-              <TableHeader>
-                <TableHeaderCell>{t("feature.fields.featureId")}</TableHeaderCell>
-                <TableHeaderCell>{t("feature.fields.workSequence")}</TableHeaderCell>
-                <TableHeaderCell>{t("feature.fields.featureStatus")}</TableHeaderCell>
-                <TableHeaderCell>{t("feature.fields.featureName")}</TableHeaderCell>
-                <TableHeaderCell>{t("feature.fields.featureNameEn")}</TableHeaderCell>
-                <TableHeaderCell>{t("feature.fields.description")}</TableHeaderCell>
-                <TableHeaderCell>{t("feature.fields.dateIns")}</TableHeaderCell>
-                <TableHeaderCell>{t("feature.fields.author")}</TableHeaderCell>
-                <TableHeaderCell>{t("feature.fields.responsible")}</TableHeaderCell>
-              </TableHeader>
-              <TableBody>
-                {features
-                  ? features.map((feature) => {
-                      return (
-                        <TableRow
-                          key={feature.featureId}
-                          selected={feature === currentFeature}
-                          onClick={() => {
-                            setCurrentFeature(feature);
-                          }}
-                          onDoubleClick={() => {
-                            history.push(`/${feature.featureId}/detail`);
-                          }}
-                        >
-                          <TableColumn label={t("feature.fields.featureId")}>
-                            {feature.featureId}
-                          </TableColumn>
-                          <TableColumn label={t("feature.fields.workSequence")}></TableColumn>
-                          <TableColumn label={t("feature.fields.featureStatus")}>
-                            {feature.featureStatus?.name}
-                          </TableColumn>
-                          <TableColumn label={t("feature.fields.featureName")}>
-                            {feature.featureName}
-                          </TableColumn>
-                          <TableColumn label={t("feature.fields.featureNameEn")}>
-                            {feature.featureNameEn}
-                          </TableColumn>
-                          <TableColumn label={t("feature.fields.description")}>
-                            {feature.description}
-                          </TableColumn>
-                          <TableColumn label={t("feature.fields.dateIns")}>
-                            {new Date(feature.dateIns.toString()).toLocaleDateString()}
-                          </TableColumn>
-                          <TableColumn label={t("feature.fields.author")}>
-                            {feature.author?.name}
-                          </TableColumn>
-                          <TableColumn label={t("feature.fields.responsible")}>
-                            {feature.responsible?.name}
-                          </TableColumn>
-                        </TableRow>
-                      );
-                    })
-                  : null}
-              </TableBody>
-            </Table>
-            <JepGridPagingBar
-              currentPage={page}
-              rowCount={pageSize}
-              totalRowCount={searchSize}
-              onRefresh={(pageNumber, pageSize) => {
-                //TODO need refresh search
-                history.push({
-                  pathname: `/list`,
-                  search: `?page=${pageNumber}&pageSize=${pageSize}`,
-                });
-              }}
-            />
-          </Grid>
+          <Grid
+            id="table"
+            columns={[
+              {
+                Header: t("feature.fields.featureId"),
+                accessor: "featureId",
+              },
+              {
+                Header: t("feature.fields.featureStatus"),
+                accessor: "featureStatus.name",
+              },
+              {
+                Header: t("feature.fields.workSequence"),
+                accessor: "workSequence",
+              },
+              {
+                Header: t("feature.fields.featureName"),
+                accessor: "featureName",
+              },
+              {
+                Header: t("feature.fields.featureNameEn"),
+                accessor: "featureNameEn",
+              },
+              {
+                Header: t("feature.fields.description"),
+                accessor: "description",
+              },
+              {
+                Header: t("feature.fields.dateIns"),
+                accessor: "dateIns",
+              },
+              {
+                Header: t("feature.fields.author"),
+                accessor: "author.name",
+              },
+              {
+                Header: t("feature.fields.responsible"),
+                accessor: "responsible.name",
+              },
+            ]}
+            data={features}
+            onSelection={(selectedFeatures) => {
+              console.log(selectedFeatures);
+              if (selectedFeatures.length === 1) {
+                setCurrentFeature(selectedFeatures[0]);
+              } else {
+                setCurrentFeature(undefined);
+              }
+            }}
+            onDoubleClick={(feature) => {
+              console.log("onDoubleClick")
+              history.push(`/${feature.featureId}/detail`);
+            }}
+          />
         )}
       </Content>
     </Page>
