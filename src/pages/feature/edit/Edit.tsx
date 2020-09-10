@@ -1,8 +1,8 @@
 import React, { useContext, useEffect, useState } from "react";
 import { Form } from "@jfront/ui-core";
 import { FormField } from "@jfront/ui-core";
-import Label from "../../../components/label";
-import Input from "../../../components/input";
+import { Label } from "@jfront/ui-label";
+import { TextInput } from "@jfront/ui-core";
 import { getFeature, updateFeature } from "../../../api/feature/FeatureApi";
 import { Feature, FeatureUpdate } from "../../../api/feature/FeatureInterface";
 import { useHistory, useParams } from "react-router-dom";
@@ -115,7 +115,7 @@ const EditPage = () => {
         </FormField>
         <FormField>
           <Label>{t("feature.fields.featureName")}:</Label>
-          <Input
+          <TextInput
             style={{ width: "350px", textAlign: "left" }}
             defaultValue={currentFeature?.featureName}
             name="featureName"
@@ -125,7 +125,7 @@ const EditPage = () => {
         </FormField>
         <FormField>
           <Label>{t("feature.fields.featureNameEn")}:</Label>
-          <Input
+          <TextInput
             style={{ width: "350px", textAlign: "left" }}
             defaultValue={currentFeature?.featureNameEn}
             name="featureNameEn"
@@ -146,7 +146,7 @@ const EditPage = () => {
         </FormField>
         <FormField>
           <Label>{t("feature.fields.description")}:</Label>
-          <Input
+          <TextInput
             style={{ width: "350px", textAlign: "left" }}
             defaultValue={currentFeature?.description}
             name="description"
@@ -172,7 +172,7 @@ const EditPage = () => {
           </Label>
         </FormField>
         <FormField>
-          <Input id="edit-submit" type="submit" hidden={true} />
+          <input id="edit-submit" type="submit" hidden={true} />
         </FormField>
       </Form>
     </>

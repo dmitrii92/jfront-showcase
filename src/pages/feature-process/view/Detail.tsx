@@ -17,7 +17,7 @@ import {
 } from "@jfront/ui-core";
 import {Form} from "@jfront/ui-core";
 import {FormField} from "@jfront/ui-core";
-import Label from "../../../components/label";
+import { Label } from "@jfront/ui-label";
 import {useTranslation} from "react-i18next";
 
 const FeatureProcessDetailPage = () => {

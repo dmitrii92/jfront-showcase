@@ -13,8 +13,7 @@ import {
 import { useHistory } from "react-router-dom";
 import { Form } from "@jfront/ui-core";
 import { FormField } from "@jfront/ui-core";
-import Label from "../../../components/label";
-import Input from "../../../components/input";
+import { Label } from "@jfront/ui-label";
 import { FeatureSearchTemplate } from "../../../api/feature/FeatureInterface";
 import { Tab, TabPanel } from "@jfront/ui-core";
 import { SearchContext } from "../../../context";
@@ -23,9 +22,10 @@ import { getFeatureStatusOptions } from "../../../api/feature-process/FeaturePro
 import { useFormik } from "formik";
 import { DatePicker } from "@jfront/ui-core";
 import { useTranslation } from "react-i18next";
-import CheckBoxGroup from "../../../components/checkbox-group";
-import CheckBox from "../../../components/checkbox";
+import { CheckBoxGroup } from "@jfront/ui-core";
+import { CheckBox } from "@jfront/ui-core";
 import queryString from "query-string";
+import { TextInput } from "@jfront/ui-core";
 
 const SearchPage = () => {
   const { t } = useTranslation();
@@ -104,9 +104,9 @@ const SearchPage = () => {
         </ToolbarButtonBase>
       </Toolbar>
       <Form onSubmit={formik.handleSubmit}>
-        <FormField>
+        <FormField style={{ display: "inline-block" }}>
           <Label>{t("feature.fields.featureId")}:</Label>
-          <Input
+          <TextInput
             name="featureId"
             value={formik.values.featureId}
             onChange={formik.handleChange}
@@ -116,7 +116,7 @@ const SearchPage = () => {
         </FormField>
         <FormField>
           <Label>{t("feature.fields.featureNameTemplate")}:</Label>
-          <Input
+          <TextInput
             name="featureNameTemplate"
             value={formik.values.featureNameTemplate}
             onChange={formik.handleChange}
@@ -125,7 +125,7 @@ const SearchPage = () => {
         </FormField>
         <FormField>
           <Label>{t("feature.fields.featureNameEnTemplate")}:</Label>
-          <Input
+          <TextInput
             name="featureNameEnTemplate"
             value={formik.values.featureNameEnTemplate}
             onChange={formik.handleChange}
@@ -153,12 +153,12 @@ const SearchPage = () => {
           />
         </FormField>
         <FormField>
-          {/*<Label>{t("feature.fields.statusCodeList")}</Label>*/}
           <CheckBoxGroup
             name="statusCodeList"
             text={t("feature.fields.statusCodeList")}
-            value={formik.values.statusCodeList ? formik.values.statusCodeList : []}
-            onChange={(newValue) => {
+            values={formik.values.statusCodeList ? formik.values.statusCodeList : []}
+            style={{ width: "142px" }}
+            onChange={(name, newValue) => {
               console.log(newValue);
               formik.setFieldValue("statusCodeList", newValue);
             }}
@@ -166,18 +166,13 @@ const SearchPage = () => {
           >
             {statusOptions
               ? statusOptions.map((option) => {
-                  return (
-                    <CheckBox
-                      value={option.value}
-                      label={option.name}
-                    />
-                  );
+                  return <CheckBox value={option.value} label={option.name} />;
                 })
               : null}
           </CheckBoxGroup>
         </FormField>
         <FormField>
-          <Input id="search-submit" type="submit" hidden={true} />
+          <input id="search-submit" type="submit" hidden={true} />
         </FormField>
       </Form>
     </>

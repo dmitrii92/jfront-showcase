@@ -5,7 +5,8 @@ import {
   FeatureStatusOptions,
 } from "./FeatureProcessInterface";
 
-const API_URL = "https://jepria-spring-feature.herokuapp.com";
+// const API_URL = "https://jepria-spring-feature.herokuapp.com";
+const API_URL = "http://localhost:5000/";
 const USER = "user";
 const PASSWORD = "123";
 const withCredentials = false;
@@ -22,7 +23,7 @@ export const findFeatureProcess = (
     )
     .then((response) => response.data)
     .catch((reason) => {
-      console.log(reason);
+      // console.log(reason);
       return Promise.reject(reason);
     });
 };
@@ -46,7 +47,7 @@ export const createFeatureProcess = (
       .then((response) => {
         if (response.status === 201) {
           let location: string = response.headers["location"];
-          console.log("location" + location);
+          // console.log("location" + location);
           axios
             .get(location, {
               // auth: {username: `${USER}`, password: `${PASSWORD}`},
@@ -88,7 +89,7 @@ export const getFeatureProcess = (
     })
     .then((response) => response.data)
     .catch((reason) => {
-      console.log(reason);
+      // console.log(reason);
       return Promise.reject(reason);
     });
 };
@@ -133,7 +134,7 @@ export const getFeatureStatusOptions = (): Promise<FeatureStatusOptions[]> => {
     })
     .then((response) => response.data)
     .catch((reason) => {
-      console.log(reason);
+      // console.log(reason);
       return Promise.reject(reason);
     });
 };
