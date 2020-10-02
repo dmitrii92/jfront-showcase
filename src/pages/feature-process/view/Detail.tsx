@@ -16,8 +16,6 @@ import {
   ToolbarSplitter
 } from "@jfront/ui-core";
 import {Form} from "@jfront/ui-core";
-import {FormField} from "@jfront/ui-core";
-import { Label } from "@jfront/ui-label";
 import {useTranslation} from "react-i18next";
 
 const FeatureProcessDetailPage = () => {
@@ -66,14 +64,14 @@ const FeatureProcessDetailPage = () => {
           <ToolbarButtonBase disabled={true}>{t("toolbar.find")}</ToolbarButtonBase>
         </Toolbar>
         <Form>
-          <FormField>
-            <Label>{t("feature-process.fields.featureStatusCode")}</Label>
-            <Label>{featureProcess?.featureStatusName}</Label>
-          </FormField>
-          <FormField>
-            <Label>{t("feature-process.fields.dateIns")}</Label>
-            <Label>{featureProcess?.dateIns}</Label>
-          </FormField>
+          <Form.Field>
+            <Form.Label>{t("feature-process.fields.featureStatusCode")}</Form.Label>
+            <Form.Label>{featureProcess?.featureStatusName}</Form.Label>
+          </Form.Field>
+          <Form.Field>
+            <Form.Label>{t("feature-process.fields.dateIns")}</Form.Label>
+            <Form.Label>{featureProcess?.dateIns}</Form.Label>
+          </Form.Field>
         </Form>
       </>
   );

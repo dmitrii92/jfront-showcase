@@ -19,7 +19,7 @@ import {
   postSearchRequest,
 } from "../../../api/feature/FeatureApi";
 import { Grid } from "@jfront/ui-core";
-import { Page, Content, Header } from "@jfront/ui-core";
+import { Panel} from "@jfront/ui-core";
 import { Tab, TabPanel } from "@jfront/ui-core";
 import { useTranslation } from "react-i18next";
 import queryString from "query-string";
@@ -98,8 +98,8 @@ const ListPage = () => {
   }, [location]);
 
   return (
-    <Page>
-      <Header>
+    <Panel>
+      <Panel.Header>
         <TabPanel>
           <Tab selected={true}>{t("feature.header")}</Tab>
         </TabPanel>
@@ -129,8 +129,8 @@ const ListPage = () => {
           <ToolbarButtonFind onClick={() => history.push(`/`)} />
           <ToolbarButtonBase disabled={true}>{t("toolbar.find")}</ToolbarButtonBase>
         </Toolbar>
-      </Header>
-      <Content>
+      </Panel.Header>
+      <Panel.Content>
         {isLoading ? (
           <div style={{ textAlign: "center" }}>Loading...</div>
         ) : (
@@ -189,8 +189,8 @@ const ListPage = () => {
             }}
           />
         )}
-      </Content>
-    </Page>
+      </Panel.Content>
+    </Panel>
   );
 };
 

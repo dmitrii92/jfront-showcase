@@ -1,7 +1,5 @@
 import React, { useContext } from "react";
 import { Form } from "@jfront/ui-core";
-import { FormField } from "@jfront/ui-core";
-import {Label} from "@jfront/ui-label";
 import {
   Toolbar,
   ToolbarButtonBase,
@@ -79,33 +77,33 @@ const CreatePage = () => {
         </ToolbarButtonBase>
       </Toolbar>
       <Form id="create-form" onSubmit={formik.handleSubmit}>
-        <FormField>
+        <Form.Field>
+        <Form.Label>{t("feature.fields.featureName")}</Form.Label>
           <TextInput
             name="featureName"
-            label={t("feature.fields.featureName")}
             value={formik.values.featureName}
             onChange={formik.handleChange}
           />
-        </FormField>
-        <FormField>
+        </Form.Field>
+        <Form.Field>
+          <Form.Label>{t("feature.fields.featureNameEn")}</Form.Label>
           <TextInput
             name="featureNameEn"
-            label={t("feature.fields.featureNameEn")}
             value={formik.values.featureNameEn}
             onChange={formik.handleChange}
           />
-        </FormField>
-        <FormField>
-          <Label>{t("feature.fields.description")}:</Label>
+        </Form.Field>
+        <Form.Field>
+          <Form.Label>{t("feature.fields.description")}:</Form.Label>
           <textarea
             name="description"
             value={formik.values.description}
             onChange={formik.handleChange}
           />
-        </FormField>
-        <FormField>
+        </Form.Field>
+        <Form.Field>
           <input id="create-submit" type="submit" hidden={true} />
-        </FormField>
+        </Form.Field>
       </Form>
     </>
   );

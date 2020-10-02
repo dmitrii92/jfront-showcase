@@ -1,7 +1,5 @@
 import React, { useContext, useEffect, useState } from "react";
-import { Form } from "@jfront/ui-core";
-import { FormField } from "@jfront/ui-core";
-import { Label } from "@jfront/ui-label";
+import { Form, Label } from "@jfront/ui-core";
 import { deleteFeature, getFeature } from "../../../api/feature/FeatureApi";
 import { Feature } from "../../../api/feature/FeatureInterface";
 import { useHistory, useParams } from "react-router-dom";
@@ -91,64 +89,64 @@ const DetailPage = () => {
         <ToolbarButtonBase disabled={true}>{t("toolbar.find")}</ToolbarButtonBase>
       </Toolbar>
       <Form>
-        <FormField>
-          <Label>{t("feature.fields.featureId")}:</Label>
-          <Label style={{ width: "350px", textAlign: "left" }}>{currentFeature?.featureId}</Label>
-        </FormField>
-        <FormField>
-          <Label>{t("feature.fields.featureStatus")}:</Label>
-          <Label
+        <Form.Field>
+          <Form.Label>{t("feature.fields.featureId")}:</Form.Label>
+          <Form.Label style={{ width: "350px", justifyContent: "flex-start" }}>{currentFeature?.featureId}</Form.Label>
+        </Form.Field>
+        <Form.Field>
+          <Form.Label>{t("feature.fields.featureStatus")}:</Form.Label>
+          <Form.Label
             style={{
               width: "350px",
-              textAlign: "left",
+              justifyContent: "flex-start",
             }}
           >
             {currentFeature?.featureStatus?.name}
-          </Label>
-        </FormField>
-        <FormField>
-          <Label>{t("feature.fields.featureName")}:</Label>
-          <Label style={{ width: "350px", textAlign: "left" }}>{currentFeature?.featureName}</Label>
-        </FormField>
-        <FormField>
-          <Label>{t("feature.fields.featureNameEn")}:</Label>
-          <Label style={{ width: "350px", textAlign: "left" }}>
+          </Form.Label>
+        </Form.Field>
+        <Form.Field>
+          <Form.Label>{t("feature.fields.featureName")}:</Form.Label>
+          <Form.Label style={{ width: "350px", justifyContent: "flex-start" }}>{currentFeature?.featureName}</Form.Label>
+        </Form.Field>
+        <Form.Field>
+          <Form.Label>{t("feature.fields.featureNameEn")}:</Form.Label>
+          <Form.Label style={{ width: "350px", justifyContent: "flex-start" }}>
             {currentFeature?.featureNameEn}
-          </Label>
-        </FormField>
-        <FormField>
-          <Label>{t("feature.fields.dateIns")}:</Label>
-          <Label style={{ width: "350px", textAlign: "left" }}>
+          </Form.Label>
+        </Form.Field>
+        <Form.Field>
+          <Form.Label>{t("feature.fields.dateIns")}:</Form.Label>
+          <Form.Label style={{ width: "350px", justifyContent: "flex-start" }}>
             {currentFeature?.dateIns.toString()
               ? new Date(currentFeature?.dateIns.toString()).toLocaleDateString()
               : ""}
-          </Label>
-        </FormField>
-        <FormField>
-          <Label>{t("feature.fields.description")}:</Label>
-          <Label style={{ width: "350px", textAlign: "left" }}>{currentFeature?.description}</Label>
-        </FormField>
-        <FormField>
-          <Label>{t("feature.fields.author")}:</Label>
-          <Label style={{ width: "350px", textAlign: "left" }}>
+          </Form.Label>
+        </Form.Field>
+        <Form.Field>
+          <Form.Label>{t("feature.fields.description")}:</Form.Label>
+          <Form.Label style={{ width: "350px", justifyContent: "flex-start" }}>{currentFeature?.description}</Form.Label>
+        </Form.Field>
+        <Form.Field>
+          <Form.Label>{t("feature.fields.author")}:</Form.Label>
+          <Form.Label style={{ width: "350px", justifyContent: "flex-start" }}>
             {currentFeature?.author?.name}
-          </Label>
-        </FormField>
-        <FormField>
-          <Label>Порядок выполнения:</Label>
-          <Label />
-        </FormField>
-        <FormField>
-          <Label>{t("feature.fields.responsible")}:</Label>
-          <Label
+          </Form.Label>
+        </Form.Field>
+        <Form.Field>
+          <Form.Label>Порядок выполнения:</Form.Label>
+          <Form.Label />
+        </Form.Field>
+        <Form.Field>
+          <Form.Label>{t("feature.fields.responsible")}:</Form.Label>
+          <Form.Label
             style={{
               width: "350px",
-              textAlign: "left",
+              justifyContent: "flex-start",
             }}
           >
             {currentFeature?.responsible?.name}
-          </Label>
-        </FormField>
+          </Form.Label>
+        </Form.Field>
       </Form>
     </>
   );

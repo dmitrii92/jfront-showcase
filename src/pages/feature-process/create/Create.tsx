@@ -18,12 +18,10 @@ import {
   FeatureStatusOptions
 } from "../../../api/feature-process/FeatureProcessInterface";
 import {Form} from "@jfront/ui-core";
-import {FormField} from "@jfront/ui-core";
 import {
   createFeatureProcess,
   getFeatureStatusOptions
 } from "../../../api/feature-process/FeatureProcessApi";
-import { Label } from "@jfront/ui-label";
 import {useFormik} from "formik";
 import {useTranslation} from "react-i18next";
 
@@ -86,8 +84,8 @@ const FeatureProcessCreatePage = () => {
           <ToolbarButtonBase disabled={true}>{t("toolbar.find")}</ToolbarButtonBase>
         </Toolbar>
         <Form onSubmit={formik.handleSubmit}>
-          <FormField>
-            <Label>{t("feature-process.fields.featureStatusCode")}</Label>
+          <Form.Field>
+            <Form.Label>{t("feature-process.fields.featureStatusCode")}</Form.Label>
             <select 
                 name="featureStatusCode" 
                 value={formik.values.featureStatusCode}
@@ -114,10 +112,10 @@ const FeatureProcessCreatePage = () => {
                 return <ComboBoxItem key={option.value} value={option.value} label={option.name} />
               }) : null}
             </ComboBox> */}
-          </FormField>
-          <FormField>
+          </Form.Field>
+          <Form.Field>
             <input type="submit" id="feature-process-save" hidden={true}/>
-          </FormField>
+          </Form.Field>
         </Form>
       </>
   );

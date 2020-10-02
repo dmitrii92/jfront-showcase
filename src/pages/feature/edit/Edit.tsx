@@ -1,7 +1,5 @@
 import React, { useContext, useEffect, useState } from "react";
 import { Form } from "@jfront/ui-core";
-import { FormField } from "@jfront/ui-core";
-import { Label } from "@jfront/ui-label";
 import { TextInput } from "@jfront/ui-core";
 import { getFeature, updateFeature } from "../../../api/feature/FeatureApi";
 import { Feature, FeatureUpdate } from "../../../api/feature/FeatureInterface";
@@ -96,25 +94,25 @@ const EditPage = () => {
         </ToolbarButtonBase>
       </Toolbar>
       <Form id="edit-form" onSubmit={formik.handleSubmit}>
-        <FormField>
-          <Label>{t("feature.fields.featureId")}:</Label>
-          <Label style={{ width: "350px", textAlign: "left" }}>
+        <Form.Field>
+          <Form.Label>{t("feature.fields.featureId")}:</Form.Label>
+          <Form.Label style={{ width: "350px", textAlign: "left" }}>
             {currentFeature?.featureId}
-          </Label>
-        </FormField>
-        <FormField>
-          <Label>{t("feature.fields.featureStatus")}:</Label>
-          <Label
+          </Form.Label>
+        </Form.Field>
+        <Form.Field>
+          <Form.Label>{t("feature.fields.featureStatus")}:</Form.Label>
+          <Form.Label
             style={{
               width: "350px",
               textAlign: "left",
             }}
           >
             {currentFeature?.featureStatus?.name}
-          </Label>
-        </FormField>
-        <FormField>
-          <Label>{t("feature.fields.featureName")}:</Label>
+          </Form.Label>
+        </Form.Field>
+        <Form.Field>
+          <Form.Label>{t("feature.fields.featureName")}:</Form.Label>
           <TextInput
             style={{ width: "350px", textAlign: "left" }}
             defaultValue={currentFeature?.featureName}
@@ -122,9 +120,9 @@ const EditPage = () => {
             value={formik.values.featureName}
             onChange={formik.handleChange}
           />
-        </FormField>
-        <FormField>
-          <Label>{t("feature.fields.featureNameEn")}:</Label>
+        </Form.Field>
+        <Form.Field>
+          <Form.Label>{t("feature.fields.featureNameEn")}:</Form.Label>
           <TextInput
             style={{ width: "350px", textAlign: "left" }}
             defaultValue={currentFeature?.featureNameEn}
@@ -132,20 +130,20 @@ const EditPage = () => {
             value={formik.values.featureNameEn}
             onChange={formik.handleChange}
           />
-        </FormField>
-        <FormField>
-          <Label>{t("feature.fields.dateIns")}:</Label>
-          <Label
+        </Form.Field>
+        <Form.Field>
+          <Form.Label>{t("feature.fields.dateIns")}:</Form.Label>
+          <Form.Label
             style={{
               width: "350px",
               textAlign: "left",
             }}
           >
             {currentFeature?.dateIns.toString() ? new Date(currentFeature?.dateIns.toString()).toLocaleDateString() : ""}
-          </Label>
-        </FormField>
-        <FormField>
-          <Label>{t("feature.fields.description")}:</Label>
+          </Form.Label>
+        </Form.Field>
+        <Form.Field>
+          <Form.Label>{t("feature.fields.description")}:</Form.Label>
           <TextInput
             style={{ width: "350px", textAlign: "left" }}
             defaultValue={currentFeature?.description}
@@ -153,27 +151,27 @@ const EditPage = () => {
             value={formik.values.description}
             onChange={formik.handleChange}
           />
-        </FormField>
-        <FormField>
-          <Label>{t("feature.fields.author")}:</Label>
-          <Label style={{ width: "350px", textAlign: "left" }}>
+        </Form.Field>
+        <Form.Field>
+          <Form.Label>{t("feature.fields.author")}:</Form.Label>
+          <Form.Label style={{ width: "350px", textAlign: "left" }}>
             {currentFeature?.author?.name}
-          </Label>
-        </FormField>
-        <FormField>
-          <Label>{t("feature.fields.responsible")}:</Label>
-          <Label
+          </Form.Label>
+        </Form.Field>
+        <Form.Field>
+          <Form.Label>{t("feature.fields.responsible")}:</Form.Label>
+          <Form.Label
             style={{
               width: "350px",
               textAlign: "left",
             }}
           >
             {currentFeature?.responsible?.name}
-          </Label>
-        </FormField>
-        <FormField>
+          </Form.Label>
+        </Form.Field>
+        <Form.Field>
           <input id="edit-submit" type="submit" hidden={true} />
-        </FormField>
+        </Form.Field>
       </Form>
     </>
   );
