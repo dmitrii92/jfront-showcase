@@ -43,13 +43,10 @@ const SearchPage = () => {
       data.dateInsTo = undefined;
     }
 
-    console.log("queryString.stringify(data):");
-    // console.log(queryString.stringify(data));
-    // let query = queryString.stringify(data);
-    let query = "";
-    // if (query) {
-    //   query = "&" + query;
-    // }
+    let query = queryString.stringify(data);
+    if (query) {
+      query = "&" + query;
+    }
     history.push(`/list/?pageSize=25&page=1${query}`);
   };
 
@@ -158,7 +155,6 @@ const SearchPage = () => {
             values={formik.values.statusCodeList ? formik.values.statusCodeList : []}
             style={{ width: "142px" }}
             onChange={(name, newValue) => {
-              console.log(newValue);
               formik.setFieldValue("statusCodeList", newValue);
             }}
             isLoading={isLoading}

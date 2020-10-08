@@ -19,7 +19,7 @@ import {
   postSearchRequest,
 } from "../../../api/feature/FeatureApi";
 import { Grid } from "@jfront/ui-core";
-import { Panel} from "@jfront/ui-core";
+import { Panel } from "@jfront/ui-core";
 import { Tab, TabPanel } from "@jfront/ui-core";
 import { useTranslation } from "react-i18next";
 import queryString from "query-string";
@@ -43,11 +43,8 @@ const ListPage = () => {
   const searchContext = useContext(SearchContext);
   const [isLoading, setIsLoading] = useState<boolean>(true);
 
-  console.log("Render");
-
   const find = () => {
     let searchTemplate = queryString.parse(location.search);
-
     if (searchTemplate.page) {
       searchTemplate.page = undefined;
     }
@@ -184,7 +181,6 @@ const ListPage = () => {
               }
             }}
             onDoubleClick={(feature) => {
-              console.log("onDoubleClick")
               history.push(`/${feature.featureId}/detail`);
             }}
           />
